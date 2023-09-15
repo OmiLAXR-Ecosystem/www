@@ -22,14 +22,14 @@ export function HeroPresentation() {
                 variant="small"
                 className="mr-3 py-0.5 px-3 font-bold text-dark uppercase border-r border-dark"
               >
-                New
+                OmiLAXR
               </Typography>
               <Typography
                 color="dark"
                 variant="small"
                 className="flex items-center font-bold uppercase"
               >
-                Astro Starter Template
+                Framework and Ecosystem for Learning Analytics in Virtual and Augmented Reality
               </Typography>
             </div>
             <Typography
@@ -37,14 +37,14 @@ export function HeroPresentation() {
               color="blue-gray"
               className="mb-8 lg:mr-32 leading-tight font-black"
             >
-              The perfect foundation for your <span className="text-blue">Astro Project</span>
+              High quality and standardized Learning Analytics foundation for your <span className="text-blue">XR Project</span>
             </Typography>
             <Typography variant="lead" color="blue-gray" className="lg:pr-32">
               AstroLaunch UI is a free template designed to be both lightweight and feature-rich. It comes packed with everything you need to get your Online Store ready in no time.
             </Typography>
             <div className="mt-12 flex flex-wrap justify-center gap-3 lg:justify-start">
               <a href="#pricing">
-                <Button color="dark" className="flex items-center">
+                <Button color="cyan" className="flex items-center">
                   Get Started
                 </Button>
               </a>

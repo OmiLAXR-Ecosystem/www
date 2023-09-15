@@ -44,6 +44,7 @@ function BlogPostCard({
         </Typography>
 
         <a href={url}>
+          {/* @ts-ignore */}
           <Button variant="text" color="dark" className="flex items-center">
             View Page
             <svg className="ml-2" width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +62,7 @@ const posts = [
     img: "aboutus.jpg",
     title: "About Us Page",
     desc: "Designed to introduce the website's purpose and encourage the user to take an action.",
-    url: "https://demos.creative-tim.com/astro-launch-ui/about",
+    url: "./about",
   },
   {
     img: "signin.jpg",
