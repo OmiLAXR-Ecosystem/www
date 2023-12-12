@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === "production";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), tailwind()],
-  site: "https://learntech-rwth.gitlab.io/omilaxr-ecosystem/www",
+  site: "https://omilaxr.dev/",
   outDir: "public",
   publicDir: "static"
 });
