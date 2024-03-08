@@ -4,8 +4,6 @@ image: node:lts
 before_script:
   - npm ci
 pages:
-  only:
-    - main
   script:
     - npm run build
   artifacts:
