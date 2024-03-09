@@ -1,5 +1,5 @@
 {
-  "name": "astro-launch-ui",
+  "name": "omilaxr-www",
   "version": "1.0.0",
   "description": "The ultimate starter template for your startup web project",
   "main": "assets/js/astro-launch-ui.min.js",
@@ -36,7 +36,6 @@
     "next": "^13.4.4",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
-    "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

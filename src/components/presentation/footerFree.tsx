@@ -5,93 +5,106 @@ const YEAR = new Date().getFullYear();
 
 const SOCIAL_MEDIA = [
   {
-    icon: "fab fa-twitter",
-    link: "https://www.twitter.com/creativetim?ref=astrolaunch-ui",
+    icon: "fab fa-linkedin",
+    link: "https://www.linkedin.com/in/sergej-g%C3%B6rzen-a7a77b178/",
   },
   {
+    icon: "fab fa-xing",
+    link: "https://www.xing.com/profile/Sergej_Goerzen2",
+  },
+  {
+    icon: "fab fa-x-twitter",
+    link: "https://twitter.com/sergejg92",
+  },
+  /*{
+    icon: "fab fa-threads",
+    link: "https://www.threads.net/@sgoerzen92",
+  },*/
+  {
+    icon: "fab fa-researchgate",
+    link: "https://www.researchgate.net/profile/Sergej-Goerzen",
+  },
+  {
+    icon: "fab fa-orcid",
+    link: "https://orcid.org/0000-0003-3853-2435",
+  },
+  /*{
     icon: "fab fa-facebook-square",
     link: "https://www.facebook.com/creativetim?ref=astrolaunch-ui",
   },
   {
     icon: "fab fa-dribbble",
     link: "https://www.dribbble.com/creativetim?ref=astrolaunch-ui",
-  },
+  },*/
   {
     icon: "fab fa-github",
-    link: "https://www.github.com/creativetimofficial?ref=astrolaunch-ui",
+    link: "https://github.com/SGoerzen/",
+  },
+  {
+    icon: "fab fa-gitlab",
+    link: "https://gitlab.com/sgoerzen",
   },
   {
     icon: "fab fa-discord",
-    link: "https://discord.com/invite/gxtg2rJa?ref=astrolaunch-ui",
+    link: "https://discord.com/users/sergej.goerzen",
   },
 ];
 
-const COMPANY = [
+const RESEARCHGROUP = [
   {
     name: "About Us",
-    link: "https://www.creative-tim.com/presentation?ref=astrolaunch-ui",
+    link: "https://learntech.rwth-aachen.de",
   },
   {
     name: "Blog",
-    link: "https://www.creative-tim.com/blog?ref=astrolaunch-ui",
+    link: "https://learntech.rwth-aachen.de/cms/LearnTech/Das-Lehr-und-Forschungsgebiet/~jiyi/Aktuelle-Meldungen/",
   },
   {
-    name: "Github",
-    link: "https://github.com/creativetimofficial?ref=astrolaunch-ui",
+    name: "GitLab",
+    link: "https://gitlab.com/learntech-rwth",
   },
   {
-    name: "Free Products",
-    link: "https://www.creative-tim.com/templates/free?ref=astrolaunch-ui",
+    name: "xAPI Registry",
+    link: "https://xapi.elearn.rwth-aachen.de/",
   },
-];
-
-const HELP = [
-  {
-    name: "Knowledge Center",
-    link: "https://www.creative-tim.com/knowledge-center?ref=astrolaunch-ui",
-  },
-  {
-    name: "Contact Us",
-    link: "https://www.creative-tim.com/contact-us?ref=astrolaunch-ui",
-  },
-  {
-    name: "Premium Support",
-    link: "https://www.creative-tim.com/support-terms?ref=astrolaunch-ui",
-  },
-  {
-    name: "Pricing",
-    link: "/#pricing",
-  },
+  /*{
+    name: "Technology Landscape (todo)",
+    link: "#",
+  },*/
 ];
 
 const RESOURCES = [
+  {
+    name: "Quick Start",
+    link: "https://www.creative-tim.com/services/updivision?ref=astrolaunch-ui",
+  },
   {
     name: "Documentation",
     link: "https://www.creative-tim.com/learning-lab/astro/overview/astro-launch-ui?ref=astrolaunch-ui",
   },
   {
-    name: "Custom Development",
-    link: "https://www.creative-tim.com/services/updivision?ref=astrolaunch-ui",
-  },
-  {
     name: "Discord",
-    link: "https://discord.gg/WCvQWMwT",
+    link: "https://discord.com/invite/AnUXutpHZz",
   },
   {
-    name: "Tailwind Components",
-    link: "https://tailwindcomponents.com/?ref=astrolaunch-ui",
-  },
+    name: "OmiLAXR Packages",
+    link: "https://www.npmjs.com/~sgoerzen",
+  }
 ];
 
 const TECHS = [
   {
-    name: "React",
-    link: "#",
+    name: "Unity",
+    link: "https://unity.com/",
   },
   {
-    name: "Astro",
-    link: "#",
+    name: "TinCan",
+    link: "https://github.com/SGoerzen/TinCanUnity",
   },
+  {
+    name: "xAPI Specification",
+    link: "https://xapi.com/",
+  }
 ];
 
 export function Footer() {
@@ -104,10 +117,10 @@ export function Footer() {
               variant="h4"
               className="mb-2 !font-semibold !text-primary"
             >
-              AstroLaunch UI
+              Sergej Görzen
             </Typography>
             <Typography className="text-md mt-0 mb-2 font-normal !text-gray-600">
-              Easy to use for Tailwind CSS and Material Design.
+              PhD Student, Research Assistant, Software Engineer and Consultant. Visit my <a href="https://sgoerzen.de">homepage</a> and get in contact with me on
             </Typography>
             <div className="mt-6">
               {SOCIAL_MEDIA.map(({ icon, link }, key) => (
@@ -123,34 +136,15 @@ export function Footer() {
             <div className="items-top mb-6 flex flex-wrap">
               <div className="w-6/12 pt-6 md:ml-auto md:px-4 md:pt-0 xl:w-3/12">
                 <span className="text-md mb-4 block font-medium text-primary">
-                  Company
+                  Research Group
                 </span>
                 <ul className="list-unstyled">
-                  {COMPANY.map(({ name, link }, key) => (
+                  {RESEARCHGROUP.map(({ name, link }, key) => (
                     <li key={key}>
                       <a
                         href={link}
                         target="_blank"
                         rel="noreferrer"
-                        className="block pb-2 text-sm font-normal leading-relaxed text-gray-600 transition-colors hover:text-primary"
-                      >
-                        {name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="ml-auto w-6/12 pt-6 md:px-4 md:pt-0 xl:w-3/12">
-                <span className="text-md mb-4 block font-medium text-primary">
-                  Help and Support
-                </span>
-                <ul className="list-unstyled">
-                  {HELP.map(({ name, link }, key) => (
-                    <li key={key}>
-                      <a
-                        href={link}
-                        rel="noreferrer"
-                        target={name === "Pricing" ? "_self" : "_blank"}
                         className="block pb-2 text-sm font-normal leading-relaxed text-gray-600 transition-colors hover:text-primary"
                       >
                         {name}
@@ -180,7 +174,7 @@ export function Footer() {
               </div>
               <div className="ml-auto w-6/12 pt-6 md:px-4 md:pt-0 xl:w-3/12">
                 <span className="text-md mb-4 block font-medium text-primary">
-                  Tehnologies
+                  Technologies
                 </span>
                 <ul className="list-unstyled">
                   {TECHS.map(({ name, link }, key) => (
@@ -201,48 +195,12 @@ export function Footer() {
         <hr className="my-6 border-blue-gray-50" />
         <div className="flex flex-wrap items-center justify-center gap-2 md:justify-between">
           <div className="text-center lg:text-left">
-            <a
-              href="https://vercel.com/?utm_source=ct-tailwind-team&utm_campaign=oss"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center font-semibold text-primary no-underline"
-            >
-              <span className="mr-1">Powered by</span>
-              <span>
-                <svg height="22" viewBox="0 0 283 64" fill="none">
-                  <path
-                    fill="currentColor"
-                    d="M141.04 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM248.72 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM200.24 34c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9V5h9zM36.95 0L73.9 64H0L36.95 0zm92.38 5l-27.71 48L73.91 5H84.3l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10V51h-9V17h9v9.2c0-5.08 5.91-9.2 13.2-9.2z"
-                  ></path>
-                </svg>
-              </span>
-            </a>
             <div className="text-md mt-2 py-1 font-normal text-gray-600">
-              Copyright &copy; {YEAR}{" "}
-              <a href="/" className="text-inherit transition-all">
-                AstroLaunch UI
-              </a>{" "}
-              by{" "}
-              <a
-                href="https://www.creative-tim.com?ref=astroLaunch-ui"
-                target="_blank"
-                rel="noreferrer"
-                className="text-inherit transition-all"
-              >
-                Creative Tim. Made with ❤️ for a better web.
-              </a>
+              Copyright &copy; {YEAR}{" Sergej Görzen"}
             </div>
           </div>
           <div className="ml-auto w-full px-4 text-center md:w-4/12 md:px-0 md:text-right">
-            <a href="https://nepcha.com?ref=astrolaunch-ui">
-              <img
-                src="https://nepcha.com/img/media/badges/analytics-by-nepcha-black-transparent.png"
-                className="mx-auto lg:mr-0 lg:ml-auto"
-                alt="nepcha"
-                width={250}
-                height={250}
-              />
-            </a>
+
           </div>
         </div>
       </div>

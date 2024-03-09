@@ -1,6 +1,6 @@
 import ThemeProvider from "./theme-provider";
 import Navbar from "./defaultNavbar"
- 
+
 import { Typography, Input, Checkbox, Button } from "@material-tailwind/react";
 
 export function SignIn() {
@@ -48,7 +48,7 @@ export function SignIn() {
               fullWidth
             >
               <img
-                src="/astro-launch-ui/logos/logo-google.png"
+                src="/astro-launch-ui/projects/logo-google.png"
                 alt="google"
                 className="-mt-0.5 h-7 w-7"
               />
@@ -62,7 +62,7 @@ export function SignIn() {
           className="hidden h-screen w-full object-cover lg:block"
         />
       </section>
-    
+
     </ThemeProvider>
   );
 }

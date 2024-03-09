@@ -17,7 +17,7 @@ export function TestimonialSectionTwo() {
           <CardBody className="flex flex-col-reverse gap-16 py-20 px-14 lg:flex-row">
             <div>
               <img
-                src="/astro-launch-ui/logos/logo-spotify.svg"
+                src="/astro-launch-ui/projects/logo-spotify.svg"
                 alt="spotify"
                 className="mb-8 w-36"
               />

@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import HeaderPresentation from "../components/presentation/header"
 import FeaturePresentation from "../components/presentation/feature"
-import LogosPresentation from "../components/presentation/logos"
+import ProjectsPresentation from "../components/presentation/projects"
 import DevFreePresentation from "../components/presentation/developerFree"
 import PalettePresentationFree from "../components/presentation/palette"
 import CodePresentation from "../components/presentation/code"
@@ -15,20 +15,22 @@ import FooterFreePresentation from "../components/presentation/footerFree"
 import UnderConstructionPresentation from "../components/presentation/underConstruction"
 import React from "react";
 
+import "../../assets/scss/main.scss";
+
 ---
 
 <Layout title="Presentation Page">
 	<main>
-        <UnderConstructionPresentation client:only="react" />
+        <!--<UnderConstructionPresentation client:only="react" />
         <section style="text-align: center; font-size: 2rem">
             <div><img style="margin: auto" width={1024} src="../logos/OmiLAXR.svg" alt="Logo" /> </div>
             <p>The website is currently under construction. Meanwhile visit our <a href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem">GitLab repositories</a>, the <a href="https://docs.omilaxr.dev">documentation page</a> of our ecosystem or <a href="https://discord.gg/ePDWxD4C">Discord for support</a>.</p>
             <a style="font-size: 4rem" href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem"><i class="fa-brands fa-gitlab"></i></a>
             <a style="font-size: 4rem" href="https://discord.gg/ePDWxD4C"><i class="fa-brands fa-discord"></i></a>
-        </section>
-        <!--<HeaderPresentation client:only="react" />
+        </section>-->
+        <HeaderPresentation client:only="react" />
             <FeaturePresentation client:only="react" />
-            <LogosPresentation client:only="react" />
+            <ProjectsPresentation client:only="react" />
             <DevFreePresentation client:only="react" />
             <PalettePresentationFree client:only="react" />
             <CodePresentation client:only="react" />
@@ -37,6 +39,6 @@ import React from "react";
             <PagesFreePresentation client:only="react" />
             <PricingPresentation client:only="react" />
             <GithubPresentation client:only="react" />
-            <FooterFreePresentation client:only="react" />-->
+            <FooterFreePresentation client:only="react" />
   </main>
 </Layout>
