@@ -1,15 +1,14 @@
 {
   "name": "omilaxr-www",
   "version": "1.0.0",
-  "description": "The ultimate starter template for your startup web project",
+  "description": "Learning Analytics Framework for making live easier for developers.",
   "main": "assets/js/astro-launch-ui.min.js",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "create-free-demo": "node create-free-demo.js"
+    "astro": "astro"
   },
   "keywords": [
     "OmiLAXR",
@@ -19,7 +18,18 @@
     "Virtual Reality",
     "Unity"
   ],
-  "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
+  "authors": [
+    {
+      "name": "Creative Tim",
+      "email": "hello@creative-tim.com",
+      "homepage": "https://www.creative-tim.com/"
+    },
+    {
+      "name": "Sergej Görzen",
+      "email": "goerzen@cs.rwth-aachen.de",
+      "homepage": "https://sgoerzen.de/"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "@astrojs/react": "^1.2.1",
@@ -45,10 +55,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/astro-launch-ui.git"
+    "url": "git@gitlab.com:learntech-rwth/omilaxr-ecosystem/www.git"
   },
   "bugs": {
-    "url": "https://github.com/creativetimofficial/astro-launch-ui/issues"
+    "url": "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/www/-/issues"
   },
-  "homepage": "https://www.creative-tim.com/astro/launch-ui/"
+  "homepage": "https://omilaxr.dev/"
 }

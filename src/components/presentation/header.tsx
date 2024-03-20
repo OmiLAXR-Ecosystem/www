@@ -4,7 +4,6 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import ThemeProvider from "../theme-provider";
-import Navbar from "../navbar";
 import {AnimatingText} from "../AnimatingText";
 import {OmiLAXRLogo} from "../OmiLAXRLogo";
 
@@ -12,7 +11,6 @@ export default function HeaderPresentation() {
 
   return (
     <ThemeProvider>
-      <Navbar />
       <header className="h-full w-screen place-items-center bg-white relative px-8 py-8 lg:mb-36">
         <div className="container mx-auto grid items-center lg:grid-cols-2">
           <div className="text-center lg:text-left">

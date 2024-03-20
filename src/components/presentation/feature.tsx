@@ -63,7 +63,7 @@ export default function FeatureLanding() {
       <div className="container mx-auto mb-20 text-center">
         <div className="flex justify-center align-center relative z-5">
           <Typography color="dark" className="text-xs mr-2 font-normal">
-            Design, Concept & Code by Sergej Görzen, Birte Heinemann, Sam Mattiussi, Ulrik Schroeder @ RWTH Aachen University
+            Framework Design, Concept & Code by Sergej Görzen, Birte Heinemann, Sam Mattiussi, Ulrik Schroeder @ RWTH Aachen University
           </Typography>
         </div>
       </div>

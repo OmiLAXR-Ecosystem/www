@@ -11,6 +11,7 @@ import {
   CodeBracketSquareIcon,
   Square3Stack3DIcon,
   Bars2Icon,
+  HomeIcon,
 } from "@heroicons/react/24/outline";
 
 interface INavListMenuItem {
@@ -21,6 +22,11 @@ interface INavListMenuItem {
 
 // nav list menu
 const navListMenuItems: INavListMenuItem[] = [
+  {
+    title: "Home",
+    href: "/",
+    icon: <HomeIcon className="h-[18px] w-[18px]" />
+  },
   {
     title: "About Us",
     href: "./about",
