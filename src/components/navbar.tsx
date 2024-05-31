@@ -17,6 +17,7 @@ import {
 interface INavListMenuItem {
   title: string,
   href: string,
+  target?: string,
   icon?: React.ReactNode
 }
 
@@ -27,7 +28,7 @@ const navListMenuItems: INavListMenuItem[] = [
     href: "/",
     icon: <HomeIcon className="h-[18px] w-[18px]" />
   },
-  {
+  /*{
     title: "About Us",
     href: "./about",
     icon: <Square3Stack3DIcon className="h-[18px] w-[18px]" />
@@ -36,10 +37,11 @@ const navListMenuItems: INavListMenuItem[] = [
     title: "Publications",
     href: "./publications",
     icon: <Square3Stack3DIcon className="h-[18px] w-[18px]" />
-  },
+  },*/
   {
     title: "Docs",
-    href: "./docs",
+    href: "https://docs.omilaxr.dev/",
+    target: "_blank",
     icon: React.createElement(CodeBracketSquareIcon, { className: "h-[18px] w-[18px]" }),
   },
 ];
@@ -48,8 +50,8 @@ function NavListMenu() {
 
   return (
     <React.Fragment>
-      {navListMenuItems.map(({title, href, icon}, index) =>
-        <Typography key={index} as="a" href={href} variant="small" className="font-normal outline-none focus:outline-none">
+      {navListMenuItems.map(({title, href, icon, target}, index) =>
+        <Typography key={index} as="a" href={href} target={target} variant="small" className="font-normal outline-none focus:outline-none">
           <MenuItem className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full">
             {icon ?? <></>} {title + " "}
           </MenuItem>

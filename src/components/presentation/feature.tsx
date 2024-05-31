@@ -37,7 +37,7 @@ const features = [
     ),
     title: "For Researchers",
     description:
-      "This template comes packed with designer files based on Figma.",
+      "Ensure consistent and standardized XR data according FAIR principles.",
   },
   {
     icon: (
@@ -45,15 +45,15 @@ const features = [
     ),
     title: "For Developers",
     description:
-      "Save months of work when you use our fully coded components and pages.",
+      "Save a lot of repetitive work and use your time for more complex tasks.",
   },
   {
     icon: (
       <img className="w-32 mx-auto mb-4" src="icon3.png" />
     ),
-    title: "For Virtual & Augmented Reality",
+    title: "For Virtual, Mixed & Augmented Reality",
     description:
-      "Save time and money by helping your team focus on customization and features.",
+      "Compatible with several XR technologies.",
   }
 ];
 
