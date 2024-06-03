@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NavbarPresentation from "../components/presentation/navbar"
-import PublicationsPresentation  from "../components/presentation/publications"
+import GetStartedPresentation  from "../components/presentation/getStarted"
 import FooterFreePresentation from "../components/presentation/footerFree"
 
 import "../../assets/scss/main.scss";
@@ -11,7 +11,7 @@ import "../../assets/scss/main.scss";
 <Layout title="OmiLAXR - Publications">
     <NavbarPresentation />
     <main>
-        <PublicationsPresentation client:only="react" />
+        <GetStartedPresentation client:only="react" />
         <FooterFreePresentation client:only="react" />
     </main>
 </Layout>

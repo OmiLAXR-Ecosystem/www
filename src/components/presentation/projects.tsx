@@ -7,9 +7,9 @@ interface Project {
 }
 
 const projects: Project[] = [
-  { name: "RePiX VR", url: "", },
-  { name: "Teach-R", url: "",  },
-  { name: "Inside the Router", url: "",  },
+  { name: "RePiX VR", url: "https://gitlab.com/learntech-rwth/repix-vr/repix-vr-app",  },
+  { name: "Teach-R", url: "https://gitup.uni-potsdam.de/mm_vr/vr-klassenzimmer/-/wikis/home",  },
+  { name: "Inside the Router", url: "https://gitlab.com/dev-ddi/vr/vr-router",  },
   //{ name: "Inside the CPU", url: "",  },
   //{ name: "Interaction Windows", url: "", },
   //{ name: "Gedächtnispalast", url: "", },
