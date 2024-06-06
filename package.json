@@ -43,13 +43,17 @@
     "framer-motion": "^10.12.16",
     "fs-extra": "^11.1.1",
     "json-server": "^0.17.0",
+    "mdx": "^0.3.1",
     "next": "^13.4.4",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-figure-ref": "^1.0.0",
+    "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "sass": "^1.55.0",
     "tailwindcss": "^3.3.0"
   },

@@ -1,14 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NavbarPresentation from "../components/presentation/navbar"
-import GetStartedPresentation  from "../components/presentation/getStarted"
 import FooterFreePresentation from "../components/presentation/footerFree"
 
 import "../../assets/scss/main.scss";
-
+import GetStartedPresentation from "../components/presentation/getStarted";
 ---
 
-<Layout title="OmiLAXR - Publications">
+<Layout title="OmiLAXR - Get Started">
     <NavbarPresentation />
     <main>
         <GetStartedPresentation client:only="react" />
