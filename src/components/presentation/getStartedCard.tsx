@@ -23,7 +23,7 @@ export default function ({children, image, title, swapCells}: GetStartedCardProp
             className="border-b-2 border-neutral-100 px-6 py-3 text-xl font-medium leading-tight dark:border-white/10">
             {title}
         </h5>
-        <div color="gray" className="mb-4 font-normal">
+        <div color="gray" className="mb-4 font-normal px-5 py-5">
             {children}
         </div>
     </div>;
