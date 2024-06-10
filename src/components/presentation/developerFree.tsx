@@ -10,26 +10,26 @@ export function DevPresentation() {
     <ThemeProvider>
       <div className="h-full w-screen place-items-center bg-white py-20">
         <div className="container mx-auto grid items-center relative lg:grid-cols-2">
-          <div className="mb-8">
+          <div className="mb-3">
             <Typography
               color="blue"
               className="flex items-center font-bold text-lg mb-5"
             >
-              Attention to hiqh-quality code
+              Attention to hiqh-quality and consistent xAPI statements
             </Typography>
 
             <Typography
               variant="h2"
               color="blue-gray"
-              className="mb-4 leading-tight"
+              className="mb-7 leading-tight"
             >
-              Develop consistenly using Astro architecture principles
+              We use xAPI consistent and IDE-supported.
             </Typography>
             <Typography color="blue-gray" className="lg:pr-32">
-              Using AstroLaunch UI you get everything you need to start creating your fully functional and responsive Ecommerce website in days, not months.
+              Using our ecosystem you can get high-quality xAPI statements and ensure consistency. As your xAPI definitions are transformed to C# code, you get full IDE support.
             </Typography>
           </div>
-          <img src="consistenly.png" alt="components" className="mx-auto hidden md:flex" />
+          <video src="xAPI_CSharp_Preview.mov" autoPlay={true} controls={false} className="mx-auto hidden md:flex" />
         </div>
       </div>
     </ThemeProvider>

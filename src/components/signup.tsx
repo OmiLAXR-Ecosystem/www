@@ -1,6 +1,6 @@
 import ThemeProvider from "./theme-provider";
 import Navbar from "./defaultNavbar"
- 
+
 import { Typography, Input, Button } from "@material-tailwind/react";
 
 export function SignUp() {
@@ -39,7 +39,7 @@ export function SignUp() {
               fullWidth
             >
               <img
-                src="/astro-launch-ui/logos/logo-google.png"
+                src="/astro-launch-ui/projects/logo-google.png"
                 alt="google"
                 className="h-6 w-6"
               />{" "}
@@ -53,7 +53,7 @@ export function SignUp() {
               fullWidth
             >
               <img
-                src="/astro-launch-ui/logos/logo-facebook.png"
+                src="/astro-launch-ui/projects/logo-facebook.png"
                 alt="facebook"
                 className="-mt-0.5 h-7 w-7"
               />
@@ -67,7 +67,7 @@ export function SignUp() {
               fullWidth
             >
               <img
-                src="/astro-launch-ui/logos/logo-apple.png"
+                src="/astro-launch-ui/projects/logo-apple.png"
                 alt="apple"
                 className="-mt-1 h-7 w-7"
               />
