@@ -1,4 +1,4 @@
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography, Button } from "../../materialTailwind";
 import ThemeProvider from "../theme-provider";
 
 export function ContentSectionOne() {

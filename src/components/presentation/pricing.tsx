@@ -7,7 +7,7 @@ import {
   Card,
   CardBody,
   CardHeader,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 
 function PaddleLoader() {
   useEffect(() => {

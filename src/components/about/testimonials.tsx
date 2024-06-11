@@ -3,7 +3,7 @@ import {
   CardHeader,
   CardBody,
   Typography,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 import { StarIcon } from "@heroicons/react/24/solid";
 
 export function TestimonialSectionTwo() {

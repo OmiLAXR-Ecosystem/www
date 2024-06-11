@@ -1,4 +1,4 @@
-import {Card, Typography} from "@material-tailwind/react";
+import {Card, Typography} from "../../materialTailwind";
 import type {ReactElement} from "react";
 
 export interface GetStartedCardProps {

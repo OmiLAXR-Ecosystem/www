@@ -1,4 +1,4 @@
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "../../materialTailwind";
 import { StarIcon } from "@heroicons/react/24/solid";
 
 export function TestimonialSectionOne() {

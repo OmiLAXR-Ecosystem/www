@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import type React from "react";
+import { Card, CardBody, Typography } from "../../materialTailwind";
 import {
   EyeIcon,
   ChatBubbleOvalLeftEllipsisIcon,

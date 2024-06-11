@@ -1,6 +1,6 @@
-import { Typography, Card } from "@material-tailwind/react";
+import { Typography, Card } from "../../materialTailwind";
 
-function StatsCard({ count, title }) {
+function StatsCard({ count, title }: any) {
   return (
     <Card color="transparent" shadow={false}>
       <Typography variant="h1" className="mb-4 text-6xl text-dark">

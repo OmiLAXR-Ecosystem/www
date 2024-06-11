@@ -1,4 +1,4 @@
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "../../materialTailwind";
 import type React from "react";
 
 interface FeatureCardProps {

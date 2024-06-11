@@ -1,5 +1,5 @@
 
-import { Typography } from "@material-tailwind/react";
+import { Typography } from "../../materialTailwind";
 
 const YEAR = new Date().getFullYear();
 

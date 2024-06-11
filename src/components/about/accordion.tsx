@@ -3,8 +3,9 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
-} from "@material-tailwind/react";
- 
+} from "../../materialTailwind";
+
+// @ts-ignore
 function Icon({ id, open }) {
   return (
     <svg
@@ -21,11 +22,11 @@ function Icon({ id, open }) {
     </svg>
   );
 }
- 
+
 export default function Example() {
   const [open, setOpen] = useState(0);
- 
-  const handleOpen = (value) => {
+
+  const handleOpen = (value: any) => {
     setOpen(open === value ? 0 : value);
   };
  
