@@ -1,5 +1,5 @@
-import React from "react";
-import { Typography, Button } from "@material-tailwind/react";
+import type React from "react";
+import { Typography, Button } from "../../materialTailwind";
 import {
   BoltIcon,
   ArrowsPointingOutIcon,

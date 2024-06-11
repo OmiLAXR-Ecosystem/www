@@ -1,4 +1,4 @@
-import { Typography, Input, Button } from "@material-tailwind/react";
+import { Typography, Input, Button } from "../../materialTailwind";
 import ThemeProvider from "../theme-provider";
 
 
@@ -38,7 +38,7 @@ export function FooterOne() {
                 Stay up to date
               </Typography>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Input color="black" label="Enter your email" />
+                <Input color="black" label="Enter your email" crossOrigin={true} />
                 <Button color="dark">subscribe</Button>
               </div>
             </div>

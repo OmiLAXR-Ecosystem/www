@@ -6,7 +6,7 @@ import {
   Button,
   MenuItem,
   IconButton,
-} from "@material-tailwind/react";
+} from "../materialTailwind";
 import {
   CodeBracketSquareIcon,
   Square3Stack3DIcon,

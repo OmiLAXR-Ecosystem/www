@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Typography,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 import ThemeProvider from "../theme-provider";
 
 export function DevPresentation() {

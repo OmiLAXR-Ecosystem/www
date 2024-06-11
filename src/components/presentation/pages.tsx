@@ -4,7 +4,7 @@ import {
   CardBody,
   Typography,
   Button,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 import ThemeProvider from "../theme-provider";
 import { color } from "@material-tailwind/react/types/components/chip";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";

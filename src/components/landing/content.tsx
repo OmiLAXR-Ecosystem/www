@@ -3,7 +3,7 @@ import ThemeProvider from "../theme-provider";
 import {
   Button,
   Typography,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 
 export function HeroSectionFour() {
   return (

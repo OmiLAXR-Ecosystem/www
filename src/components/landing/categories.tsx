@@ -4,7 +4,7 @@ import {
   CardBody,
 
   Typography,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 
 interface CategoriesCardPropsType {
   img: string;

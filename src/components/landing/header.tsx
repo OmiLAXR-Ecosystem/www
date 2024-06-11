@@ -1,7 +1,7 @@
 import {
   Button,
   Typography,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 import ThemeProvider from "../theme-provider";
 import Navbar from "../defaultNavbar"
 

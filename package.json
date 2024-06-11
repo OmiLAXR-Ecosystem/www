@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Learning Analytics Framework for making live easier for developers.",
   "main": "assets/js/astro-launch-ui.min.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

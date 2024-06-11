@@ -1,4 +1,4 @@
-import { Button, Typography, Card, CardBody } from "@material-tailwind/react";
+import { Button, Typography, Card, CardBody } from "../../materialTailwind";
 import { CheckIcon, MinusIcon } from "@heroicons/react/24/outline";
 
 function Check() {

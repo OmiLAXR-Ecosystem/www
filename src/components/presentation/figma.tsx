@@ -3,10 +3,10 @@ import {
   Button,
   Card,
   Typography
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 import ThemeProvider from "../theme-provider";
 
-function StatsCard({ count, title, desc }) {
+function StatsCard({ count, title, desc }: any) {
   return (
     <Card color="transparent" shadow={false}>
       <Typography variant="h1" className="mb-4 text-5xl text-dark">

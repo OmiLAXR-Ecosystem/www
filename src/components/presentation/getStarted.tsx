@@ -1,10 +1,9 @@
 import ThemeProvider from "../theme-provider";
-import React, {type ReactElement} from "react";
+import React from "react";
 import GetStartedCard, {type GetStartedCardProps} from "./getStartedCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
-import Code from "./code";
 
 const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",

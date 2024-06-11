@@ -3,7 +3,7 @@ import {
   CardHeader,
   IconButton,
   Typography,
-} from "@material-tailwind/react";
+} from "../../materialTailwind";
 
 interface TeamCardPropsType {
   img: string;
