@@ -105,7 +105,7 @@ export default function ComplexNavbar() {
       }`}
     >
       <div className="relative mx-auto flex items-center text-blue-gray-900">
-        <img width={120} src="./logos/OmiLAXR.svg" alt="Logo" />
+        <img width={120} src="/logos/OmiLAXR.svg" alt="Logo" />
         <div className="hidden lg:flex ml-auto">
           <NavList />
         </div>
