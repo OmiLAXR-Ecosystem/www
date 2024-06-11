@@ -48,18 +48,18 @@ function H({children}: any) {
 export function GetStartedPresentation() {
     const fm = new FigureManager({
         figures: [
-            {label: "step-0", imageSrc: "./get-started/step-0.png"},
-            {label: "step-1", imageSrc: "./get-started/step-1.png"},
-            {label: "step-3", imageSrc: "./get-started/step-3.jpg"},
-            {label: "step-3-1", imageSrc: "./get-started/step-3-1.jpg"},
-            {label: "step-3-2", imageSrc: "./get-started/step-3-2.jpg"},
-            {label: "omilaxr-workflow", imageSrc: "./OmiLAXR_Workflow_generic_small.jpg"},
-            {label: "using-xapi", imageSrc: "./Using_xAPI.webm"},
-            {label: "trackable-register", imageSrc: "./get-started/Trackable_Register.png"},
-            {label: "step-4", imageSrc: "./get-started/step-4.png"},
-            {label: "asmdef-inspector", imageSrc: "./get-started/asmdef.png"},
-            {label: "omilaxr-prefabs", imageSrc: "./get-started/OmiLAXR_Prefabs.jpg"},
-            {label: "lrs-component", imageSrc: "./get-started/LRS_Component.png"},
+            {label: "step-0", imageSrc: "/get-started/step-0.png"},
+            {label: "step-1", imageSrc: "/get-started/step-1.png"},
+            {label: "step-3", imageSrc: "/get-started/step-3.jpg"},
+            {label: "step-3-1", imageSrc: "/get-started/step-3-1.jpg"},
+            {label: "step-3-2", imageSrc: "/get-started/step-3-2.jpg"},
+            {label: "omilaxr-workflow", imageSrc: "/OmiLAXR_Workflow_generic_small.jpg"},
+            {label: "using-xapi", imageSrc: "/Using_xAPI.webm"},
+            {label: "trackable-register", imageSrc: "/get-started/Trackable_Register.png"},
+            {label: "step-4", imageSrc: "/get-started/step-4.png"},
+            {label: "asmdef-inspector", imageSrc: "/get-started/asmdef.png"},
+            {label: "omilaxr-prefabs", imageSrc: "/get-started/OmiLAXR_Prefabs.jpg"},
+            {label: "lrs-component", imageSrc: "/get-started/LRS_Component.png"},
         ]
     });
 

@@ -11,5 +11,6 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   site: "https://omilaxr.dev/",
   outDir: "public",
-  publicDir: "static"
+  publicDir: "static",
+  base: "/"
 });
