@@ -39,7 +39,7 @@ export function FooterOne() {
               </Typography>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Input color="black" label="Enter your email" crossOrigin={true} />
-                <Button color="dark">subscribe</Button>
+                <Button color="blue">subscribe</Button>
               </div>
             </div>
           </div>

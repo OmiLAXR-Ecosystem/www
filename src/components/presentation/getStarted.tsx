@@ -9,14 +9,6 @@ const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",
     "com.rwth.unity.omilaxr",
     "com.rwth.unity.omilaxr.xapi",
-    "com.rwth.unity.omilaxr.assistance",
-    "com.rwth.unity.omilaxr.assistance.xapi",
-    "com.rwth.unity.omilaxr.adapters.recopa",
-    "com.rwth.unity.omilaxr.adapters.steamvr",
-    "com.rwth.unity.omilaxr.adapters.unityxr",
-    "com.rwth.unity.omilaxr.adapters.vivesr",
-    "com.rwth.unity.omilaxr.scenemanager",
-    "com.rwth.unity.opentts4unity"
 ];
 
 const jsonManifest = () => ({
@@ -101,7 +93,7 @@ export function GetStartedPresentation() {
 
                 <P>
                     After saving the file, you should open Unity editor and check under <InlineCodeBox>Edit &gt; Project
-                    Settings...</InlineCodeBox> if the scopes are applied (see <fm.FigureRef label="step-1"/>).
+                    Settings...</InlineCodeBox> if the scopes are applied (see <fm.FigureRef label="step-1"/>). Further modules are coming soon.
                 </P>
 
                 <div className="columns-2xl">
@@ -113,7 +105,23 @@ export function GetStartedPresentation() {
                     <fm.Figure className="align-middle" caption="Unity Package Manager scopes" label="step-1"/>
 
                 </div>
+            </div>
+        },
+        {
+            title: "(Optional) Contribution to OmiLAXR",
+            children: <div>
+                <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, we recommend
+                    following
+                    workflow.</P>
 
+                <ul>
+                    <li>(a) Clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</li>
+                    <li>(b) Request a branch in our official repository and clone it as submodule into your Unity
+                        project.
+                    </li>
+                    <li>(c) Fork our repository and clone the fork as submodule into your Unity project.</li>
+                    <li>(d) Include Unity package of xAPI registry (currently not available)</li>
+                </ul>
             </div>
         },
         {
@@ -486,6 +494,10 @@ export function GetStartedPresentation() {
                 <div className="container mx-auto items-center relative">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Get
                         started</h1>
+                    <p style={{color: 'red'}} className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+                        Looking for v1 of OmiLAXR? Click <a href="/get-started-v1">here</a>.
+                    </p>
+
                     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
                         Here, educators, students, and developers can find technical guides, best practices, case
                         studies, and examples. Whether you're
