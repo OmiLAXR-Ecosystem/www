@@ -1,6 +1,6 @@
 import ThemeProvider from "../../theme-provider";
 import React from "react";
-import GetStartedCard, {contentOf, type GetStartedCardProps} from "../getStartedCard";
+import {contentOf, type GetStartedCardProps} from "../getStartedCard";
 import CodeBox, {InlineCodeBox} from "../../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../../Hyperlink";
@@ -222,7 +222,7 @@ export function GetStartedPresentation() {
                 </ol>
 
 
-                <H className="pt-3">Include OmiLAXR to your project</H>
+                <H>Include OmiLAXR to your project</H>
                 <P>We your project is not using any asmdef-file it should work without including
                     OmiLAXR asmdef file.
                     But we recommend to use a asmdef file in your project. To do this create with right click in assets
