@@ -28,7 +28,7 @@ export function HeroSectionTwo() {
           </Typography>
           <div className="w-auto mx-auto">
             <div className="flex items-center">
-              <Button color="dark" size="lg" className="w-full z-10">
+              <Button color="blue" size="lg" className="w-full z-10">
                 Show new arrival
               </Button>
             </div>

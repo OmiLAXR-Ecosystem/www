@@ -42,7 +42,7 @@ export function StatsSectionTwo() {
           className="h-full w-full rounded-xl object-cover object-center"
         />
         <div className="p-2 lg:p-8">
-          <Typography color="dark" className="mb-2 font-bold text-lg">
+          <Typography color="blue" className="mb-2 font-bold text-lg">
             Our Activity
           </Typography>
           <Typography variant="h1" color="blue-gray" className="mb-20">

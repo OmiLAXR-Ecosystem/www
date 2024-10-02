@@ -120,19 +120,19 @@ export default function ComplexNavbar() {
         </IconButton>
         <a href="https://discord.gg/AnUXutpHZz" target="_blank">
           {/* @ts-ignore */}
-          <Button size="sm" color="dark" variant="text">
+          <Button size="sm" color="blue" variant="text">
             <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>
           </Button>
         </a>
         <a href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem" target="_blank">
           {/* @ts-ignore */}
-          <Button size="sm" color="dark" variant="text">
+          <Button size="sm" color="blue" variant="text">
             <i className="fab fa-gitlab text-xl leading-none" aria-hidden="true"></i>
           </Button>
         </a>
         <a href="/get-started">
           {/* @ts-ignore */}
-          <Button color="dark">
+          <Button color="blue">
             Get started
           </Button>
         </a>

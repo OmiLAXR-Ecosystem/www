@@ -1,7 +1,5 @@
 // utils/materialTailwind.js
-import pkg from '@material-tailwind/react';
-
-export const {
+export {
     Accordion,
     AccordionHeader,
     AccordionBody,
@@ -21,4 +19,4 @@ export const {
     Typography,
     MenuItem,
     ThemeProvider
-} = pkg;
+}  from '@material-tailwind/react';

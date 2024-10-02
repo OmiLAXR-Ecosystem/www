@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavbarPresentation from "../components/presentation/navbar"
+import FooterFreePresentation from "../components/presentation/footerFree"
+
+import "../../assets/scss/main.scss";
+import PipelinePresentation from "../components/presentation/pipeline";
+---
+
+<Layout title="OmiLAXR - Get Started">
+    <NavbarPresentation />
+    <main>
+        <PipelinePresentation client:only="react" />
+        <FooterFreePresentation client:only="react" />
+    </main>
+</Layout>

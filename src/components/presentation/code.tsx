@@ -33,7 +33,7 @@ export function CodePresentation() {
               Using our ecommerce starter template will save a lot of coding time , as it provides a solid foundation for the Online Store, allowing your team to focus on customizing and adding specific features to meet the needs of your particular project.
             </Typography>
             <a href="https://www.creative-tim.com/learning-lab/astro/overview/astro-launch-ui">
-              <Button color="dark" variant="text" size="sm" className="flex items-center mx-auto md:mr-auto lg:ml-0 gap-2 mt-4">
+              <Button color="blue" variant="text" size="sm" className="flex items-center mx-auto md:mr-auto lg:ml-0 gap-2 mt-4">
                 Documentation <ArrowRightIcon strokeWidth={2} className="h-5 w-5" />
               </Button>
             </a>

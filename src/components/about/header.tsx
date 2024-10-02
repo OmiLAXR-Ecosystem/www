@@ -25,7 +25,7 @@ export function HeroSectionTwo() {
                 New
               </Typography>
               <Typography
-                color="dark"
+                color="blue"
                 variant="small"
                 className="!flex !items-center !font-semibold"
               >
@@ -49,7 +49,7 @@ export function HeroSectionTwo() {
               we lose family over time.
             </Typography>
             <div className="mt-12 flex flex-wrap justify-center gap-3 lg:justify-start">
-              <Button color="dark" className="flex items-center">
+              <Button color="blue" className="flex items-center">
                 <img
                   src="/astro-launch-ui/projects/logo-ios.svg"
                   alt="ios"
@@ -57,7 +57,7 @@ export function HeroSectionTwo() {
                 />
                 Download Ios
               </Button>
-              <Button color="dark" className="flex items-center">
+              <Button color="blue" className="flex items-center">
                 <img
                   src="/astro-launch-ui/projects/logo-android.svg"
                   alt="ios"
