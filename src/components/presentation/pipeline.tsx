@@ -38,6 +38,7 @@ export function GetStartedPresentation() {
             {label: "hierarchy", imageSrc: "/pipeline/hierarchy.png"},
             {label: "learner_pipeline", imageSrc: "/pipeline/learner_pipeline.png"},
             {label: "step-listeners", imageSrc: "/pipeline/Listeners.png"},
+            {label: "learner_listeners", imageSrc: "/pipeline/learner_listeners.png"},
             {label: "step-filters", imageSrc: "/pipeline/Filters.png"},
             {label: "step-tb", imageSrc: "/pipeline/TrackingBehaviours.png"},
             {label: "step-composers", imageSrc: "/pipeline/Composers.png"},
@@ -118,7 +119,6 @@ export function GetStartedPresentation() {
                     Attention: as the parameter of <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is an array of
                     type <InlineCodeBox>Object</InlineCodeBox> it is also allowed to pass components instead of game objects.</P>
 
-
                 <CodeBox language="csharp">
                     {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / Example Listener (YOUR_MODULE_NAME)\")]\n" +
                         "public sealed class ExampleListener : Listener\n" +
@@ -131,6 +131,13 @@ export function GetStartedPresentation() {
                         "    }"}
                 </CodeBox>
 
+                <P>The pipeline is triggered whenever <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is called.
+                    This makes it possible to also wait asynchronously for specific in future appearing objects.</P>
+
+                <P>The order of components is not relevant. All listeners are attached to one game objects (see <fm.FigureRef label="learner_listeners" />).</P>
+
+                <fm.Figure caption="Example of listeners of Learner Pipeline" label="learner_listeners" maxWidth={"500px"} />
+
             </div>
         },
         {
@@ -138,6 +145,28 @@ export function GetStartedPresentation() {
             children: <div>
 
                 <fm.Figure caption="Filters Step" label="step-filters" maxWidth="100%"/>
+
+                <P>The objects from the previous step are passed as input to the filtering stage.</P>
+
+                <P>Filters can selectively isolate certain objects from the full set of passed objects.
+                    This is useful in scenarios where you need to blacklist specific objects or manage particular ones
+                    (such as <InlineCodeBox>InputManager</InlineCodeBox>). Since the filters are applied in a sequence,
+                    their order is important. Objects that have already been filtered out will not be passed to subsequent filters.</P>
+
+                <P>The following example demonstrates filtering specific objects by name using a blacklist.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 2) Filters / Blacklist Filter\")]\n" +
+                        "public class BlacklistFilter : Filter\n" +
+                        "{\n" +
+                        "    public List<string> blacklist;\n" +
+                        "    public override Object[] Pass(Object[] objects)\n" +
+                        "    {\n" +
+                        "        return objects.Where(go => !blacklist.Contains(go.GetTrackingName())).ToArray();\n" +
+                        "    }\n" +
+                        "}"}
+                </CodeBox>
+
 
             </div>
         },
@@ -147,6 +176,52 @@ export function GetStartedPresentation() {
 
                 <fm.Figure caption="Tracking Behaviours Step" label="step-tb" maxWidth="100%"/>
 
+                <P><InlineCodeBox>Tracking Behaviours</InlineCodeBox> serve two main purposes.
+                    Firstly, they can process previously passed objects and perform actions on them.
+                    For example, if a list of buttons is provided, <InlineCodeBox>Tracking Behaviours</InlineCodeBox>
+                    can attach listeners to the click events.</P>
+
+                <P>Further the explicit event class <InlineCodeBox>TrackingBehaviourEvent</InlineCodeBox> ensures a clean
+                    binding and unbinding of listener events whenever the pipeline is started, paused or restarted.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / UI Tracking Behaviour\")]\n" +
+                        "public class UiTrackingBehaviour : TrackingBehaviour\n" +
+                        "{\n" +
+                        "    [Gesture(\"UI\"), Action(\"Click\")]\n" +
+                        "    public TrackingBehaviourEvent<Button> OnClickedButton = new TrackingBehaviourEvent<Button>();\n" +
+                        "    ..." +
+                        "    \n" +
+                        "    protected override void AfterFilteredObjects(Object[] objects)\n" +
+                        "    {\n" +
+                        "        var selectables = Select<Selectable>(objects);\n" +
+                        "        \n" +
+                        "        foreach (var selectable in selectables)\n" +
+                        "        {\n" +
+                        "            var type = selectable.GetType();\n" +
+                        "\n" +
+                        "            if (type == typeof(Button))\n" +
+                        "            {\n" +
+                        "                var button = (Button)selectable;\n" +
+                        "                OnClickedButton.Bind(button.onClick, () =>\n" +
+                        "                {\n" +
+                        "                    OnClickedButton?.Invoke(this, button);\n" +
+                        "                });\n" +
+                        "            }\n" +
+                        "            ..." +
+                        "        }\n" +
+                        "    }\n" +
+                        "}"}
+                </CodeBox>
+
+
+                <P>Secondly, they can respond to specific inputs or user gestures. This can be solved by using (for example)
+                the <InlineCodeBox>Update</InlineCodeBox> function of Unity or whatever is needed. One example for this usecase
+                can be seen in component <InlineCodeBox>MouseTrackingBehaviour</InlineCodeBox> in source code.</P>
+                <P>Their core concept is to react to any kind of action (such as button clicks or interactions) and
+                    emit public events for further processing. These events function as an interface for composers.</P>
+                {/*<P>A more abstract example could be if we reuse our <InlineCodeBox>ExampleComponent</InlineCodeBox> again.*/}
+                {/*We added a random event to the component and just react on its triggering.</P>*/}
             </div>
         },
         {
@@ -155,6 +230,94 @@ export function GetStartedPresentation() {
 
                 <fm.Figure caption="Composers Step" label="step-composers" maxWidth="100%"/>
 
+                <P><InlineCodeBox>Composers</InlineCodeBox> are the part where the events of
+                    <InlineCodeBox>Tracking Behaviours</InlineCodeBox> are translated to data rows (in our example to
+                xAPI statements).</P>
+
+                <P>In our example, our composer is waiting when the <InlineCodeBox>OnClickedButton</InlineCodeBox> event
+                is triggered by <InlineCodeBox>UiTrackingBehaviour</InlineCodeBox>.</P>
+
+                <P>An xAPI statement can be composed by following the xAPI syntax of <InlineCodeBox>actor.Does(verb).Activity(activity)</InlineCodeBox>.
+                Further information (like context, result and activity extensions) can be provided by using <InlineCodeBox>.WithContext(resultExtension)</InlineCodeBox>
+                    <InlineCodeBox>.WithContext(contextExtension)</InlineCodeBox> and <InlineCodeBox>.WithExtension(activityExtension)</InlineCodeBox> notation.</P>
+                <P>The actor is assigned automatically depending on which actor pipeline triggers this specific <InlineCodeBox>Tracking Behaviour</InlineCodeBox>.</P>
+
+                <P>The xAPI registry can be addressed by using <InlineCodeBox>xapi</InlineCodeBox> field.</P>
+
+                <P>However, the old syntax is also enabled by using <InlineCodeBox>xAPIv1.CreateStatement(statement)</InlineCodeBox>
+                (instead of actor) and <InlineCodeBox>xAPI_Definitions</InlineCodeBox> (instead of xapi) class.</P>
+
+                <P>Further, we enabled to provide a responsible person to ensure some kind of data quality. This is covered
+                    by a mandatory method <InlineCodeBox>GetAuthor()</InlineCodeBox>. This information is provided automatically
+                to a xAPI statement.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 4) Composers / UI Statement Composer (xAPI)\")]\n" +
+                        "public sealed class UiComposer : XApiComposer<UiTrackingBehaviour>\n" +
+                        "{\n" +
+                        "    protected override Author GetAuthor()\n" +
+                        "        => new Author(\"Sergej Görzen\", \"goerzen@cs.rwth-aachen.de\");\n" +
+                        "    protected override void Compose(UiTrackingBehaviour tb)\n" +
+                        "    {\n" +
+                        "        tb.OnClickedButton.AddHandler((_, button) =>\n" +
+                        "        {\n" +
+                        "            var buttonName = button.gameObject.GetTrackingName();\n" +
+                        "            var text = button.GetTextOrDefault();\n" +
+                        "            \n" +
+                        "            var statement = actor.Does(xapi.generic.verbs.clicked)\n" +
+                        "                .WithExtension(xapi.virtualReality.extensions.activity\n" +
+                        "                    .uiElementValue(text)\n" +
+                        "                    .uiElementType(\"button\")\n" +
+                        "                    .vrObjectName(buttonName))\n" +
+                        "                .Activity(xapi.virtualReality.activities.uiElement);\n" +
+                        "            \n" +
+                        "            SendStatement(statement);\n" +
+                        "        });\n" +
+                        "        ...\n" +
+                        "    }\n" +
+                        "}"}
+                </CodeBox>
+
+                <P>If another data standard is wished instead of xAPI, than a new data composer class need to be implemented
+                analog to <InlineCodeBox>XApiComposer</InlineCodeBox>.</P>
+
+                <h5 style={{fontSize: "20px"}}>Higher or Semantic Composers</h5>
+
+                <P>Our pipeline allows to create higher level <InlineCodeBox>Composers</InlineCodeBox> right before processing
+                to hooks. They are useful, for example, if you wish to compose further statements depending on some existing other
+                statements. They are triggered whenever a set of conditions is matched.</P>
+
+                <P>In our example, we create a new statement whenever mouse clicked happened one time and move event 5 times.
+                For checking the statements there some <InlineCodeBox>Match</InlineCodeBox> functions.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 4.1) Higher Composers / Example Semantic Composer (YOUR_MODULE_NAME)\")]\n" +
+                        "public sealed class ExampleSemanticComposer : xApiStatementSemanticComposer<LearnerPipeline>\n" +
+                        "{\n" +
+                        "    protected override Author GetAuthor()\n" +
+                        "        => new Author(\"Sergej Görzen\", \"goerzen@cs.rwth-aachen.de\");\n" +
+                        "    protected override Dictionary<string, MatchCondition<xApiStatement>> Conditions()\n" +
+                        "        => new Dictionary<string, MatchCondition<xApiStatement>>\n" +
+                        "        {\n" +
+                        "            { \"clicked\", new MatchCondition<xApiStatement>(1, stmt => stmt.MatchKeys(\"clicked\", \"mouse\")) },\n" +
+                        "            { \"moved\", new MatchCondition<xApiStatement>(10, stmt => stmt.MatchKeys(\"moved\", \"mouse\")) }\n" +
+                        "        };\n" +
+                        "    protected override void OnMatchAllConditions(Dictionary<string, IEnumerable<xApiStatement>> matchingStatements)\n" +
+                        "    {\n" +
+                        "        // Get clicked statement\n" +
+                        "        var clickedStatement = matchingStatements[\"clicked\"].First();\n" +
+                        "        // Get first and last move statement\n" +
+                        "        var movedMatch = matchingStatements[\"moved\"];\n" +
+                        "        var firstMoveStatement = movedMatch.First();\n" +
+                        "        var lastMoveStatement = movedMatch.Last();\n" +
+                        "        // Compose new statement\n" +
+                        "        var stmt = actor.Does(xapi.generic.verbs.achieved)\n" +
+                        "            .Activity(xapi.generic.activities.goal)\n" +
+                        "            .WithExtension(xapi.generic.extensions.activity.name(\"dragged\"));\n" +
+                        "        SendStatement(stmt);" +
+                        "    }\n" +
+                        "}"}
+                </CodeBox>
 
             </div>
         },
@@ -164,6 +327,29 @@ export function GetStartedPresentation() {
 
                 <fm.Figure caption="Hooks Step" label="step-hooks" maxWidth="100%"/>
 
+                <P><InlineCodeBox>Hooks</InlineCodeBox> are a mechanism which allows you to manipulate existing statements
+                composed by all <InlineCodeBox>Composers</InlineCodeBox>.</P>
+
+                <P>In our example we check the statements. When ever a "clicked" verb statement is detected we change the verb
+                to "interacted".</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Example Hook (YOUR_MODULE_NAME)\")]\n" +
+                        "public sealed class ExampleHook : xApiStatementHook\n" +
+                        "{\n" +
+                        "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
+                        "    {\n" +
+                        "        // change all clicked verbs by interacted\n" +
+                        "        if (statement.MatchKeys(\"clicked\", \"uiElement\"))\n" +
+                        "        {\n" +
+                        "            DebugLog.xAPI.Print($\"Matches keys 'clicked' and 'uiElement': {statement}\");\n" +
+                        "            statement.Verb(xapi.virtualReality.verbs.interacted)\n" +
+                        "                .ChangedBy(\"Sergej G.\", \"goerzen@informatik.rwth-aachen.de\");\n" +
+                        "            DebugLog.xAPI.Print($\"Exchanged 'clicked' by 'interacted': {statement}\");\n" +
+                        "        }" +
+                        "\n..." +
+                        "}"}
+                </CodeBox>
 
             </div>
         },
@@ -173,6 +359,37 @@ export function GetStartedPresentation() {
 
                 <fm.Figure caption="Endpoints Step" label="step-endpoints" maxWidth="100%"/>
 
+                <P><InlineCodeBox>Endpoints</InlineCodeBox> are responsible to translate the data to a needed format
+                (e.g. JSON) and provide it to a wished endpoint. This can be, for example, a simple MongoDB, a REST API
+                or Learning Record Store. As we are working with xAPI in our example we are transforming the xAPI
+                    statement to a TinCan standardized object (using <a href="https://github.com/RusticiSoftware/TinCan.NET">TinCan.NET</a>)
+                    and send it to a Learning Record Store. The TinCan.NET library is already delivered by installing
+                    the <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> module.</P>
+
+                <P>As long you don't need a new endpoint type, you can reuse existing components.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 6) Endpoints / Learning Record Store (LRS for xAPI)\")]\n" +
+                        "public class LearningRecordStore : Endpoint\n" +
+                        "{\n" +
+                        "    ...\n" +
+                        "\n" +
+                        "    protected override TransferCode HandleSending(IStatement statement)\n" +
+                        "    {\n" +
+                        "       \n" +
+                        "        var stmt = statement as xApiStatement;\n" +
+                        "        // Transfer single statement to LRS\n" +
+                        "        var resp = _remoteLRS.SaveStatement(stmt.ToTinCanStatement(statementIdUri));\n" +
+                        "\n" +
+                        "        if (resp.success) \n" +
+                        "            return TransferCode.Success;\n" +
+                        "        \n" +
+                        "        // Print error message to know more about on debug\n" +
+                        "        DebugLog.xAPI.Error($\"Error Message: {resp.errMsg}, Http Error: {resp.httpException}\");\n" +
+                        "        return TransferCode.Error;\n" +
+                        "    }\n" +
+                        "}"}
+                </CodeBox>
 
             </div>
         }

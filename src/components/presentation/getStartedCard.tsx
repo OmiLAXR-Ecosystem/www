@@ -1,6 +1,7 @@
-import {Card, Typography} from "../../materialTailwind";
+import {Card} from "../../materialTailwind";
 import type {ReactElement} from "react";
 import React from "react";
+import "./getStartedCard.scss";
 
 export interface GetStartedCardProps {
     title: string,
