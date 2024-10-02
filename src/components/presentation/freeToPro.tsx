@@ -79,7 +79,7 @@ export function FigmaPresentation() {
                   ))}
                 </div>
                 <a href="https://www.creative-tim.com/product/astro-launch-ui-pro" target="_blank">
-                  <Button color="dark" className="flex items-center">
+                  <Button color="blue" className="flex items-center">
                      Astro Pro
                   </Button>
                 </a>

@@ -80,7 +80,7 @@ export function FigmaPresentation() {
                 </div>
               </div>
               <a href="https://www.figma.com/community/file/1201892214265868825">
-                <Button color="dark" className="flex items-center">
+                <Button color="blue" className="flex items-center">
                   Get Figma
                 </Button>
               </a>

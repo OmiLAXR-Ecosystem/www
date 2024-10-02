@@ -1,5 +1,7 @@
-import {Card, Typography} from "../../materialTailwind";
+import {Card} from "../../materialTailwind";
 import type {ReactElement} from "react";
+import React from "react";
+import "./getStartedCard.scss";
 
 export interface GetStartedCardProps {
     title: string,
@@ -8,7 +10,9 @@ export interface GetStartedCardProps {
     swapCells?: boolean,
 }
 
-export default function ({children, image, title, swapCells}: GetStartedCardProps) {
+
+
+export default function GetStartedCard({children, image, title, swapCells}: GetStartedCardProps) {
 
     const imageCell = () => <div className="step-image">
         <img
@@ -19,10 +23,10 @@ export default function ({children, image, title, swapCells}: GetStartedCardProp
     </div>;
 
     const contentCell = () => <div className="step-content">
-        <h5
+        <h4 style={{fontSize: "24px"}}
             className="border-b-2 border-neutral-100 px-6 py-3 text-xl font-medium leading-tight dark:border-white/10">
             {title}
-        </h5>
+        </h4>
         <div color="gray" className="mb-4 font-normal px-5 py-5">
             {children}
         </div>
@@ -37,4 +41,30 @@ export default function ({children, image, title, swapCells}: GetStartedCardProp
             {!swapCells && contentCell()}
         </div>
     </Card>
+}
+
+export function contentOf(items: GetStartedCardProps[]) {
+    return <div className="get-started-cards">
+        <ol className="table-of-contents" style={{fontSize: "1.5em", paddingLeft: "1em"}}>
+            {
+                items.map(({title}, index) => (
+                    <li key={index}>
+                        <a href={'#section-' + index}>{index}. {title}</a>
+                    </li>
+                ))
+            }
+        </ol>
+
+        {
+            items.map(({title, children, image}, index) => (
+                <section style={{paddingTop: '80px'}} id={'section-' + index} key={index}>
+                    <GetStartedCard title={`Step ${index}: ${title}`}
+                                    image={image}
+                                    swapCells={index % 2 != 0}>
+                        {children}
+                    </GetStartedCard>
+                </section>
+            ))
+        }
+    </div>
 }
