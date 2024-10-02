@@ -1,6 +1,6 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import GetStartedCard, {type GetStartedCardProps} from "./getStartedCard";
+import GetStartedCard, {contentOf, type GetStartedCardProps} from "./getStartedCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
@@ -19,13 +19,6 @@ const jsonManifest = () => ({
             "url": "https://registry.npmjs.com",
             "scopes": scopes
         },
-        {
-            "name": "package.openupm.com",
-            "url": "https://package.openupm.com",
-            "scopes": [
-                "com.itisnajim.socketiounity"
-            ]
-        }
     ]
 });
 
@@ -41,10 +34,11 @@ export function GetStartedPresentation() {
     const fm = new FigureManager({
         figures: [
             {label: "step-0", imageSrc: "/get-started/step-0.png"},
-            {label: "step-1", imageSrc: "/get-started/step-1.png"},
+            {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
             {label: "step-3", imageSrc: "/get-started/step-3.jpg"},
             {label: "step-3-1", imageSrc: "/get-started/step-3-1.jpg"},
             {label: "step-3-2", imageSrc: "/get-started/step-3-2.jpg"},
+            {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
             {label: "omilaxr-workflow", imageSrc: "/OmiLAXR_Workflow_generic_small.jpg"},
             {label: "using-xapi", imageSrc: "/Using_xAPI.webm"},
             {label: "trackable-register", imageSrc: "/get-started/Trackable_Register.png"},
@@ -68,7 +62,7 @@ export function GetStartedPresentation() {
             </div>
         },
         {
-            title: "Prepare Unity package scope (recommended)",
+            title: "Prepare Unity package scope",
             children: <div>
 
                 <strong>If you wish instead importing packages via their git url, than this step can be ignored. We
@@ -108,55 +102,24 @@ export function GetStartedPresentation() {
             </div>
         },
         {
-            title: "(Optional) Contribution to OmiLAXR",
+            title: "Working with OmiLAXR modules",
             children: <div>
-                <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, we recommend
-                    following
-                    workflow.</P>
+                <P>We <strong>strongly</strong> recommend to create an own module for your </P>
 
                 <ul>
-                    <li>(a) Clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</li>
-                    <li>(b) Request a branch in our official repository and clone it as submodule into your Unity
-                        project.
+                    <li>(a) Clone following repository <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</li>
+                    <li>(b) In Unity menu navigate to <InlineCodeBox>Window &gt; Package
+                        Manager</InlineCodeBox>, then on <InlineCodeBox>+</InlineCodeBox> in the top left corner. Then click on
+                        <InlineCodeBox>Add from disk...</InlineCodeBox> (see <fm.FigureRef label="add-from-disk" />).
+
+                        <fm.Figure maxWidth="700px" className="align-middle" caption="Add package from disk" label="add-from-disk"/>
                     </li>
-                    <li>(c) Fork our repository and clone the fork as submodule into your Unity project.</li>
-                    <li>(d) Include Unity package of xAPI registry (currently not available)</li>
-                </ul>
-            </div>
-        },
-        {
-            title: "Prepare xAPI Registry",
-            children: <div>
-
-                <P>For data tracking we are using the xAPI data format. To get an idea of the
-                    eXperience API please read the official documentation
-                    (<Hyperlink>https://xapi.com/statements-101/</Hyperlink>).</P>
-
-                <P>For standardization purpose we established an own xAPI registry specialized for
-                    different research domains. One domain
-                    is <InlineCodeBox>virtualReality</InlineCodeBox> (<InlineCodeBox>extendedReality</InlineCodeBox> is
-                    in progress). We maintain our registry on in our GitLab
-                    repository <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
-                    For a more user friendly maintenance we created an user
-                    interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
-
-                <P>OmiLAXR is using this registry for tracking interactions of the XR scenarios.
-                    This is why you will need a local copy of the xAPI repository. You have following options to get
-                    it:</P>
-
-                <ul>
-                    <li>(a) Download zip and unpack inside your Unity project and maintain it in your XR project.</li>
-                    <li>(b) Request a branch in our official repository and clone it as submodule into your Unity project.</li>
-                    <li>(c) Fork our repository and clone the fork as submodule into your Unity project.</li>
-                    <li>(d) Include Unity package of xAPI registry (currently not available)</li>
+                    <li>(c) Navigate to the cloned project(s) and select its <InlineCodeBox>package.json</InlineCodeBox>.</li>
+                    <li>(d) Now you have imported the package into your project and you can start to work.</li>
                 </ul>
 
-                <P>As we invite you to contribute to new vocabulary we strongly recommend option (c).</P>
-
-                <P>After you have prepared the repository you shall have a <InlineCodeBox>xapi</InlineCodeBox> folder in your project.
-                    We strongly recommend to place it into <InlineCodeBox>Assets</InlineCodeBox> folder.</P>
-
-
+                <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, use can use the same workflow. For contribution we recommend to create a fork of our projects and push the changes back.</P>
+                <P>But here you need to clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</P>
             </div>
         },
         {
@@ -200,6 +163,41 @@ export function GetStartedPresentation() {
                 </P>
 
                 <fm.Figure caption="xAPI4Unity Config Window" label="step-3-2" maxWidth="50%"/>
+            </div>
+        },
+        {
+            title: "Prepare xAPI Registry",
+            children: <div>
+
+                <P>For data tracking we are using the xAPI data format. To get an idea of the
+                    eXperience API please read the official documentation
+                    (<Hyperlink>https://xapi.com/statements-101/</Hyperlink>).</P>
+
+                <P>For standardization purpose we established an own xAPI registry specialized for
+                    different research domains. One domain
+                    is <InlineCodeBox>virtualReality</InlineCodeBox> (<InlineCodeBox>extendedReality</InlineCodeBox> is
+                    in progress). We maintain our registry on in our GitLab
+                    repository <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
+                    For a more user friendly maintenance we created an user
+                    interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
+
+                <P>OmiLAXR is using this registry for tracking interactions of the XR scenarios.
+                    This is why you will need a local copy of the xAPI repository. You have following options to get
+                    it:</P>
+
+                <ul>
+                    <li>(a) Download zip and unpack inside your Unity project and maintain it in your XR project.</li>
+                    <li>(b) Request a branch in our official repository and clone it as submodule into your Unity project.</li>
+                    <li>(c) Fork our repository and clone the fork as submodule into your Unity project.</li>
+                    <li>(d) Include Unity package of xAPI registry (currently not available)</li>
+                </ul>
+
+                <P>As we invite you to contribute to new vocabulary we strongly recommend option (c).</P>
+
+                <P>After you have prepared the repository you shall have a <InlineCodeBox>xapi</InlineCodeBox> folder in your project.
+                    We strongly recommend to place it into <InlineCodeBox>Assets</InlineCodeBox> folder.</P>
+
+
             </div>
         },
         {
@@ -495,7 +493,7 @@ export function GetStartedPresentation() {
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Get
                         started</h1>
                     <p style={{color: 'red'}} className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                        Looking for v1 of OmiLAXR? Click <a href="/get-started-v1">here</a>.
+                        Looking for v1 of OmiLAXR? Click <a href="/get-started-v1" className="underline">here</a>.
                     </p>
 
                     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
@@ -509,27 +507,7 @@ export function GetStartedPresentation() {
                         We hope you find our resources helpful. Thank you for exploring XR in education with us.
                     </p>
 
-                    <ol>
-                        {
-                            items.map(({title}, index) => (
-                                <li key={index}>
-                                    <a href={'#section-' + index}>{index}. {title}</a>
-                                </li>
-                            ))
-                        }
-                    </ol>
-
-                    {
-                        items.map(({title, children, image}, index) => (
-                            <section id={'section-' + index} key={index}>
-                                <GetStartedCard title={`Step ${index}: ${title}`}
-                                                image={image}
-                                                swapCells={index % 2 != 0}>
-                                    {children}
-                                </GetStartedCard>
-                            </section>
-                        ))
-                    }
+                    {contentOf(items)}
                 </div>
             </div>
         </ThemeProvider>

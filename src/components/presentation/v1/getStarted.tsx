@@ -1,6 +1,6 @@
 import ThemeProvider from "../../theme-provider";
 import React from "react";
-import GetStartedCard, {type GetStartedCardProps} from "../getStartedCard";
+import GetStartedCard, {contentOf, type GetStartedCardProps} from "../getStartedCard";
 import CodeBox, {InlineCodeBox} from "../../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../../Hyperlink";
@@ -501,27 +501,8 @@ export function GetStartedPresentation() {
                         We hope you find our resources helpful. Thank you for exploring XR in education with us.
                     </p>
 
-                    <ol>
-                        {
-                            items.map(({title}, index) => (
-                                <li key={index}>
-                                    <a href={'#section-' + index}>{index}. {title}</a>
-                                </li>
-                            ))
-                        }
-                    </ol>
 
-                    {
-                        items.map(({title, children, image}, index) => (
-                            <section id={'section-' + index} key={index}>
-                                <GetStartedCard title={`Step ${index}: ${title}`}
-                                                image={image}
-                                                swapCells={index % 2 != 0}>
-                                    {children}
-                                </GetStartedCard>
-                            </section>
-                        ))
-                    }
+                    {contentOf(items)}
                 </div>
             </div>
         </ThemeProvider>
