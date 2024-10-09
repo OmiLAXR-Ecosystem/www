@@ -27,7 +27,7 @@ export default function HeaderPresentation() {
               your own IDE-supported xAPI statements.
             </Typography>
             <div className="mt-12 flex flex-wrap justify-center gap-3 lg:justify-start">
-              <a href="#get-started">
+              <a href="/get-started">
                 <Button color="blue" className="flex items-center">
                   Get Started
                 </Button>
