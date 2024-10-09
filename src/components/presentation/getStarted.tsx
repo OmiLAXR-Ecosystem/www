@@ -97,27 +97,7 @@ export function GetStartedPresentation() {
                 </div>
             </div>
         },
-        {
-            title: "Working with OmiLAXR modules",
-            children: <div>
-                <P>We <strong>strongly</strong> recommend to create an own module for your </P>
 
-                <ul>
-                    <li>(a) Clone following repository <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</li>
-                    <li>(b) In Unity menu navigate to <InlineCodeBox>Window &gt; Package
-                        Manager</InlineCodeBox>, then on <InlineCodeBox>+</InlineCodeBox> in the top left corner. Then click on
-                        <InlineCodeBox>Add from disk...</InlineCodeBox> (see <fm.FigureRef label="add-from-disk" />).
-
-                        <fm.Figure maxWidth="700px" className="align-middle" caption="Add package from disk" label="add-from-disk"/>
-                    </li>
-                    <li>(c) Navigate to the cloned project(s) and select its <InlineCodeBox>package.json</InlineCodeBox>.</li>
-                    <li>(d) Now you have imported the package into your project and you can start to work.</li>
-                </ul>
-
-                <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, use can use the same workflow. For contribution we recommend to create a fork of our projects and push the changes back.</P>
-                <P>But here you need to clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</P>
-            </div>
-        },
         {
             title: "Install xAPI4Unity package",
             children: <div>
@@ -162,6 +142,7 @@ export function GetStartedPresentation() {
 
             </div>
         },
+
         {
             title: "Prepare xAPI Registry",
             children: <div>
@@ -207,10 +188,13 @@ export function GetStartedPresentation() {
                     You can do this by using the namespaces (recommended) or their git urls.
                 </P>
 
+                <P>Another convenient way to do it is to install by selecting from "My Registries" (see <fm.FigureRef label="my-registries" />).</P>
+
                 <fm.Figure caption="Installed OmiLAXR" label="installed-omilaxr" maxWidth="70%"/>
 
                 <div className="pt-3"></div>
                 <h5 style={{fontSize: "20px"}}>Include OmiLAXR to your project</h5>
+                <P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the next instruction.</P>
                 <P>We your project is not using any asmdef-file it should work without including
                     OmiLAXR asmdef file.
                     But we recommend to use a asmdef file in your project. To do this create with right click in assets
@@ -249,6 +233,32 @@ export function GetStartedPresentation() {
                 <fm.Figure caption={"OmiLAXR Prefabs"} label={"prefabs"} maxWidth={"50%"} />
 
                 <P>Further, some example components can be found in the module template <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</P>
+            </div>
+        },
+
+        {
+            title: "Working with OmiLAXR modules",
+            children: <div>
+                <P>In OmiLAXRv2 we are working with so called "modules". The <a href="/pipeline">Pipeline</a> consists of components. Modules are a collection of components to extend or create OmiLAXR pipelines.</P>
+                <P>We <strong>strongly</strong> recommend to create an own module for your project. This way you can split your LA work into an own repository. Anyway, it is also possible and good practise if you wish to place it inside your project.</P>
+                <P>To do LA work, you can either place all components in an own folder inside your project or you can work with an own module following this template.</P>
+                <P>If you want to place the module inside your XR project repository, it is enough to download the project by ZIP from <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</P>
+
+                <ul>
+                    <li>(a) Fork the following repository <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink> and fork your clone.</li>
+                    <li>(b) In Unity menu navigate to <InlineCodeBox>Window &gt; Package
+                        Manager</InlineCodeBox>, then on <InlineCodeBox>+</InlineCodeBox> in the top left corner. Then click on
+                        <InlineCodeBox>Add from disk...</InlineCodeBox> (see <fm.FigureRef label="add-from-disk" />).
+
+                        <fm.Figure maxWidth="700px" className="align-middle" caption="Add package from disk" label="add-from-disk"/>
+                    </li>
+                    <li>(c) Navigate to the cloned project(s) and select its <InlineCodeBox>package.json</InlineCodeBox>.</li>
+                    <li>(d) Now you have imported the package into your project and you can start to work.</li>
+                    <li>(e) Adjust all "YOUR_MODULE_NAME" entries in the module package (e.g. in README.md, package.json, asmdef-File, asmdef-File name, Namespaces of scripts). This can be done step by step.</li>
+                </ul>
+
+                <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, use can use the same workflow. For contribution we recommend to create a fork of our projects and push the changes back.</P>
+                <P>But here you need to clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</P>
             </div>
         },
     ];
