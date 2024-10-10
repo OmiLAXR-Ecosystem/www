@@ -26,8 +26,20 @@ const navListMenuItems: INavListMenuItem[] = [
   {
     title: "Home",
     href: "/",
-    icon: <HomeIcon className="h-[18px] w-[18px]" />
+    icon: <HomeIcon className="h-[18px] w-[18px]"/>
   },
+  {
+    title: "Join community",
+    href: "https://discord.gg/AnUXutpHZz",
+    target: "_blank",
+    icon: <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>
+  },
+  {
+    title: "GitLab",
+    href: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem",
+    target: "_blank",
+    icon: <i className="fab fa-gitlab text-xl leading-none" aria-hidden="true"></i>
+  }
   /*{
     title: "About Us",
     href: "./about",
@@ -38,32 +50,27 @@ const navListMenuItems: INavListMenuItem[] = [
     href: "./publications",
     icon: <Square3Stack3DIcon className="h-[18px] w-[18px]" />
   },*/
-  {
-    title: "Docs",
-    href: "https://docs.omilaxr.dev/",
-    target: "_blank",
-    icon: React.createElement(CodeBracketSquareIcon, { className: "h-[18px] w-[18px]" }),
-  },
 ];
 
 function NavListMenu() {
 
   return (
-    <React.Fragment>
-      {navListMenuItems.map(({title, href, icon, target}, index) =>
-        <Typography key={index} as="a" href={href} target={target} variant="small" className="font-normal outline-none focus:outline-none">
-          <MenuItem className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full">
-            {icon ?? <></>} {title + " "}
-          </MenuItem>
-        </Typography>
-      )}
-    </React.Fragment>
+      <React.Fragment>
+        {navListMenuItems.map(({title, href, icon, target}, index) =>
+            <Typography key={index} as="a" href={href} target={target} variant="small"
+                        className="font-normal outline-none focus:outline-none">
+              <MenuItem className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full">
+                {icon ?? <></>} {title + " "}
+              </MenuItem>
+            </Typography>
+        )}
+      </React.Fragment>
   );
 }
 
 function NavList() {
   return (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+      <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <NavListMenu />
     </ul>
   );
