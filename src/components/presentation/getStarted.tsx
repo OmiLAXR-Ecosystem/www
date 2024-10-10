@@ -9,6 +9,7 @@ const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",
     "com.rwth.unity.omilaxr",
     "com.rwth.unity.omilaxr.xapi",
+    "com.rwth.unity.omilaxr.pseudonymization"
 ];
 
 const jsonManifest = () => ({
