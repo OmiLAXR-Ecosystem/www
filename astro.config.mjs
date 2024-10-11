@@ -3,6 +3,8 @@ import react from "@astrojs/react";
 
 import tailwind from "@astrojs/tailwind";
 const isProd = process.env.NODE_ENV === "production";
+import { cjsInterop } from "vite-plugin-cjs-interop";
+
 
 // https://astro.build/config
 
@@ -12,5 +14,15 @@ export default defineConfig({
   site: "https://omilaxr.dev/",
   outDir: "public",
   publicDir: "static",
-  base: "/"
+  base: "/",
+  vite: {
+    plugins: [
+      cjsInterop({
+        // List of CJS dependencies that require interop
+        dependencies: [
+          "@material-tailwind/react"
+        ],
+      }),
+    ],
+  }
 });

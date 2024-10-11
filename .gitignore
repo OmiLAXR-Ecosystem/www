@@ -1,3 +1,6 @@
 public/
 node_modules
 .idea/
+.astro
+.vscode
+dist
