@@ -1,6 +1,6 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import GetStartedCard, {contentOf, type GetStartedCardProps} from "./getStartedCard";
+import {contentOf, type GetStartedCardProps} from "./getStartedCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
@@ -9,7 +9,8 @@ const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",
     "com.rwth.unity.omilaxr",
     "com.rwth.unity.omilaxr.xapi",
-    "com.rwth.unity.omilaxr.pseudonymization"
+    "com.rwth.unity.omilaxr.pseudonymization",
+    "com.rwth.unity.learning-structure"
 ];
 
 const jsonManifest = () => ({
@@ -51,14 +52,19 @@ export function GetStartedPresentation() {
 
     const items: GetStartedCardProps[] = [
         {
-            title: "Prepare your XR project",
+            title: "Preparation",
             children: <div>
-                <P>Make sure you have an XR project. Currently we are compatible with SteamVR and UnityXR projects.
-                    Further XR frameworks are coming soon. If you are interested to make it your own compatible than
-                    contact us
-                    on Discord.</P>
+                <P>Make sure you have an XR project. OmiLAXRv2 has no XR framework dependency and is compatible with all of them by design. Further, it is not limited to XR projects. Simple Unity projects are compatible, too. However, you can either use a new project or choose an existing one.</P>
 
-                <fm.Figure caption="Screenshot of a XR start project" label="step-0" maxWidth="50%"/>
+                <fm.Figure caption="Screenshot of a XR start project" label="step-0" maxWidth="80%"/>
+
+                <P>In this page you will install three OmiLAXR packages. They all have following purposes:</P>
+
+                <ul>
+                    <li><strong>xAPI4Unity</strong>: A package for transforming xAPI registry JSON files to strict C# files. These files are needed to work with xAPI in a specific C# notation. It creates a new namespace <InlineCodeBox>xAPI.Registry</InlineCodeBox> that is used by <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>.</li>
+                    <li><strong>OmiLAXR</strong>: This is the base package delivering the complete base for the whole <a href="/pipeline">OmiLAXR pipeline</a> but without any specific data standard.</li>
+                    <li><strong>OmiLAXR.xAPI</strong>: As OmiLAXR gives you the possibility to use any data standard you need. This package uses <InlineCodeBox>xAPI.Registry</InlineCodeBox> and enables a new notation to build xAPI statements with like-spoken C# syntax. It contains OmiLAXR components using xAPI as data standard.</li>
+                </ul>
             </div>
         },
         {
@@ -93,7 +99,7 @@ export function GetStartedPresentation() {
                         {JSON.stringify(jsonManifest(), null, 2)}
                     </CodeBox>
 
-                    <fm.Figure className="align-middle" caption="Unity Package Manager scopes" label="step-1"/>
+                    <fm.Figure className="align-middle" caption="Unity Package Manager scopes (amount of packages can differ)" label="step-1"/>
 
                 </div>
             </div>
@@ -109,38 +115,19 @@ export function GetStartedPresentation() {
 
                 <fm.Figure caption="Compact overview of the OmiLAXR workflow" label="omilaxr-workflow" maxWidth="50%"/>
 
-                <P>In Unity menu navigate to <InlineCodeBox>Window &gt; Package
-                    Manager</InlineCodeBox>, then on <InlineCodeBox>+</InlineCodeBox> in the top left corner. Type
-                    now <InlineCodeBox>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox> into the "name" field
+                <P>In Unity menu navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox>.</P>
+
+                <P>Choose <InlineCodeBox>My Registries</InlineCodeBox> and select the available package in the list (see <fm.FigureRef label="my-registries"/>). Here you will be able to update your packages.</P>
+
+                <fm.Figure caption="My Unity Registries (amount of packages can differ)" label="my-registries" maxWidth="70%"/>
+
+                <P>Alternatively, you can add packages by using the <InlineCodeBox>+</InlineCodeBox> in the top left corner. Type
+                    there <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox> into the "name" field
                     (see <fm.FigureRef label="step-3"/>). More details about this package you can read
                     in <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/xapi-4-unity</Hyperlink>.
                 </P>
 
                 <fm.Figure caption="Installing Unity package" label="step-3"/>
-
-                <P>Alternatively you can go to "My registries" and just select
-                    the available package in the list (see <fm.FigureRef label="my-registries"/>).
-                </P>
-
-                <fm.Figure caption="My Unity registries" label="my-registries" maxWidth="70%"/>
-
-                <h5 style={{fontSize: "20px"}}>xAPI4Unity Window</h5>
-                <P>Now, xAPI4Unity is installed and can be used in your Unity project. If you
-                    already have the folder <InlineCodeBox>Assets/xapi</InlineCodeBox> then you can use it directly. But
-                    we recommend to check whether everything is configured correctly. For doing this, go
-                    to <InlineCodeBox>OmiLAXR &gt; xAPI &gt; Open Fetcher Window</InlineCodeBox>.
-                    Now, you have to check if every path is correct. The recommended settings are defined by default.
-                    If you haven't cloned a xAPI repository folder, yet you can do it by clicking the "Clone repository"
-                    button. Make sure you have no error messages and your window looks similar to <fm.FigureRef label="xapi4unity"/>.
-                    To (re-)transform the JSON files to C# you have to click the button "Transform JSON =&lt; C#". After
-                    transformation you shall have the
-                    folder <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox> containing
-                    all C# files.
-                </P>
-
-                <fm.Figure caption="xAPI4Unity Config Window" label="xapi4unity" maxWidth="70%"/>
-
-
             </div>
         },
 
@@ -159,43 +146,57 @@ export function GetStartedPresentation() {
                     For a more user friendly maintenance we created an user
                     interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
 
-                <P>OmiLAXR is using this registry for tracking interactions of the XR scenarios.
-                    This is why you will need a local copy of the xAPI repository.</P>
-                <P>Follow the steps of <fm.FigureRef label="xapi4unity"/> or alternatively do:</P>
-
+                <P> Check in <InlineCodeBox>OmiLAXR &gt; Settings</InlineCodeBox>
+                    whether everything is configured correctly.
+                    Now, you have to check if every path is correct. The recommended settings are defined by default.
+                    Here, you have two options.</P>
 
                 <ul>
-                    <li>(a) Download zip and unpack inside your Unity project and maintain it in your XR project.</li>
-                    <li>(b) Request a branch in our official repository and clone it as submodule into your Unity project.</li>
-                    <li>(c) Fork our repository and clone the fork as submodule into your Unity project.</li>
-                    <li>(d) Include Unity package of xAPI registry (currently not available)</li>
+                    <li><strong>(Option 1) I want to use git</strong>: You can add a git submodule to your project. This
+                        makes sense if you want to sync your local registry changes with a separate git repository or
+                        contribute to a global repository. Of course, you can do it totally on your own, but the tool
+                        window gives you the possibility to choose a target git repository and branch. By default it
+                        will use our git repository and. Make sure you have no error messages and your window looks
+                        similar to <fm.FigureRef label="xapi4unity"/>.
+                    </li>
+                    <li><strong>(Option 2) I want just to download local copy</strong>: It is also allowed to use a
+                        local copy without a separate git. This makes sense if you plan to hold your local registry
+                        changes inside your project repository. This can make sense if you plan a lot of
+                        project-specific xAPI definitions. If you click on the button, the newest files will be
+                        downloaded from our repository. All you need to do is to extract the content into your wished
+                        path (recommended <InlineCodeBox>Assets/xapi</InlineCodeBox>). Make sure you have the
+                        `definitions` folder in root of <InlineCodeBox>Assets/xapi</InlineCodeBox>.
+                    </li>
                 </ul>
 
-                <P>As we invite you to contribute to new vocabulary we strongly recommend option (c).</P>
+                <P>
+                    To (re-)transform the JSON files to C# you have to click the button <InlineCodeBox>Update xAPI.Registry</InlineCodeBox>. After
+                    transformation you shall have the
+                    folder <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox> containing
+                    all C# files.
+                </P>
 
-                <P>After you have prepared the repository you shall have a <InlineCodeBox>xapi</InlineCodeBox> folder in your project.
-                    We strongly recommend to place it into <InlineCodeBox>Assets</InlineCodeBox> folder.</P>
-
-
+                <fm.Figure caption="xAPI4Unity Config Window" label="xapi4unity" maxWidth="70%"/>
             </div>
         },
         {
             title: "Install OmiLAXR Framework",
             children: <div>
 
-                <P>Open <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> and install the
-                    packages <InlineCodeBox>com.rwth.unity.omilaxr</InlineCodeBox> and <InlineCodeBox>com.rwth.unity.omilaxr.xapi</InlineCodeBox>
-                    (see <fm.FigureRef label="installed-omilaxr"/>).
-                    You can do this by using the namespaces (recommended) or their git urls.
-                </P>
-
-                <P>Another convenient way to do it is to install by selecting from "My Registries" (see <fm.FigureRef label="my-registries" />).</P>
+                <P>Use again "My Registries" and install <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> package (see <fm.FigureRef label="my-registries"/>). As it depends on OmiLAXR package, it will be installed, too.</P>
 
                 <fm.Figure caption="Installed OmiLAXR" label="installed-omilaxr" maxWidth="70%"/>
 
+                <P>Alternatively, open <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> and install the
+                    package <InlineCodeBox
+                        clipboardButton={true}>com.rwth.unity.omilaxr.xapi</InlineCodeBox>
+                    (see <fm.FigureRef label="installed-omilaxr"/>).
+                </P>
+
                 <div className="pt-3"></div>
-                <h5 style={{fontSize: "20px"}}>Include OmiLAXR to your project</h5>
-                <P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the next instruction.</P>
+                <h5 style={{fontSize: "20px"}}>(Optional, if you are using Assembly Definitions): Include OmiLAXR to your project</h5>
+                <P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the next
+                    instruction.</P>
                 <P>We your project is not using any asmdef-file it should work without including
                     OmiLAXR asmdef file.
                     But we recommend to use a asmdef file in your project. To do this create with right click in assets
@@ -205,7 +206,7 @@ export function GetStartedPresentation() {
                 <ol>
                     <li>(1) Select your asmdef file.</li>
                     <li>(2) Add a new entry in <InlineCodeBox>Assembly Definition References</InlineCodeBox> in
-                        <InlineCodeBox>Inspector</InlineCodeBox> window (see <fm.FigureRef label="asmdef-inspector" />).
+                        <InlineCodeBox>Inspector</InlineCodeBox> window (see <fm.FigureRef label="asmdef-inspector"/>).
                     </li>
                     <li>(3) Select <InlineCodeBox>OmiLAXR</InlineCodeBox> by double click.</li>
                     <li>(4) Repeat the same for <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>.</li>
@@ -221,27 +222,26 @@ export function GetStartedPresentation() {
             title: "Start working with OmiLAXR",
             children: <div>
 
-                <P>Supporting all XR frameworks is not trivial. They differ (for example) in
-                    interaction and teleport behavior or player game object hierarchies. This is why OmiLAXR is
-                    organized in modules.</P>
+                <P>The modular architecture of OmiLAXR enables to implemented needed modules for all XR frameworks.
+                    Depending on needs, they differ in interaction and teleport behavior or player game object hierarchies.</P>
 
-                <P>To continue look into <a href="/pipeline">Pipeline</a> instruction.</P>
+                <P>The modular architecture is explained in the <a href="/pipeline">Pipeline</a> instruction. Click on
+                    the link to continue your work.</P>
+
+                <P>Working with OmiLAXR means to implement components of the pipeline and add this way more functionality to the pipeline.
+                This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
 
                 <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
-                prefabs <fm.FigureRef label="prefabs" />. Further details can be read
-                &nbsp;<a className="underline" href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main?ref_type=heads">here</a>.</P>
+                    prefabs <fm.FigureRef label="prefabs"/>. Example scripts can be found
+                    &nbsp;<a className="underline" target="_blank"
+                             href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main/Runtime/Examples">here</a>.</P>
 
-                <fm.Figure caption={"OmiLAXR Prefabs"} label={"prefabs"} maxWidth={"50%"} />
+                <fm.Figure caption={"OmiLAXR Prefabs"} label={"prefabs"} maxWidth={"50%"}/>
 
-                <P>Further, some example components can be found in the module template <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</P>
-            </div>
-        },
-
-        {
-            title: "Working with OmiLAXR modules",
-            children: <div>
+                <div className="pt-3"></div>
+                <h5 style={{fontSize: "20px"}}>(Optional, if you wish to work in separate Unity packages): Creating OmiLAXR modules</h5>
                 <P>In OmiLAXRv2 we are working with so called "modules". The <a href="/pipeline">Pipeline</a> consists of components. Modules are a collection of components to extend or create OmiLAXR pipelines.</P>
-                <P>We <strong>strongly</strong> recommend to create an own module for your project. This way you can split your LA work into an own repository. Anyway, it is also possible and good practise if you wish to place it inside your project.</P>
+                <P>This way you can split your LA work into an own repository.</P>
                 <P>To do LA work, you can either place all components in an own folder inside your project or you can work with an own module following this template.</P>
                 <P>If you want to place the module inside your XR project repository, it is enough to download the project by ZIP from <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</P>
 

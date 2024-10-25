@@ -27,9 +27,8 @@ export function LogoSectionOne() {
         </Typography>
         <div className="flex flex-wrap items-center justify-center gap-8">
           {projects.map(({logo, name, url}, key) => (
-              <a href={url} target="_blank">
+              <a href={url} target="_blank" key={key}>
                 {logo && <img
-                    key={key}
                     src={`logos/logo-${logo}.svg`}
                     alt="logo"
                     className="w-40"
