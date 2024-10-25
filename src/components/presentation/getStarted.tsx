@@ -41,7 +41,7 @@ export function GetStartedPresentation() {
             {label: "xapi4unity", imageSrc: "/get-started/xapi4unity.png"},
             {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
             {label: "omilaxr-workflow", imageSrc: "/OmiLAXR_Workflow_generic_small.jpg"},
-            {label: "using-xapi", imageSrc: "/Using_xAPI.webm"},
+            {label: "using-xapi", imageSrc: "/Using_xAPI_v2.webm"},
             {label: "trackable-register", imageSrc: "/get-started/Trackable_Register.png"},
             {label: "installed-omilaxr", imageSrc: "/get-started/installed-omilaxr.png"},
             {label: "asmdef-inspector", imageSrc: "/get-started/asmdef.png"},

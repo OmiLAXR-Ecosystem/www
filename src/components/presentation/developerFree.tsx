@@ -29,7 +29,7 @@ export function DevPresentation() {
               Using our ecosystem you can get high-quality xAPI statements and ensure consistency. As your xAPI definitions are transformed to C# code, you get full IDE support.
             </Typography>
           </div>
-          <video src="xAPI_CSharp_Preview.mov" autoPlay={true} controls={false} className="mx-auto hidden md:flex" />
+          <video src="Using_xAPI_v2.webm" autoPlay={true} controls={false} className="mx-auto hidden md:flex" />
         </div>
       </div>
     </ThemeProvider>
