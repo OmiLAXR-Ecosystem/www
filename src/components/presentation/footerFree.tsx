@@ -75,20 +75,16 @@ const RESEARCHGROUP = [
 
 const RESOURCES = [
   {
-    name: "Quick Start",
-    link: "https://www.creative-tim.com/services/updivision?ref=astrolaunch-ui",
-  },
-  {
-    name: "Documentation",
-    link: "https://www.creative-tim.com/learning-lab/astro/overview/astro-launch-ui?ref=astrolaunch-ui",
-  },
-  {
     name: "Discord",
     link: "https://discord.com/invite/AnUXutpHZz",
   },
   {
-    name: "OmiLAXR Packages",
-    link: "https://www.npmjs.com/~sgoerzen",
+    name: "OmiLAXR Framework and Modules",
+    link: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2",
+  },
+  {
+    name: "OmiLAXR Ecosystem",
+    link: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem",
   }
 ];
 
