@@ -1,15 +1,12 @@
 import React from "react";
 import {
   Navbar,
-  Collapse,
   Typography,
   Button,
   MenuItem,
   IconButton,
 } from "../materialTailwind";
 import {
-  CodeBracketSquareIcon,
-  Square3Stack3DIcon,
   Bars2Icon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
@@ -18,7 +15,7 @@ interface INavListMenuItem {
   title: string,
   href: string,
   target?: string,
-  icon?: React.ReactNode
+  icon: React.ReactNode
 }
 
 // nav list menu
@@ -29,7 +26,7 @@ const navListMenuItems: INavListMenuItem[] = [
     icon: <HomeIcon className="h-[18px] w-[18px]"/>
   },
   {
-    title: "Join community",
+    title: "Join our community",
     href: "https://discord.gg/AnUXutpHZz",
     target: "_blank",
     icon: <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>
@@ -39,6 +36,11 @@ const navListMenuItems: INavListMenuItem[] = [
     href: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem",
     target: "_blank",
     icon: <i className="fab fa-gitlab text-xl leading-none" aria-hidden="true"></i>
+  },
+  {
+    title: "Basics",
+    href: "/pipeline",
+    icon: <i className="fa-solid fa-book text-xl leading-none" aria-hidden="true"></i>
   }
   /*{
     title: "About Us",
@@ -59,8 +61,8 @@ function NavListMenu() {
         {navListMenuItems.map(({title, href, icon, target}, index) =>
             <Typography key={index} as="a" href={href} target={target} variant="small"
                         className="font-normal outline-none focus:outline-none">
-              <MenuItem className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full">
-                {icon ?? <></>} {title + " "}
+              <MenuItem className="items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full">
+                {icon} <span className="hidden lg:flex">{title}</span>
               </MenuItem>
             </Typography>
         )}
@@ -70,7 +72,7 @@ function NavListMenu() {
 
 function NavList() {
   return (
-      <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+      <ul className="flex gap-2 mb-0 mt-0 flex-row lg:items-center">
       <NavListMenu />
     </ul>
   );
@@ -113,40 +115,16 @@ export default function ComplexNavbar() {
     >
       <div className="relative mx-auto flex items-center text-blue-gray-900">
         <img width={120} src="/logos/OmiLAXR.svg" alt="Logo" />
-        <div className="hidden lg:flex ml-auto">
+        <div className="flex ml-auto">
           <NavList />
         </div>
-        <IconButton
-          size="sm"
-          color="blue-gray"
-          variant="text"
-          onClick={toggleIsNavOpen}
-          className="ml-auto mr-2 lg:hidden"
-        >
-          <Bars2Icon className="h-6 w-6" />
-        </IconButton>
-        <a href="https://discord.gg/AnUXutpHZz" target="_blank">
-          {/* @ts-ignore */}
-          <Button size="sm" color="blue" variant="text">
-            <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>
-          </Button>
-        </a>
-        <a href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem" target="_blank">
-          {/* @ts-ignore */}
-          <Button size="sm" color="blue" variant="text">
-            <i className="fab fa-gitlab text-xl leading-none" aria-hidden="true"></i>
-          </Button>
-        </a>
         <a href="/get-started">
           {/* @ts-ignore */}
-          <Button color="blue">
+          <Button color="blue" className="ml-2">
             Get started
           </Button>
         </a>
       </div>
-      <Collapse open={isNavOpen} className="overflow-scroll">
-        <NavList />
-      </Collapse>
     </Navbar>
   );
 }

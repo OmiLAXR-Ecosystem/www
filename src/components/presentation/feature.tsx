@@ -33,7 +33,7 @@ function FeatureCard({ icon, title, children }: FeatureCardProps) {
 const features = [
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon1.png" />
+      <img className="w-32 mx-auto mb-4" src="icon1.png" alt="Researchers" />
     ),
     title: "For Researchers",
     description:
@@ -41,7 +41,7 @@ const features = [
   },
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon2.png" />
+      <img className="w-32 mx-auto mb-4" src="icon2.png" alt="Developers" />
     ),
     title: "For Developers",
     description:
@@ -49,7 +49,7 @@ const features = [
   },
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon3.png" />
+      <img className="w-32 mx-auto mb-4" src="icon3.png" alt="XR" />
     ),
     title: "For Virtual, Mixed & Augmented Reality",
     description:
@@ -62,9 +62,9 @@ export default function FeatureLanding() {
     <section className="px-4 mt-12">
       <div className="container mx-auto mb-20 text-center">
         <div className="flex justify-center align-center relative z-5">
-          <Typography color="blue" className="text-xs mr-2 font-normal">
+          {/*<Typography color="blue" className="text-xs mr-2 font-normal">
             Framework Design, Concept & Code by Sergej Görzen, Birte Heinemann, Sam Mattiussi, Ulrik Schroeder @ RWTH Aachen University
-          </Typography>
+          </Typography>*/}
         </div>
       </div>
       <div className="container mx-auto grid grid-cols-1 gap-y-20 md:grid-cols-2 lg:grid-cols-3">

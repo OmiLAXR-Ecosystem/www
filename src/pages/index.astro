@@ -9,17 +9,16 @@ import FooterFreePresentation from "../components/presentation/footerFree"
 
 import "../../assets/scss/main.scss";
 import NavbarPresentation from "../components/presentation/navbar";
-
 ---
 
-<Layout title="OmiLAXR">
+<Layout title="OmiLAXR - Modular Learning Analytics framework for XR">
         <NavbarPresentation />
         <main>
                 <HeaderPresentation client:only="react" />
+                <PalettePresentationFree client:only="react" />
+                <DevFreePresentation client:only="react" />
                 <FeaturePresentation client:only="react" />
                 <ProjectsPresentation client:only="react" />
-                <DevFreePresentation client:only="react" />
-                <PalettePresentationFree client:only="react" />
                 <FooterFreePresentation client:only="react" />
         </main>
 </Layout>

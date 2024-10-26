@@ -1,5 +1,5 @@
 // utils/materialTailwind.js
-import pkg from '@material-tailwind/react';
+import * as pkg from '@material-tailwind/react';
 export const {
     Accordion,
     AccordionHeader,

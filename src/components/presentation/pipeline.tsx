@@ -1,27 +1,9 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import GetStartedCard, {contentOf, type GetStartedCardProps} from "./getStartedCard";
+import {contentOf, type GetStartedCardProps} from "./getStartedCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
-import Hyperlink from "../Hyperlink";
 import {OmiLAXRPipeline} from "../Pipeline";
-
-const scopes = [
-    "com.rwth.unity.omilaxr.xapi4unity",
-    "com.rwth.unity.omilaxr",
-    "com.rwth.unity.omilaxr.xapi",
-];
-
-const jsonManifest = () => ({
-    "dependencies": {"...": "..."},
-    "scopedRegistries": [
-        {
-            "name": "npmjs",
-            "url": "https://registry.npmjs.com",
-            "scopes": scopes
-        },
-    ]
-});
 
 function P({children}: any) {
     return <p className="pt-3 pb-3">{children}</p>
@@ -330,7 +312,29 @@ export function GetStartedPresentation() {
                 <P><InlineCodeBox>Hooks</InlineCodeBox> are a mechanism which allows you to manipulate existing statements
                 composed by all <InlineCodeBox>Composers</InlineCodeBox>.</P>
 
-                <P>In our example we check the statements. When ever a "clicked" verb statement is detected we change the verb
+                <P>One sensible use case for Hooks is whenever you wish to extend all statements by context information.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Scenario Context Hook (xAPI)\")]\n" +
+                        "public class ScenarioContextHook : xApiHook\n" +
+                        "{\n" +
+                        "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
+                        "    {\n" +
+                        "        ...\n" +
+                        "        if (FpsMonitor.Instance && FpsMonitor.Instance.enabled)\n" +
+                        "        {\n" +
+                        "            // Todo: add when fps is in Registry\n" +
+                        "            statement.WithContext(xapi.systemControl.extensions.context.fps(FpsMonitor.Instance.fps));\n" +
+                        "        }\n" +
+                        "        \n" +
+                        "        ...\n" +
+                        "        return statement;\n" +
+                        "    }\n" +
+                        "}"}
+                </CodeBox>
+
+
+                <P>Further, we match for specific statements. For example, when ever a "clicked" verb statement is detected we change the verb
                 to "interacted".</P>
 
                 <CodeBox language="csharp">
