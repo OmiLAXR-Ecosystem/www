@@ -93,13 +93,13 @@ export function GetStartedPresentation() {
                     Settings...</InlineCodeBox> if the scopes are applied (see <fm.FigureRef label="step-1"/>). Further modules are coming soon.
                 </P>
 
-                <div className="columns-2xl">
+                <div className="columns-2xl max-w-[100vw]">
 
                     <CodeBox language="JavaScript" filename="<project_root>/Packages/manifest.json">
                         {JSON.stringify(jsonManifest(), null, 2)}
                     </CodeBox>
 
-                    <fm.Figure className="align-middle" caption="Unity Package Manager scopes (amount of packages can differ)" label="step-1"/>
+                    <fm.Figure className="align-middle"  maxWidth="100%" caption="Unity Package Manager scopes (amount of packages can differ)" label="step-1"/>
 
                 </div>
             </div>
@@ -127,7 +127,7 @@ export function GetStartedPresentation() {
                     in <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/xapi-4-unity</Hyperlink>.
                 </P>
 
-                <fm.Figure caption="Installing Unity package" label="step-3"/>
+                <fm.Figure caption="Installing Unity package" label="step-3" maxWidth="100%"/>
             </div>
         },
 

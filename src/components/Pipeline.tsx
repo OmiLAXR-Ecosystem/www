@@ -65,7 +65,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -126,7 +126,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -230,7 +230,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -287,7 +287,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -391,7 +391,6 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -448,7 +447,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -553,7 +552,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                     style={{overflow: "visible", textAlign: "left"}}
                                 >
                                     <div
-                                        xmlns="http://www.w3.org/1999/xhtml"
+
                                         style={{
                                             display: "flex",
                                             alignItems: "unsafe center",
@@ -585,9 +584,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                                     overflowWrap: "normal",
                                                 }}
                                             >
-                                                <font style={{fontSize: 24}}>
-                                                    {"TRACKING BEHAVIOURS"}
-                                                </font>
+                                                {"TRACKING BEHAVIOURS"}
                                             </div>
                                         </div>
                                     </div>
@@ -612,7 +609,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                     style={{overflow: "visible", textAlign: "left"}}
                                 >
                                     <div
-                                        xmlns="http://www.w3.org/1999/xhtml"
+
                                         style={{
                                             display: "flex",
                                             alignItems: "unsafe center",
@@ -718,7 +715,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -775,7 +772,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -873,7 +870,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -930,7 +927,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                                 style={{overflow: "visible", textAlign: "left"}}
                             >
                                 <div
-                                    xmlns="http://www.w3.org/1999/xhtml"
+
                                     style={{
                                         display: "flex",
                                         alignItems: "unsafe center",
@@ -1027,7 +1024,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1093,7 +1090,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1161,7 +1158,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1227,7 +1224,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1293,7 +1290,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1349,7 +1346,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1413,7 +1410,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1477,7 +1474,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",
@@ -1539,7 +1536,7 @@ export function OmiLAXRPipeline(props: SVGProps<any>) {
                             style={{overflow: "visible", textAlign: "left"}}
                         >
                             <div
-                                xmlns="http://www.w3.org/1999/xhtml"
+
                                 style={{
                                     display: "flex",
                                     alignItems: "unsafe center",

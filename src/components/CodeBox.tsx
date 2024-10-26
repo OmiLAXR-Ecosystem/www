@@ -49,7 +49,7 @@ export function InlineCodeBox({children, clipboardButton}: InlineCodeBoxProps) {
 
 export default function CodeBox({children: code, language, filename}: CodeBoxProps) {
     return (
-        <div className={'code-box code-' + language.toLowerCase()} style={{position: "relative"}}>
+        <div className={'code-box code-' + language.toLowerCase()} style={{position: "relative", maxWidth: '100%'}}>
             {filename && <small className="code-box-filename">{filename}</small>}
             <SyntaxHighlighter language={language} style={docco}>
                 {code}
