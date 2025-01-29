@@ -1,7 +1,7 @@
 import {Card} from "../../materialTailwind";
 import type {ReactElement} from "react";
 import React from "react";
-import "./getStartedCard.scss";
+import "./instructionCard.scss";
 
 export interface GetStartedCardProps {
     title: string,

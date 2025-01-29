@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavbarPresentation from "../components/presentation/navbar"
+import FooterFreePresentation from "../components/presentation/footerFree"
+
+import "../../assets/scss/main.scss";
+import EcosystemPresentation from "../components/presentation/ecosystem";
+---
+
+<Layout title="OmiLAXR - Ecosystem">
+    <NavbarPresentation />
+    <main>
+        <EcosystemPresentation client:only="react" />
+        <FooterFreePresentation client:only="react" />
+    </main>
+</Layout>

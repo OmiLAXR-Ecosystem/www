@@ -10,6 +10,8 @@ interface CodeBoxProps {
 
 interface InlineCodeBoxProps {
     children: string,
+    href?: string,
+    target?: string,
     clipboardButton?: boolean
 }
 
@@ -32,19 +34,23 @@ export function ClipboardButton({code, ...props}: IClipboardButtonProps) {
     </button>;
 }
 
-export function InlineCodeBox({children, clipboardButton}: InlineCodeBoxProps) {
-    return (
-        <>
+export function InlineCodeBox({children, href, target, clipboardButton}: InlineCodeBoxProps) {
+    const code =
             <span className={'code-box-inline'} style={{
                 fontFamily: 'Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace',
                 background: 'rgb(248, 248, 255)',
                 color: 'black',
                 padding: '5px',
                 borderColor: '#eeeeee'
-            }}>{children}</span>
-            {clipboardButton && <ClipboardButton style={{position: 'relative', top: '8px'}} code={children}/>}
-        </>
-    );
+            }}>{children}</span>;
+
+    const clipboardCode = <>{clipboardButton && <ClipboardButton style={{position: 'relative', top: '8px'}} code={children}/>}</>;
+
+    if (href) {
+        return <><a href={href} target={target}>{code}</a>{clipboardCode}</>;
+    }
+
+    return <>{code}{clipboardCode}</>;
 }
 
 export default function CodeBox({children: code, language, filename}: CodeBoxProps) {
