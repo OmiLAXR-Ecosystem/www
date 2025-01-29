@@ -4,10 +4,8 @@ import {
   Typography,
   Button,
   MenuItem,
-  IconButton,
 } from "../materialTailwind";
 import {
-  Bars2Icon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
 
@@ -40,6 +38,11 @@ const navListMenuItems: INavListMenuItem[] = [
   {
     title: "Basics",
     href: "/pipeline",
+    icon: <i className="fa-solid fa-book text-xl leading-none" aria-hidden="true"></i>
+  },
+  {
+    title: "How to's",
+    href: "/how-to",
     icon: <i className="fa-solid fa-book text-xl leading-none" aria-hidden="true"></i>
   }
   /*{
@@ -81,8 +84,6 @@ function NavList() {
 export default function ComplexNavbar() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [shouldShowBorder, setShouldShowBorder] = React.useState(false);
-
-  const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
   React.useEffect(() => {
     const handleScroll = () => {

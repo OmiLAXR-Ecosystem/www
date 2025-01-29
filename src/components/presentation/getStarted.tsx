@@ -1,6 +1,6 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import {contentOf, type GetStartedCardProps} from "./getStartedCard";
+import {contentOf, type GetStartedCardProps} from "./instructionCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
