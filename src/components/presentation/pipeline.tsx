@@ -45,8 +45,8 @@ export default function () {
                 <P>The key idea is to maintain separate pipelines for different actors. By default, OmiLAXR provides a
                     <InlineCodeBox>Learner Pipeline</InlineCodeBox> and a <InlineCodeBox>System Pipeline</InlineCodeBox>.
                     The <InlineCodeBox>Learner Pipeline</InlineCodeBox> processes actions and objects specifically related to
-                    learner interactions, while the <InlineCodeBox>System Pipeline</InlineCodeBox> functions in a similar
-                    manner for system-related interactions. This makes it possible to extend existing pipelines by new
+                    learner interactions (e.g. teleported event), while the <InlineCodeBox>System Pipeline</InlineCodeBox> functions in a similar
+                    manner for system-related interactions (e.g. game start). This makes it possible to extend existing pipelines by new
                     components or build new pipelines with a set of components (depending on use case).</P>
 
 
@@ -96,27 +96,39 @@ export default function () {
                     pipeline.</P>
                 <P>You may define one Listener for many objects or define specific Listeners for different cases.</P>
 
-                <P>In the following example code the Listener is looking for explicit GameObjects having the component <InlineCodeBox>ExampleComponent</InlineCodeBox>.
+                <P>In the following example code the Listener is looking for explicit GameObjects having the component <InlineCodeBox>Collider</InlineCodeBox>.
                     These objects are passed to the mandatory function <InlineCodeBox>Found(objects: Object[])</InlineCodeBox>.
                     Attention: as the parameter of <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is an array of
                     type <InlineCodeBox>Object</InlineCodeBox> it is also allowed to pass components instead of game objects.</P>
 
                 <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / Example Listener (YOUR_MODULE_NAME)\")]\n" +
-                        "public sealed class ExampleListener : Listener\n" +
+                    {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / Collider Listener (YOUR_MODULE_NAME)\")]\n" +
+                        "public sealed class ColliderListener : Listener\n" +
+                        "{\n" +
+                        "    public override void StartListening()\n" +
                         "    {\n" +
-                        "        public override void StartListening()\n" +
-                        "        {\n" +
-                        "            var exampleComponents = FindObjectsOfType<ExampleComponent>();\n" +
-                        "            Found(exampleComponents);\n" +
-                        "        }\n" +
-                        "    }"}
+                        "        var exampleComponents = FindObjectsOfType<Collider>();\n" +
+                        "        Found(exampleComponents);\n" +
+                        "    }\n" +
+                        "}"}
                 </CodeBox>
 
                 <P>The pipeline is triggered whenever <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is called.
                     This makes it possible to also wait asynchronously for specific in future appearing objects.</P>
 
                 <P>The order of components is not relevant. All listeners are attached to one game objects (see <fm.FigureRef label="learner_listeners" />).</P>
+
+                <H>Safe time by using AutoListener</H>
+                <P>If you just need to find specific game components like in the example above, than we have a more easier way to implement the same. Here is an equivalent example of the <InlineCodeBox>ColliderListener</InlineCodeBox> implementation. Technically, <InlineCodeBox>AutoListener</InlineCodeBox> is doing the same as you can see above. The only thing you have to do is to provide the wished type.</P>
+
+                <CodeBox language="csharp">
+                    {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / Collider Listener (YOUR_MODULE_NAME)\")]\n" +
+                        "public sealed class ColliderListener : AutoListener<Collider>\n" +
+                        "{\n" +
+                        "   // do nothing \n" +
+                        "}"
+                    }
+                </CodeBox>
 
                 <fm.Figure caption="Example of listeners of Learner Pipeline" label="learner_listeners" maxWidth={"500px"} />
 
@@ -406,19 +418,29 @@ export default function () {
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">OmiLAXR
                         Pipeline</h1>
                     <p style={{color: 'red'}}
-                       className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+                       className="mb-6 text-lg font-normal lg:text-xl">
                         Looking for setup? Click <a href="/get-started" className="underline">here</a>.
                     </p>
 
-                    <p className="mb-6 mt-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+                    <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         The OmiLAXR Pipeline gives you the possibility to create modular tracking mechanisms in form of
                         a pipeline.
                     </p>
 
-                    <OmiLAXRPipeline/>
+                    {/*<OmiLAXRPipeline/>*/}
+                    <img src="./pipeline/OmiLAXR_Pipeline.drawio.svg" alt="OmiLAXR Pipeline" />
 
+                    <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+                        The pipeline is lead by four questions:
+                        <ol>
+                            <li>1. <strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
+                            <li>2. <strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
+                            <li>3. <strong>How</strong> should data be encoded? (Composers and Hooks)</li>
+                            <li>4. <strong>Where</strong> should the data be stored? (Endpoints)</li>
+                        </ol>
+                    </p>
 
-                    <p className="mb-6 mt-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+                    <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         In the following you will get detailed information about the pipelines components.
                     </p>
 
