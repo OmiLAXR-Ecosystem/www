@@ -1,6 +1,6 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import {contentOf, type GetStartedCardProps} from "./instructionCard";
+import {contentOf, type InstructionCardProps} from "./instructionCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import {OmiLAXRPipeline} from "../Pipeline";
@@ -13,7 +13,7 @@ function H({children}: any) {
     return <h6 className="pt-3">{children}</h6>
 }
 
-export function GetStartedPresentation() {
+export default function () {
     const fm = new FigureManager({
         figures: [
             {label: "components", imageSrc: "/pipeline/OmiLAXR_Pipeline_Blackbox.drawio.svg"},
@@ -29,7 +29,7 @@ export function GetStartedPresentation() {
         ]
     });
 
-    const items: GetStartedCardProps[] = [
+    const items: InstructionCardProps[] = [
         {
             title: "Actor Pipelines and Data Providers",
             children: <div>
@@ -64,8 +64,8 @@ export function GetStartedPresentation() {
                            maxWidth="250px"/>
 
                 <P>As example, in <fm.FigureRef label="learner_pipeline"/> you can see the Learner Pipeline. The
-                actor is defined by an own component and you can see a <InlineCodeBox>Learner Pipeline</InlineCodeBox>
-                component.</P>
+                    actor is defined by an own component and you can see a <InlineCodeBox>Learner Pipeline</InlineCodeBox>
+                    component.</P>
 
                 <fm.Figure caption="Learner Pipeline as example in Unity" label="learner_pipeline"
                            maxWidth="500px"/>
@@ -73,7 +73,7 @@ export function GetStartedPresentation() {
                 <P>In our example, we are using an explicit <InlineCodeBox>Learner Pipeline</InlineCodeBox>. Alternatively,
                     to create an own pipeline, it is enough to use the <InlineCodeBox>Pipeline</InlineCodeBox> component.
                     However, even an own component for a custom pipeline is not needed, we strongly recommend to create one.
-                See for example, how an own pipeline component could look like.</P>
+                    See for example, how an own pipeline component could look like.</P>
 
                 <CodeBox language="csharp">
                     {"[AddComponentMenu(\"OmiLAXR / 0) Pipelines / Learner Pipeline\")]\n" +
@@ -97,7 +97,7 @@ export function GetStartedPresentation() {
                 <P>You may define one Listener for many objects or define specific Listeners for different cases.</P>
 
                 <P>In the following example code the Listener is looking for explicit GameObjects having the component <InlineCodeBox>ExampleComponent</InlineCodeBox>.
-                These objects are passed to the mandatory function <InlineCodeBox>Found(objects: Object[])</InlineCodeBox>.
+                    These objects are passed to the mandatory function <InlineCodeBox>Found(objects: Object[])</InlineCodeBox>.
                     Attention: as the parameter of <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is an array of
                     type <InlineCodeBox>Object</InlineCodeBox> it is also allowed to pass components instead of game objects.</P>
 
@@ -198,8 +198,8 @@ export function GetStartedPresentation() {
 
 
                 <P>Secondly, they can respond to specific inputs or user gestures. This can be solved by using (for example)
-                the <InlineCodeBox>Update</InlineCodeBox> function of Unity or whatever is needed. One example for this usecase
-                can be seen in component <InlineCodeBox>MouseTrackingBehaviour</InlineCodeBox> in source code.</P>
+                    the <InlineCodeBox>Update</InlineCodeBox> function of Unity or whatever is needed. One example for this usecase
+                    can be seen in component <InlineCodeBox>MouseTrackingBehaviour</InlineCodeBox> in source code.</P>
                 <P>Their core concept is to react to any kind of action (such as button clicks or interactions) and
                     emit public events for further processing. These events function as an interface for composers.</P>
                 {/*<P>A more abstract example could be if we reuse our <InlineCodeBox>ExampleComponent</InlineCodeBox> again.*/}
@@ -214,24 +214,24 @@ export function GetStartedPresentation() {
 
                 <P><InlineCodeBox>Composers</InlineCodeBox> are the part where the events of
                     <InlineCodeBox>Tracking Behaviours</InlineCodeBox> are translated to data rows (in our example to
-                xAPI statements).</P>
+                    xAPI statements).</P>
 
                 <P>In our example, our composer is waiting when the <InlineCodeBox>OnClickedButton</InlineCodeBox> event
-                is triggered by <InlineCodeBox>UiTrackingBehaviour</InlineCodeBox>.</P>
+                    is triggered by <InlineCodeBox>UiTrackingBehaviour</InlineCodeBox>.</P>
 
                 <P>An xAPI statement can be composed by following the xAPI syntax of <InlineCodeBox>actor.Does(verb).Activity(activity)</InlineCodeBox>.
-                Further information (like context, result and activity extensions) can be provided by using <InlineCodeBox>.WithContext(resultExtension)</InlineCodeBox>
+                    Further information (like context, result and activity extensions) can be provided by using <InlineCodeBox>.WithContext(resultExtension)</InlineCodeBox>
                     <InlineCodeBox>.WithContext(contextExtension)</InlineCodeBox> and <InlineCodeBox>.WithExtension(activityExtension)</InlineCodeBox> notation.</P>
                 <P>The actor is assigned automatically depending on which actor pipeline triggers this specific <InlineCodeBox>Tracking Behaviour</InlineCodeBox>.</P>
 
                 <P>The xAPI registry can be addressed by using <InlineCodeBox>xapi</InlineCodeBox> field.</P>
 
                 <P>However, the old syntax is also enabled by using <InlineCodeBox>xAPIv1.CreateStatement(statement)</InlineCodeBox>
-                (instead of actor) and <InlineCodeBox>xAPI_Definitions</InlineCodeBox> (instead of xapi) class.</P>
+                    (instead of actor) and <InlineCodeBox>xAPI_Definitions</InlineCodeBox> (instead of xapi) class.</P>
 
                 <P>Further, we enabled to provide a responsible person to ensure some kind of data quality. This is covered
                     by a mandatory method <InlineCodeBox>GetAuthor()</InlineCodeBox>. This information is provided automatically
-                to a xAPI statement.</P>
+                    to a xAPI statement.</P>
 
                 <CodeBox language="csharp">
                     {"[AddComponentMenu(\"OmiLAXR / 4) Composers / UI Statement Composer (xAPI)\")]\n" +
@@ -261,16 +261,16 @@ export function GetStartedPresentation() {
                 </CodeBox>
 
                 <P>If another data standard is wished instead of xAPI, than a new data composer class need to be implemented
-                analog to <InlineCodeBox>XApiComposer</InlineCodeBox>.</P>
+                    analog to <InlineCodeBox>XApiComposer</InlineCodeBox>.</P>
 
                 <h5 style={{fontSize: "20px"}}>Higher or Semantic Composers</h5>
 
                 <P>Our pipeline allows to create higher level <InlineCodeBox>Composers</InlineCodeBox> right before processing
-                to hooks. They are useful, for example, if you wish to compose further statements depending on some existing other
-                statements. They are triggered whenever a set of conditions is matched.</P>
+                    to hooks. They are useful, for example, if you wish to compose further statements depending on some existing other
+                    statements. They are triggered whenever a set of conditions is matched.</P>
 
                 <P>In our example, we create a new statement whenever mouse clicked happened one time and move event 5 times.
-                For checking the statements there some <InlineCodeBox>Match</InlineCodeBox> functions.</P>
+                    For checking the statements there some <InlineCodeBox>Match</InlineCodeBox> functions.</P>
 
                 <CodeBox language="csharp">
                     {"[AddComponentMenu(\"OmiLAXR / 4.1) Higher Composers / Example Semantic Composer (YOUR_MODULE_NAME)\")]\n" +
@@ -310,7 +310,7 @@ export function GetStartedPresentation() {
                 <fm.Figure caption="Hooks Step" label="step-hooks" maxWidth="100%"/>
 
                 <P><InlineCodeBox>Hooks</InlineCodeBox> are a mechanism which allows you to manipulate existing statements
-                composed by all <InlineCodeBox>Composers</InlineCodeBox>.</P>
+                    composed by all <InlineCodeBox>Composers</InlineCodeBox>.</P>
 
                 <P>One sensible use case for Hooks is whenever you wish to extend all statements by context information.</P>
 
@@ -335,7 +335,7 @@ export function GetStartedPresentation() {
 
 
                 <P>Further, we match for specific statements. For example, when ever a "clicked" verb statement is detected we change the verb
-                to "interacted".</P>
+                    to "interacted".</P>
 
                 <CodeBox language="csharp">
                     {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Example Hook (YOUR_MODULE_NAME)\")]\n" +
@@ -364,8 +364,8 @@ export function GetStartedPresentation() {
                 <fm.Figure caption="Endpoints Step" label="step-endpoints" maxWidth="100%"/>
 
                 <P><InlineCodeBox>Endpoints</InlineCodeBox> are responsible to translate the data to a needed format
-                (e.g. JSON) and provide it to a wished endpoint. This can be, for example, a simple MongoDB, a REST API
-                or Learning Record Store. As we are working with xAPI in our example we are transforming the xAPI
+                    (e.g. JSON) and provide it to a wished endpoint. This can be, for example, a simple MongoDB, a REST API
+                    or Learning Record Store. As we are working with xAPI in our example we are transforming the xAPI
                     statement to a TinCan standardized object (using <a href="https://github.com/RusticiSoftware/TinCan.NET">TinCan.NET</a>)
                     and send it to a Learning Record Store. The TinCan.NET library is already delivered by installing
                     the <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> module.</P>
@@ -427,6 +427,4 @@ export function GetStartedPresentation() {
             </div>
         </ThemeProvider>
     );
-}
-
-export default GetStartedPresentation;
+};

@@ -36,15 +36,20 @@ const navListMenuItems: INavListMenuItem[] = [
     icon: <i className="fab fa-gitlab text-xl leading-none" aria-hidden="true"></i>
   },
   {
+    title: "Ecosystem",
+    href: "/ecosystem",
+    icon: <i className="fa-solid fa-cube text-xl leading-none" aria-hidden="true"></i>
+  },
+  {
     title: "Basics",
     href: "/pipeline",
     icon: <i className="fa-solid fa-book text-xl leading-none" aria-hidden="true"></i>
   },
-  {
-    title: "How to's",
-    href: "/how-to",
-    icon: <i className="fa-solid fa-book text-xl leading-none" aria-hidden="true"></i>
-  }
+  // {
+  //   title: "How to's",
+  //   href: "/how-to",
+  //   icon: <i className="fa-solid fa-book text-xl leading-none" aria-hidden="true"></i>
+  // }
   /*{
     title: "About Us",
     href: "./about",

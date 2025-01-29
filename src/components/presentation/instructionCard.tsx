@@ -3,7 +3,7 @@ import type {ReactElement} from "react";
 import React from "react";
 import "./instructionCard.scss";
 
-export interface GetStartedCardProps {
+export interface InstructionCardProps {
     title: string,
     image?: string,
     children: ReactElement<any, any>,
@@ -12,7 +12,7 @@ export interface GetStartedCardProps {
 
 
 
-export default function InstructionCard({children, image, title, swapCells}: GetStartedCardProps) {
+export default function InstructionCard({children, image, title, swapCells}: InstructionCardProps) {
 
     const imageCell = () => <div className="step-image">
         <img
@@ -43,7 +43,7 @@ export default function InstructionCard({children, image, title, swapCells}: Get
     </Card>
 }
 
-export function contentOf(items: GetStartedCardProps[]) {
+export function contentOf(items: InstructionCardProps[]) {
     return <div className="get-started-cards">
         <ol className="table-of-contents" style={{fontSize: "1.5em", paddingLeft: "1em"}}>
             {

@@ -1,28 +1,16 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import {contentOf, type GetStartedCardProps} from "./instructionCard";
-import CodeBox, {InlineCodeBox} from "../CodeBox";
+import {contentOf, type InstructionCardProps} from "./instructionCard";
+import {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
+import {JsonManifestCodebox} from "../jsonManifest";
 
 const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",
     "com.rwth.unity.omilaxr",
-    "com.rwth.unity.omilaxr.xapi",
-    "com.rwth.unity.omilaxr.pseudonymization",
-    "com.rwth.unity.learning-structure"
+    "com.rwth.unity.omilaxr.xapi"
 ];
-
-const jsonManifest = () => ({
-    "dependencies": {"...": "..."},
-    "scopedRegistries": [
-        {
-            "name": "npmjs",
-            "url": "https://registry.npmjs.com",
-            "scopes": scopes
-        },
-    ]
-});
 
 function P({children}: any) {
     return <p className="pt-3 pb-3">{children}</p>
@@ -32,7 +20,7 @@ function H({children}: any) {
     return <h6 className="pt-3">{children}</h6>
 }
 
-export function GetStartedPresentation() {
+export default function () {
     const fm = new FigureManager({
         figures: [
             {label: "step-0", imageSrc: "/get-started/step-0.png"},
@@ -50,7 +38,7 @@ export function GetStartedPresentation() {
         ]
     });
 
-    const items: GetStartedCardProps[] = [
+    const items: InstructionCardProps[] = [
         {
             title: "Preparation",
             children: <div>
@@ -95,9 +83,7 @@ export function GetStartedPresentation() {
 
                 <div className="columns-2xl max-w-[100vw]">
 
-                    <CodeBox language="JavaScript" filename="<project_root>/Packages/manifest.json">
-                        {JSON.stringify(jsonManifest(), null, 2)}
-                    </CodeBox>
+                    <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
 
                     <fm.Figure className="align-middle"  maxWidth="100%" caption="Unity Package Manager scopes (amount of packages can differ)" label="step-1"/>
 
@@ -229,7 +215,7 @@ export function GetStartedPresentation() {
                     the link to continue your work.</P>
 
                 <P>Working with OmiLAXR means to implement components of the pipeline and add this way more functionality to the pipeline.
-                This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
+                    This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
 
                 <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
                     prefabs <fm.FigureRef label="prefabs"/>. Example scripts can be found
@@ -296,6 +282,4 @@ export function GetStartedPresentation() {
             </div>
         </ThemeProvider>
     );
-}
-
-export default GetStartedPresentation;
+};
