@@ -13,8 +13,8 @@ const scopes = [
     "com.rwth.unity.omilaxr.xapi"
 ];
 
-function P({children}: any) {
-    return <p className="pt-3 pb-3">{children}</p>
+function P({children, ...props}: any) {
+    return <p className="pt-3 pb-3" {...props}>{children}</p>
 }
 
 function H({children}: any) {
@@ -242,14 +242,13 @@ export default function () {
                 <P>The modular architecture of OmiLAXR enables to implemented needed modules for all XR frameworks.
                     Depending on needs, they differ in interaction and teleport behavior or player game object hierarchies.</P>
 
-                <P>The modular architecture is explained in the <a href="/pipeline">Pipeline</a> instruction. Click on
-                    the link to continue your work.</P>
-
                 <P>Working with OmiLAXR means to implement components of the pipeline and add this way more functionality to the pipeline.
                     This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
 
                 <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
                     prefabs that can be used to start directly (see <fm.FigureRef label="prefabs"/>, <fm.FigureRef label="prefabs-2"/> and <fm.FigureRef label="prefabs-in-hierarchy"/>).</P>
+
+                <P style={{fontSize:"1.5em"}}>To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>.</P>
 
                     <P>Example scripts can be found
                     &nbsp;<a className="underline" target="_blank"
@@ -258,6 +257,8 @@ export default function () {
                 <fm.Figure caption={"OmiLAXR Prefab"} label={"prefabs"} maxWidth={"50%"}/>
                 <fm.Figure caption={"OmiLAXR.xAPI Prefab"} label={"prefabs-2"} maxWidth={"50%"}/>
                 <fm.Figure caption={"OmiLAXR Prefabs in Hierarchy"} label={"prefabs-in-hierarchy"} maxWidth={"50%"}/>
+
+
 
                 <div className="pt-3"></div>
                 <h5 style={{fontSize: "20px"}}>(Optional, if you wish to work in separate Unity packages): Creating OmiLAXR modules</h5>
