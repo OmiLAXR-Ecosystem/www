@@ -428,7 +428,7 @@ export default function () {
                     </p>
 
                     {/*<OmiLAXRPipeline/>*/}
-                    <img src="./pipeline/OmiLAXR_Pipeline.drawio.svg" alt="OmiLAXR Pipeline" />
+                    <img src="./OmiLAXR_Pipeline.drawio.svg" alt="OmiLAXR Pipeline" />
 
                     <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         The pipeline is lead by four questions:
