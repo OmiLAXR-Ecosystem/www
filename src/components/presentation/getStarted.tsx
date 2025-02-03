@@ -5,6 +5,7 @@ import {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
 import {JsonManifestCodebox} from "../jsonManifest";
+import Tabs from "../Tabs";
 
 const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",
@@ -21,12 +22,14 @@ function H({children}: any) {
 }
 
 export default function () {
+
     const fm = new FigureManager({
         figures: [
             {label: "step-0", imageSrc: "/get-started/step-0.png"},
             {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
             {label: "step-3", imageSrc: "/get-started/step-3.jpg"},
             {label: "my-registries", imageSrc: "/get-started/my-registries.png"},
+            {label: "my-registries-2023", imageSrc: "/get-started/my-registries-2023.png"},
             {label: "xapi4unity", imageSrc: "/get-started/xapi4unity.png"},
             {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
             {label: "omilaxr-workflow", imageSrc: "/OmiLAXR_Workflow_generic_small.jpg"},
@@ -35,24 +38,44 @@ export default function () {
             {label: "installed-omilaxr", imageSrc: "/get-started/installed-omilaxr.png"},
             {label: "asmdef-inspector", imageSrc: "/get-started/asmdef.png"},
             {label: "prefabs", imageSrc: "/get-started/prefabs.png"},
+            {label: "prefabs-2", imageSrc: "/get-started/prefabs-2.png"},
+            {label: "prefabs-in-hierarchy", imageSrc: "/get-started/prefabs-in-hierarchy.png"},
         ]
     });
 
     const items: InstructionCardProps[] = [
         {
+            title: "Overview of the workflow",
+            children: <div>
+                <P>For working more easy, consistent and IDE-supported, we created a tool
+                    which transforms the xAPI registry into C# code you can use. In this step you will import this
+                    tool. In <fm.FigureRef label="omilaxr-workflow"/> you can get an overview of our idea.
+                </P>
+
+                <fm.Figure caption="Compact overview of the OmiLAXR workflow" label="omilaxr-workflow" maxWidth="50%"/>
+
+                <P>In the <a href="https://xapi.elearn.rwth-aachen.de" target="_blank">xAPI Definitions Registry</a> (on the top left), we maintain a collection of xAPI verbs, activities and extensions for different contexts.
+                    They are defined in a folder structure of <InlineCodeBox>&lt;context&gt;/&lt;defType&gt;/&lt;defName&gt;.json</InlineCodeBox>, where <InlineCodeBox>context</InlineCodeBox> depends on the usage e.g.
+                    <InlineCodeBox>virtualReality</InlineCodeBox> or <InlineCodeBox>lms</InlineCodeBox>, <InlineCodeBox>defType</InlineCodeBox> is <InlineCodeBox>verb</InlineCodeBox>, <InlineCodeBox>activity</InlineCodeBox>,
+                    <InlineCodeBox>extensions/result</InlineCodeBox>, <InlineCodeBox>extensions/context</InlineCodeBox> or <InlineCodeBox>extensions/activity</InlineCodeBox> and <InlineCodeBox>defName</InlineCodeBox> is the name of the definition e.g. <InlineCodeBox>teleported</InlineCodeBox>.</P>
+                <P>Our package <InlineCodeBox>xAPI4Unity</InlineCodeBox> (<fm.FigureRef label="omilaxr-workflow"/>, in the bottom) takes all these definitions and translate them into strict and static C# classes. This approach avoids typos and inconsistencies. This is how the definitions can be used.
+                    See <a href="/pipeline#composers">Composers</a> for more details. This can be used for your XR application to define custom xAPI statements. These definitions are used and provided via <InlineCodeBox>OmiLAXR</InlineCodeBox> to a Learning Record Store (in the top). The developers learn
+                from situations and these learnings can be used to define new xAPI definitions. This can be done locally in project and transfered later to our xAPI Registry to share with the community.</P>
+            </div>
+        },
+        {
             title: "Preparation",
             children: <div>
-                <P>Make sure you have an XR project. OmiLAXRv2 has no XR framework dependency and is compatible with all of them by design. Further, it is not limited to XR projects. Simple Unity projects are compatible, too. However, you can either use a new project or choose an existing one.</P>
+                <P>Make sure you have an Unity project in what you want to integrate the framework. OmiLAXRv2 has no XR framework dependency and is compatible with all of them by design. Further, it is not limited to XR projects so far. Simple Unity projects are compatible, too. However, you can either use a new project or choose an existing one.</P>
 
                 <fm.Figure caption="Screenshot of a XR start project" label="step-0" maxWidth="80%"/>
 
-                <P>In this page you will install three OmiLAXR packages. They all have following purposes:</P>
+                <P>On this page you will install three Unity packages. As described before, <InlineCodeBox>xAPI4Unity</InlineCodeBox> is used for transforming the xAPI Registry int C# code. This is necessary be installed <strong>before</strong> you install <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>.
+                Our framework does not depend on any XR framework or data format. But to keep some common functionality, we created the base module <InlineCodeBox>OmiLAXR</InlineCodeBox>. That need to be installed if you want to use OmiLAXR. The last package enables the handling of xAPI specification.
+                    The package <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> keeps some components for working with the specific data format xAPI.
+                </P>
 
-                <ul>
-                    <li><strong>xAPI4Unity</strong>: A package for transforming xAPI registry JSON files to strict C# files. These files are needed to work with xAPI in a specific C# notation. It creates a new namespace <InlineCodeBox>xAPI.Registry</InlineCodeBox> that is used by <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>.</li>
-                    <li><strong>OmiLAXR</strong>: This is the base package delivering the complete base for the whole <a href="/pipeline">OmiLAXR pipeline</a> but without any specific data standard.</li>
-                    <li><strong>OmiLAXR.xAPI</strong>: As OmiLAXR gives you the possibility to use any data standard you need. This package uses <InlineCodeBox>xAPI.Registry</InlineCodeBox> and enables a new notation to build xAPI statements with like-spoken C# syntax. It contains OmiLAXR components using xAPI as data standard.</li>
-                </ul>
+                <P><strong style={{color: "red"}}>To avoid errors it is necessary to install the packages in the order of this instruction! (xAPI4Unity, OmiLAXR, OmilAXR.xAPI)</strong></P>
             </div>
         },
         {
@@ -67,7 +90,7 @@ export default function () {
                     third-party packages (like <InlineCodeBox>OmiLAXR</InlineCodeBox>) you need to add the registers to your project.
                     This can do this either by Unity editor or by directly edit your manifest.json file of the project.</P>
 
-                <P>We recommended to just add all scopes of OmiLAXR by using manifest.json</P>
+                <P>We recommended to just add all scopes of OmiLAXR by using manifest.json. Alternatively, you can do the entry via Unity editor (see below).</P>
 
                 <P>Open for this the
                     file <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> any code editor and
@@ -78,15 +101,12 @@ export default function () {
 
                 <P>
                     After saving the file, you should open Unity editor and check under <InlineCodeBox>Edit &gt; Project
-                    Settings...</InlineCodeBox> if the scopes are applied (see <fm.FigureRef label="step-1"/>). Further modules are coming soon.
+                    Settings...</InlineCodeBox> if the scopes are applied (see <fm.FigureRef label="step-1"/>). Further modules (see <a target="_blank" href="/ecosystem">Ecosystem</a>) can be added here, too.
                 </P>
 
                 <div className="columns-2xl max-w-[100vw]">
-
                     <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
-
                     <fm.Figure className="align-middle"  maxWidth="100%" caption="Unity Package Manager scopes (amount of packages can differ)" label="step-1"/>
-
                 </div>
             </div>
         },
@@ -94,18 +114,25 @@ export default function () {
         {
             title: "Install xAPI4Unity package",
             children: <div>
-                <P>For working more easy, consistent and IDE-supported, we created a tool
-                    which transforms the xAPI registry into C# code you can use. In this step you will import this
-                    tool. In <fm.FigureRef label="omilaxr-workflow"/> you can get an overview of our idea.
-                </P>
 
-                <fm.Figure caption="Compact overview of the OmiLAXR workflow" label="omilaxr-workflow" maxWidth="50%"/>
 
                 <P>In Unity menu navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox>.</P>
 
                 <P>Choose <InlineCodeBox>My Registries</InlineCodeBox> and select the available package in the list (see <fm.FigureRef label="my-registries"/>). Here you will be able to update your packages.</P>
 
-                <fm.Figure caption="My Unity Registries (amount of packages can differ)" label="my-registries" maxWidth="70%"/>
+                <Tabs tabs={[{
+                    id: "unity-2022",
+                    label: "< Unity 2023",
+                    content: (
+                        <fm.Figure caption="My Unity Registries (amount of packages can differ)" label="my-registries" maxWidth="70%"/>
+                    )
+                }, {
+                    id: "unity-2023",
+                    label: "Unity 2023+",
+                    content: (
+                        <fm.Figure caption="My Unity Registries Unity 2023+ (amount of packages can differ)" label="my-registries-2023" maxWidth="70%"/>
+                    )
+                }]} />
 
                 <P>Alternatively, you can add packages by using the <InlineCodeBox>+</InlineCodeBox> in the top left corner. Type
                     there <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox> into the "name" field
@@ -132,26 +159,30 @@ export default function () {
                     For a more user friendly maintenance we created an user
                     interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
 
-                <P> Check in <InlineCodeBox>OmiLAXR &gt; Settings</InlineCodeBox>
+                <P> Check in <InlineCodeBox>xAPI4Unity &gt; Open Fetcher Window (Settings)</InlineCodeBox>
                     whether everything is configured correctly.
                     Now, you have to check if every path is correct. The recommended settings are defined by default.
-                    Here, you have two options.</P>
+                    Here, you have three options. You can click through them because you need confirm again before action get executed.</P>
 
                 <ul>
-                    <li><strong>(Option 1) I want to use git</strong>: You can add a git submodule to your project. This
-                        makes sense if you want to sync your local registry changes with a separate git repository or
-                        contribute to a global repository. Of course, you can do it totally on your own, but the tool
-                        window gives you the possibility to choose a target git repository and branch. By default it
-                        will use our git repository and. Make sure you have no error messages and your window looks
-                        similar to <fm.FigureRef label="xapi4unity"/>.
+                    <li><strong>(Option 1) I want to download a local copy and place it in projects 'Assets' folder</strong>:
+                        In this case the <a href="https://gitlab.com/learntech-rwth/xapi/-/tree/master?ref_type=heads" target="_blank">latest xAPI repository version of 'master' branch</a> will be downloaded and extracted directly into your
+                        Assets folder. This way the xAPI definitions will be part of your project repository (<InlineCodeBox>Assets/xapi</InlineCodeBox>). This option is used most commonly.
                     </li>
-                    <li><strong>(Option 2) I want just to download local copy</strong>: It is also allowed to use a
+                    <li><strong>(Option 2) I want just to download local copy to selected path</strong>: It is also allowed to use a
                         local copy without a separate git. This makes sense if you plan to hold your local registry
                         changes inside your project repository. This can make sense if you plan a lot of
                         project-specific xAPI definitions. If you click on the button, the newest files will be
                         downloaded from our repository. All you need to do is to extract the content into your wished
                         path (recommended <InlineCodeBox>Assets/xapi</InlineCodeBox>). Make sure you have the
                         `definitions` folder in root of <InlineCodeBox>Assets/xapi</InlineCodeBox>.
+                    </li>
+                    <li><strong>(Option 1) I want to use git and clone it to my selected path</strong>: You can add a git submodule to your project. This
+                        makes sense if you want to sync your local registry changes with a separate git repository or
+                        contribute to a global repository. Of course, you can do it totally on your own, but the tool
+                        window gives you the possibility to choose a target git repository and branch. By default it
+                        will use our git repository and. Make sure you have no error messages and your window looks
+                        similar to <fm.FigureRef label="xapi4unity"/>.
                     </li>
                 </ul>
 
@@ -171,7 +202,7 @@ export default function () {
 
                 <P>Use again "My Registries" and install <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> package (see <fm.FigureRef label="my-registries"/>). As it depends on OmiLAXR package, it will be installed, too.</P>
 
-                <fm.Figure caption="Installed OmiLAXR" label="installed-omilaxr" maxWidth="70%"/>
+                <fm.Figure caption="Installed (xAPI4Unity, OmiLAXR and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%"/>
 
                 <P>Alternatively, open <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> and install the
                     package <InlineCodeBox
@@ -218,11 +249,15 @@ export default function () {
                     This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
 
                 <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
-                    prefabs <fm.FigureRef label="prefabs"/>. Example scripts can be found
-                    &nbsp;<a className="underline" target="_blank"
-                             href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main/Runtime/Examples">here</a>.</P>
+                    prefabs that can be used to start directly (see <fm.FigureRef label="prefabs"/>, <fm.FigureRef label="prefabs-2"/> and <fm.FigureRef label="prefabs-in-hierarchy"/>).</P>
 
-                <fm.Figure caption={"OmiLAXR Prefabs"} label={"prefabs"} maxWidth={"50%"}/>
+                    <P>Example scripts can be found
+                    &nbsp;<a className="underline" target="_blank"
+                             href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main/Runtime/Examples">here</a> (Attention: Currently they are a bit outdated and will be updated later).</P>
+
+                <fm.Figure caption={"OmiLAXR Prefab"} label={"prefabs"} maxWidth={"50%"}/>
+                <fm.Figure caption={"OmiLAXR.xAPI Prefab"} label={"prefabs-2"} maxWidth={"50%"}/>
+                <fm.Figure caption={"OmiLAXR Prefabs in Hierarchy"} label={"prefabs-in-hierarchy"} maxWidth={"50%"}/>
 
                 <div className="pt-3"></div>
                 <h5 style={{fontSize: "20px"}}>(Optional, if you wish to work in separate Unity packages): Creating OmiLAXR modules</h5>
@@ -263,7 +298,7 @@ export default function () {
 
                     <p style={{color: 'green'}}
                        className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                        <P>Already installed OmiLAXRv2? Continue with the <a href="/pipeline" className="underline">Pipeline</a> instruction.</P>.
+                        <P>Already installed OmiLAXRv2? Continue with the <a href="/pipeline" className="underline">Pipeline</a> instruction.</P>
                     </p>
 
                     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">

@@ -43,13 +43,34 @@ export default function InstructionCard({children, image, title, swapCells}: Ins
     </Card>
 }
 
+export function generateUrlAnchor(title: string): string {
+    const umlautMap: Record<string, string> = {
+        "ä": "ae",
+        "ö": "oe",
+        "ü": "ue",
+        "ß": "ss"
+    };
+
+    return (
+        title
+            .toLowerCase()
+            .replace(/[äöüß]/g, (match) => umlautMap[match]) // Replace German umlauts
+            .normalize("NFD") // Normalize to decompose accents
+            .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks
+            .replace(/[^a-z0-9\s-]/g, "") // Remove non-alphanumeric except space and hyphen
+            .trim()
+            .replace(/\s+/g, "-") // Convert spaces to hyphens
+            .replace(/-+/g, "-") // Ensure single hyphen usage
+    );
+}
+
 export function contentOf(items: InstructionCardProps[]) {
     return <div className="get-started-cards">
         <ol className="table-of-contents" style={{fontSize: "1.5em", paddingLeft: "1em"}}>
             {
                 items.map(({title}, index) => (
                     <li key={index}>
-                        <a href={'#section-' + index}>{index}. {title}</a>
+                        <a href={'#' + generateUrlAnchor(title)}>{index}. {title}</a>
                     </li>
                 ))
             }
@@ -57,7 +78,7 @@ export function contentOf(items: InstructionCardProps[]) {
 
         {
             items.map(({title, children, image}, index) => (
-                <section style={{paddingTop: '80px'}} id={'section-' + index} key={index}>
+                <section style={{paddingTop: '80px'}} id={generateUrlAnchor(title)} key={index}>
                     <InstructionCard title={`Step ${index}: ${title}`}
                                      image={image}
                                      swapCells={index % 2 != 0}>
