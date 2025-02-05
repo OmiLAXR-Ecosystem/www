@@ -3,3 +3,9 @@
     cursor: pointer;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  svg {
+    background-color: transparent !important;
+  }
+}

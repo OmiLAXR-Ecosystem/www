@@ -413,7 +413,7 @@ export default function () {
 
     return (
         <ThemeProvider>
-            <div className="h-full w-screen place-items-center bg-white py-20">
+            <div className="h-full w-screen place-items-center py-20">
                 <div className="container mx-auto items-center relative">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">OmiLAXR
                         Pipeline</h1>
@@ -428,17 +428,17 @@ export default function () {
                     </p>
 
                     {/*<OmiLAXRPipeline/>*/}
-                    <img src="./OmiLAXR_Pipeline.drawio.svg" alt="OmiLAXR Pipeline" />
+                    <img src="./pipeline/OmiLAXR_Pipeline.drawio.svg" style={{background: "white"}} alt="OmiLAXR Pipeline" />
 
                     <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         The pipeline is lead by four questions:
-                        <ol>
-                            <li>1. <strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
-                            <li>2. <strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
-                            <li>3. <strong>How</strong> should data be encoded? (Composers and Hooks)</li>
-                            <li>4. <strong>Where</strong> should the data be stored? (Endpoints)</li>
-                        </ol>
                     </p>
+                    <ol className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+                        <li>1. <strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
+                        <li>2. <strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
+                        <li>3. <strong>How</strong> should data be encoded? (Composers and Hooks)</li>
+                        <li>4. <strong>Where</strong> should the data be stored? (Endpoints)</li>
+                    </ol>
 
                     <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         In the following you will get detailed information about the pipelines components.
