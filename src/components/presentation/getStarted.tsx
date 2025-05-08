@@ -45,105 +45,54 @@ export default function () {
 
     const items: InstructionCardProps[] = [
         {
-            title: "Overview of the workflow",
+            title: "Overview of the Workflow",
             children: <div>
-                <P>For working more easy, consistent and IDE-supported, we created a tool
-                    which transforms the xAPI registry into C# code you can use. In this step you will import this
-                    tool. In <fm.FigureRef label="omilaxr-workflow"/> you can get an overview of our idea.
-                </P>
-
-                <fm.Figure caption="Compact overview of the OmiLAXR workflow" label="omilaxr-workflow" maxWidth="50%"/>
-
-                <P>In the <a href="https://xapi.elearn.rwth-aachen.de" target="_blank">xAPI Definitions Registry</a> (on the top left), we maintain a collection of xAPI verbs, activities and extensions for different contexts.
-                    They are defined in a folder structure of <InlineCodeBox>&lt;context&gt;/&lt;defType&gt;/&lt;defName&gt;.json</InlineCodeBox>, where <InlineCodeBox>context</InlineCodeBox> depends on the usage e.g.
-                    <InlineCodeBox>virtualReality</InlineCodeBox> or <InlineCodeBox>lms</InlineCodeBox>, <InlineCodeBox>defType</InlineCodeBox> is <InlineCodeBox>verb</InlineCodeBox>, <InlineCodeBox>activity</InlineCodeBox>,
-                    <InlineCodeBox>extensions/result</InlineCodeBox>, <InlineCodeBox>extensions/context</InlineCodeBox> or <InlineCodeBox>extensions/activity</InlineCodeBox> and <InlineCodeBox>defName</InlineCodeBox> is the name of the definition e.g. <InlineCodeBox>teleported</InlineCodeBox>.</P>
-                <P>Our package <InlineCodeBox>xAPI4Unity</InlineCodeBox> (<fm.FigureRef label="omilaxr-workflow"/>, in the bottom) takes all these definitions and translate them into strict and static C# classes. This approach avoids typos and inconsistencies. This is how the definitions can be used.
-                    See <a href="/pipeline#composers">Composers</a> for more details. This can be used for your XR application to define custom xAPI statements. These definitions are used and provided via <InlineCodeBox>OmiLAXR</InlineCodeBox> to a Learning Record Store (in the top). The developers learn
-                from situations and these learnings can be used to define new xAPI definitions. This can be done locally in project and transfered later to our xAPI Registry to share with the community.</P>
+                <P>To streamline development with IDE support and ensure consistency, we provide a tool that converts the xAPI registry into C# code. Start by importing this tool. Refer to <fm.FigureRef label="omilaxr-workflow"/> for an overview.</P>
+                <fm.Figure caption="Overview of the OmiLAXR workflow" label="omilaxr-workflow" maxWidth="50%"/>
+                <P>We maintain xAPI definitions through a structured registry, organized as <InlineCodeBox>&lt;context&gt;/&lt;defType&gt;/&lt;defName&gt;.json</InlineCodeBox> for modular and reusable definitions. Our tool translates these definitions into static C# classes, avoiding typos and inconsistencies.</P>
+                <P>These definitions can be integrated into your XR application to create custom xAPI statements, provided to a Learning Record Store (LRS). Developers also learn from tracked scenarios and update the registry with new definitions for broader community use.</P>
             </div>
         },
         {
             title: "Preparation",
             children: <div>
-                <P>Make sure you have an Unity project in what you want to integrate the framework. OmiLAXRv2 has no XR framework dependency and is compatible with all of them by design. Further, it is not limited to XR projects so far. Simple Unity projects are compatible, too. However, you can either use a new project or choose an existing one.</P>
-
-                <fm.Figure caption="Screenshot of a XR start project" label="step-0" maxWidth="80%"/>
-
-                <P>On this page you will install three Unity packages. As described before, <InlineCodeBox>xAPI4Unity</InlineCodeBox> is used for transforming the xAPI Registry int C# code. This is necessary be installed <strong>before</strong> you install <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>.
-                Our framework does not depend on any XR framework or data format. But to keep some common functionality, we created the base module <InlineCodeBox>OmiLAXR</InlineCodeBox>. That need to be installed if you want to use OmiLAXR. The last package enables the handling of xAPI specification.
-                    The package <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> keeps some components for working with the specific data format xAPI.
-                </P>
-
-                <P><strong style={{color: "red"}}>To avoid errors it is necessary to install the packages in the order of this instruction! (xAPI4Unity, OmiLAXR, OmilAXR.xAPI)</strong></P>
+                <P>Ensure you have a Unity project where you plan to integrate this framework. OmiLAXRv2 is compatible with all Unity projects—both XR and non-XR.</P>
+                <fm.Figure caption="XR Starter Project Screenshot" label="step-0" maxWidth="80%"/>
+                <P>In this guide, you'll install three Unity packages:</P>
+                <ul>
+                    <li><InlineCodeBox>xAPI4Unity</InlineCodeBox>: Transforms JSON definitions into C# code.</li>
+                    <li><InlineCodeBox>OmiLAXR</InlineCodeBox>: The base module for added functionality.</li>
+                    <li><InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>: Adds xAPI handling tools and components.</li>
+                </ul>
+                <P><strong style={{color: "red", fontSize: "1.5em"}}>Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
+            </div>
+        },
+{
+            title: "Prepare Unity Package Scope (Optional)",
+            children: <div>
+                <strong>If you prefer installing packages by Git URL, skip this step. Otherwise, follow these instructions to manage package updates:</strong>
+                <P>Unity only recognizes Unity-hosted packages by default. To support third-party packages like <InlineCodeBox>OmiLAXR</InlineCodeBox>, update your `manifest.json` file to include the required scopes.</P>
+                <P>Edit <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following within <InlineCodeBox>scopedRegistries</InlineCodeBox> if missing:</P>
+                <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
+                <P>Once updated, restart Unity and verify the scopes via <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox> as shown in <fm.FigureRef label="step-1"/>.</P>
             </div>
         },
         {
-            title: "Prepare Unity package scope",
+            title: "Install xAPI4Unity Package",
             children: <div>
-
-                <strong>If you wish instead importing packages via their git url, than this step can be ignored. We
-                    strongly
-                    recommend to apply this step, to get update notifications of the packages.</strong>
-
-                <P>Unity packages are only looking for packages hosted by Unity. To enable
-                    third-party packages (like <InlineCodeBox>OmiLAXR</InlineCodeBox>) you need to add the registers to your project.
-                    This can do this either by Unity editor or by directly edit your manifest.json file of the project.</P>
-
-                <P>We recommended to just add all scopes of OmiLAXR by using manifest.json. Alternatively, you can do the entry via Unity editor (see below).</P>
-
-                <P>Open for this the
-                    file <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> any code editor and
-                    look for <InlineCodeBox>scopedRegistries</InlineCodeBox> entry.
-                    If there is no entry, than just put next to <InlineCodeBox>dependencies</InlineCodeBox> following
-                    code.
-                </P>
-
-                <P>
-                    After saving the file, you should open Unity editor and check under <InlineCodeBox>Edit &gt; Project
-                    Settings...</InlineCodeBox> if the scopes are applied (see <fm.FigureRef label="step-1"/>). Further modules (see <a target="_blank" href="/ecosystem">Ecosystem</a>) can be added here, too.
-                </P>
-
-                <div className="columns-2xl max-w-[100vw]">
-                    <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
-                    <fm.Figure className="align-middle"  maxWidth="100%" caption="Unity Package Manager scopes (amount of packages can differ)" label="step-1"/>
-                </div>
-            </div>
-        },
-
-        {
-            title: "Install xAPI4Unity package",
-            children: <div>
-
-
-                <P>In Unity menu navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox>.</P>
-
-                <P>Choose <InlineCodeBox>My Registries</InlineCodeBox> and select the available package in the list (see <fm.FigureRef label="my-registries"/>). Here you will be able to update your packages.</P>
-
+                <P>In Unity, navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> → <InlineCodeBox>My Registries</InlineCodeBox> to locate and install the package (see <fm.FigureRef label="my-registries"/>).</P>
                 <Tabs tabs={[{
-                    id: "unity-2022",
-                    label: "< Unity 2023",
-                    content: (
-                        <fm.Figure caption="My Unity Registries (amount of packages can differ)" label="my-registries" maxWidth="70%"/>
-                    )
-                }, {
                     id: "unity-2023",
                     label: "Unity 2023+",
-                    content: (
-                        <fm.Figure caption="My Unity Registries Unity 2023+ (amount of packages can differ)" label="my-registries-2023" maxWidth="70%"/>
-                    )
-                }]} />
-
-                <P>Alternatively, you can add packages by using the <InlineCodeBox>+</InlineCodeBox> in the top left corner. Type
-                    there <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox> into the "name" field
-                    (see <fm.FigureRef label="step-3"/>). More details about this package you can read
-                    in <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/xapi-4-unity</Hyperlink>.
-                </P>
-
-                <fm.Figure caption="Installing Unity package" label="step-3" maxWidth="100%"/>
+                    content: <fm.Figure caption="My Registries in Unity (2023+)" label="my-registries-2023" maxWidth="70%"/>
+                }, {
+                    id: "unity-2022",
+                    label: "< Unity 2023",
+                    content: <fm.Figure caption="My Registries in Unity (<2023)" label="my-registries" maxWidth="70%"/>
+                }]}/>
+                <P>Alternatively, use the <InlineCodeBox>+</InlineCodeBox> button in the Package Manager and add the package by entering <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox>.</P>
             </div>
         },
-
         {
             title: "Prepare xAPI Registry",
             children: <div>
@@ -177,7 +126,7 @@ export default function () {
                         path (recommended <InlineCodeBox>Assets/xapi</InlineCodeBox>). Make sure you have the
                         `definitions` folder in root of <InlineCodeBox>Assets/xapi</InlineCodeBox>.
                     </li>
-                    <li><strong>(Option 1) I want to use git and clone it to my selected path</strong>: You can add a git submodule to your project. This
+                    <li><strong>(Option 3) I want to use git and clone it to my selected path</strong>: You can add a git submodule to your project. This
                         makes sense if you want to sync your local registry changes with a separate git repository or
                         contribute to a global repository. Of course, you can do it totally on your own, but the tool
                         window gives you the possibility to choose a target git repository and branch. By default it
