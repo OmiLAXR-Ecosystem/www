@@ -103,7 +103,7 @@ export default function () {
                 <P>For standardization purpose we established an own xAPI registry specialized for
                     different research domains. One domain
                     is <InlineCodeBox>virtualReality</InlineCodeBox> (<InlineCodeBox>extendedReality</InlineCodeBox> is
-                    in progress). We maintain our registry on in our GitLab
+                    in progress). We maintain our registry in our GitLab
                     repository <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
                     For a more user friendly maintenance we created an user
                     interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
