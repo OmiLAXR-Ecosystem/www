@@ -1,8 +1,6 @@
 import ThemeProvider from "../theme-provider";
 import React from "react";
-import {contentOf, type InstructionCardProps} from "./instructionCard";
-import CodeBox, {InlineCodeBox} from "../CodeBox";
-import {FigureManager} from "react-figure-ref";
+import {InlineCodeBox} from "../CodeBox";
 import Table from "../Table";
 import {JsonManifestCodebox} from "../jsonManifest";
 
@@ -52,13 +50,6 @@ export default function () {
             package: "com.rwth.unity.omilaxr.unityxr",
             purpose: "Collection of Listeners, Filters and Tracking Behaviours for Unity's XR SDK.",
             required: {"OmiLAXR@^2.0.11": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.11", "Unity XR Plugin": "https://docs.unity.com/2020.3/Documentation/Manual/Unity-XR-Overview.html"}
-        },
-        {
-            name: "OmiLAXR.UnityXR.xAPI",
-            sourceCode: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/xr-framework-modules/omilaxr.unityxr.xapi",
-            package: "com.rwth.unity.omilaxr.unityxr.xapi",
-            purpose: "Composers enabling xAPI statements for OmiLAXR.UnityXR. Longterm: will be moved standardized into OmiLAXR.xAPI.",
-            required: {"OmiLAXR@^2.0.11": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.11", "OmiLAXR.UnityXR@^0.0.1-beta": ""}
         }
     ];
 
