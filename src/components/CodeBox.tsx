@@ -6,6 +6,7 @@ interface CodeBoxProps {
     children: string,
     language: string,
     filename?: string,
+    clipboardCode?: string,
 }
 
 interface InlineCodeBoxProps {
@@ -53,7 +54,7 @@ export function InlineCodeBox({children, href, target, clipboardButton}: InlineC
     return <>{code}{clipboardCode}</>;
 }
 
-export default function CodeBox({children: code, language, filename}: CodeBoxProps) {
+export default function CodeBox({children: code, clipboardCode, language, filename}: CodeBoxProps) {
     return (
         <div className={'code-box code-' + language.toLowerCase()} style={{position: "relative", maxWidth: '100%'}}>
             {filename && <small className="code-box-filename">{filename}</small>}
@@ -61,7 +62,7 @@ export default function CodeBox({children: code, language, filename}: CodeBoxPro
                 {code}
             </SyntaxHighlighter>
             <div className="code-box-copy-holder" style={{position: "absolute", right: "5px", top: "2em"}}>
-                <ClipboardButton code={code} />
+                <ClipboardButton code={clipboardCode ?? code} />
             </div>
             <div className="code-box-caption"></div>
         </div>

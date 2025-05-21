@@ -25,21 +25,26 @@ export default function () {
 
     const fm = new FigureManager({
         figures: [
-            {label: "step-0", imageSrc: "/get-started/step-0.png"},
-            {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
-            {label: "step-3", imageSrc: "/get-started/step-3.jpg"},
-            {label: "my-registries", imageSrc: "/get-started/my-registries.png"},
-            {label: "my-registries-2023", imageSrc: "/get-started/my-registries-2023.png"},
-            {label: "xapi4unity", imageSrc: "/get-started/xapi4unity.png"},
-            {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
             {label: "omilaxr-workflow", imageSrc: "/OmiLAXR_Workflow_generic_small.jpg"},
-            {label: "using-xapi", imageSrc: "/Using_xAPI_v2.webm"},
-            {label: "trackable-register", imageSrc: "/get-started/Trackable_Register.png"},
+            {label: "step-0", imageSrc: "/get-started/step-0.png"},
+            {label: "my-registries-2023", imageSrc: "/get-started/my-registries-2023.png"},
+            {label: "my-registries", imageSrc: "/get-started/my-registries.png"},
+            {label: "xapi4unity-menu", imageSrc: "/get-started/xAPI4Unity_Menu.png"},
+            {label: "xapi4unity", imageSrc: "/get-started/xapi4unity.png"},
             {label: "installed-omilaxr", imageSrc: "/get-started/installed-omilaxr.png"},
             {label: "asmdef-inspector", imageSrc: "/get-started/asmdef.png"},
             {label: "prefabs", imageSrc: "/get-started/prefabs.png"},
             {label: "prefabs-2", imageSrc: "/get-started/prefabs-2.png"},
             {label: "prefabs-in-hierarchy", imageSrc: "/get-started/prefabs-in-hierarchy.png"},
+            {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
+            {label: "unityxr", imageSrc: "/get-started/unityxr.png"},
+            {label: "mrtk2", imageSrc: "/get-started/mrtk2.png"},
+            {label: "discord", imageSrc: "/get-started/discord.png"},
+
+            {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
+            {label: "step-3", imageSrc: "/get-started/step-3.jpg"},
+            {label: "using-xapi", imageSrc: "/Using_xAPI_v2.webm"},
+            {label: "trackable-register", imageSrc: "/get-started/Trackable_Register.png"},
         ]
     });
 
@@ -64,11 +69,11 @@ export default function () {
                     <li><InlineCodeBox>OmiLAXR</InlineCodeBox>: The base module for added functionality.</li>
                     <li><InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>: Adds xAPI handling tools and components.</li>
                 </ul>
-                <P><strong style={{color: "red", fontSize: "1.5em"}}>Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
+                <P><strong style={{color: "red" }}>For OmiLAXR.xAPI below 2.0.16: Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
             </div>
         },
 {
-            title: "Prepare Unity Package Scope (Optional)",
+            title: "Prepare Unity Package Scope",
             children: <div>
                 <strong>If you prefer installing packages by Git URL, skip this step. Otherwise, follow these instructions to manage package updates:</strong>
                 <P>Unity only recognizes Unity-hosted packages by default. To support third-party packages like <InlineCodeBox>OmiLAXR</InlineCodeBox>, update your `manifest.json` file to include the required scopes.</P>
@@ -108,10 +113,12 @@ export default function () {
                     For a more user friendly maintenance we created an user
                     interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
 
-                <P> Check in <InlineCodeBox>xAPI4Unity &gt; Open Fetcher Window (Settings)</InlineCodeBox>
+                <P> Check in <InlineCodeBox>xAPI4Unity &gt; Setup xAPI Definitions</InlineCodeBox>
                     whether everything is configured correctly.
                     Now, you have to check if every path is correct. The recommended settings are defined by default.
                     Here, you have three options. You can click through them because you need confirm again before action get executed.</P>
+
+                <fm.Figure caption={"xAPI4Unity Menu"} label={"xapi4unity-menu"} />
 
                 <ul>
                     <li><strong>(Option 1) I want to download a local copy and place it in projects 'Assets' folder</strong>:
@@ -197,7 +204,7 @@ export default function () {
                 <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
                     prefabs that can be used to start directly (see <fm.FigureRef label="prefabs"/>, <fm.FigureRef label="prefabs-2"/> and <fm.FigureRef label="prefabs-in-hierarchy"/>).</P>
 
-                <P style={{fontSize:"1.5em"}}>To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>.</P>
+                <P style={{fontSize:"1.5em"}}>&gt;&gt;&gt; To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>. &lt;&lt;&lt;</P>
 
                     <P>Example scripts can be found
                     &nbsp;<a className="underline" target="_blank"
@@ -206,11 +213,38 @@ export default function () {
                 <fm.Figure caption={"OmiLAXR Prefab"} label={"prefabs"} maxWidth={"50%"}/>
                 <fm.Figure caption={"OmiLAXR.xAPI Prefab"} label={"prefabs-2"} maxWidth={"50%"}/>
                 <fm.Figure caption={"OmiLAXR Prefabs in Hierarchy"} label={"prefabs-in-hierarchy"} maxWidth={"50%"}/>
+            </div>
+        },
+        {
+            title: "Install your needed XR SDK Module",
+            children: <div>
+                <P>To support XR interactions it is needed to install a OmiLAXR module, that supports the SDK-specific components.</P>
+                <P>We are working on several components. Please take a look into those which are already published.</P>
+                <P>If you cannot find them in your Unity registry, please take a look <Hyperlink url="/ecosystem">here</Hyperlink>.</P>
 
+                <Tabs tabs={[{
+                    id: "unityxr",
+                    label: "UnityXR",
+                    content: <fm.Figure caption="OmiLAXR.UnityXR" label="unityxr" maxWidth="70%"/>
+                }, {
+                    id: "mrtk",
+                    label: "MRTK2",
+                    content: <fm.Figure caption="OmiLAXR.MRTK2" label="mrtk2" maxWidth="70%"/>
+                }]}/>
+            </div>
+        },
+        {
+            title: "Join our Discord server",
+            children: <div>
+                <P>Our Discord server has update notes and a community, where everyone is working with OmiLAXR.</P>
+                <P>Join and work within a community! Click <Hyperlink url={'https://discord.gg/AnUXutpHZz'}>here</Hyperlink>.</P>
 
-
-                <div className="pt-3"></div>
-                <h5 style={{fontSize: "20px"}}>(Optional, if you wish to work in separate Unity packages): Creating OmiLAXR modules</h5>
+                <fm.Figure caption={"OmiLAXR Discord server"} label={"discord"} />
+            </div>
+        },
+        {
+            title: "Contribute and share with the community",
+            children: <div>
                 <P>In OmiLAXRv2 we are working with so called "modules". The <a href="/pipeline">Pipeline</a> consists of components. Modules are a collection of components to extend or create OmiLAXR pipelines.</P>
                 <P>This way you can split your LA work into an own repository.</P>
                 <P>To do LA work, you can either place all components in an own folder inside your project or you can work with an own module following this template.</P>
@@ -232,7 +266,7 @@ export default function () {
                 <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, use can use the same workflow. For contribution we recommend to create a fork of our projects and push the changes back.</P>
                 <P>But here you need to clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</P>
             </div>
-        },
+        }
     ];
 
     return (
@@ -241,10 +275,10 @@ export default function () {
                 <div className="container mx-auto items-center relative">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Get
                         started</h1>
-                    <p style={{color: 'red'}}
-                       className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                        Looking for v1 of OmiLAXR? Click <a href="/get-started-v1" className="underline">here</a>.
-                    </p>
+                    {/*<p style={{color: 'red'}}*/}
+                    {/*   className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">*/}
+                    {/*    Looking for v1 of OmiLAXR? Click <a href="/get-started-v1" className="underline">here</a>.*/}
+                    {/*</p>*/}
 
                     <p style={{color: 'green'}}
                        className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
