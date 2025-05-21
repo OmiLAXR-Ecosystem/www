@@ -45,7 +45,7 @@ export default function () {
             {label: "create-credentials.json", imageSrc: "/get-started/create-credentials-json.png"},
             {label: "osx-allow-java", imageSrc: "/get-started/osx-allow-java.png"},
             {label: "yetanalytics", imageSrc: "/get-started/yetanalytics.png"},
-
+            {label: "definitions-editor", imageSrc: "/get-started/definitions-editor.png"},
             {label: "discord", imageSrc: "/get-started/discord.png"},
 
             {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
@@ -196,7 +196,7 @@ export default function () {
             </div>
         },
         {
-            title: "Start working with OmiLAXR",
+            title: "Use the OmiLAXR prefabs",
             children: <div>
 
                 <P>The modular architecture of OmiLAXR enables to implemented needed modules for all XR frameworks.
@@ -207,8 +207,6 @@ export default function () {
 
                 <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
                     prefabs that can be used to start directly (see <fm.FigureRef label="prefabs"/>, <fm.FigureRef label="prefabs-2"/> and <fm.FigureRef label="prefabs-in-hierarchy"/>).</P>
-
-                <P style={{fontSize:"1.5em"}}>&gt;&gt;&gt; To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>. &lt;&lt;&lt;</P>
 
                 <P>Example scripts can be found
                     &nbsp;<a className="underline" target="_blank"
@@ -246,7 +244,7 @@ export default function () {
             children: <div>
                 <P>To create some statements you need to setup an endpoint. You can use multiple endpoints to providing data. One of our default endpoints is <InlineCodeBox>StatementPrinter</InlineCodeBox>. This one can be used to print statements into Unity console. The other one is a Learning Record Store. In <fm.FigureRef label={"endpoints"} /> we have disabled the LRS components and just enabled <InlineCodeBox>PrintStatement</InlineCodeBox> component. If you still want to use the Learning Record Store component you need to keep it enabled.</P>
 
-                <fm.Figure maxWidth={"75%"} caption={"OmiLAXR Default Endpoints"} label={"endpoints"} />
+                <fm.Figure maxWidth={"50%"} caption={"OmiLAXR Default Endpoints"} label={"endpoints"} />
 
                 <P>You can either provide credentials of your Learning Record Store (LRS) by changing your <InlineCodeBox>Streaming Assets / credentials.json</InlineCodeBox> (see <fm.FigureRef label={"credentials.json"} />) file. If you haven't a <InlineCodeBox>credentials.json</InlineCodeBox> yet, you can create one via <InlineCodeBox>OmiLAXR &gt; Create credentials.json</InlineCodeBox>  (see <fm.FigureRef label={"create-credentials.json"} />). As Learning Record Store you can use several solutions. Here are some LRS we recommend:</P>
 
@@ -279,8 +277,24 @@ export default function () {
                     <li>You can see created statements in your LRS, now.</li>
                 </ol>
 
-                <fm.Figure caption={"Allow Java in Preferences"} label={"osx-allow-java"} />
-                <fm.Figure caption={"YetAnalytics LRSQL"} label={"yetanalytics"} />
+                <fm.Figure maxWidth={"50%"} caption={"Allow Java in Preferences"} label={"osx-allow-java"} />
+                <fm.Figure maxWidth={"50%"} caption={"YetAnalytics LRSQL"} label={"yetanalytics"} />
+            </div>
+        },
+        {
+            title: "Work with xAPI Definitions",
+            children: <div>
+                <P>To work with xAPI definitions you can either use your IDE and edit the JSON files in <InlineCodeBox>Assets/xapi</InlineCodeBox> or use again our <InlineCodeBox>xAPI4Unity</InlineCodeBox> package.
+                    It provides a tool window to manage xAPI definitions (see <fm.FigureRef label={"definitions-editor"} />).
+                    You can find it in <InlineCodeBox>xAPI4Unity &gt; Edit xAPI definitions</InlineCodeBox>. Finally, you can edit, create, rename or delete definitions there.</P>
+                <fm.Figure maxWidth={"50%"} caption={"Edit xAPI definitions window"} label={"definitions-editor"} />
+            </div>
+        },
+        {
+            title: "Work with OmiLAXR Modules",
+            children: <div>
+                <P>You can start to implement own modules.</P>
+                <P style={{fontSize:"1.5em"}}>&gt;&gt;&gt; To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>. &lt;&lt;&lt;</P>
             </div>
         },
         {
@@ -289,7 +303,7 @@ export default function () {
                 <P>Our Discord server has update notes and a community, where everyone is working with OmiLAXR.</P>
                 <P>Join and work within a community! Click <Hyperlink url={'https://discord.gg/AnUXutpHZz'}>here</Hyperlink>.</P>
 
-                <fm.Figure caption={"OmiLAXR Discord server"} label={"discord"} />
+                <fm.Figure maxWidth={"50%"} caption={"OmiLAXR Discord server"} label={"discord"} />
             </div>
         },
         {
