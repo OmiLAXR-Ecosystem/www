@@ -22,8 +22,7 @@ interface IJsonManifestCodeboxProps {
     scopes: string[]
 }
 export function JsonManifestCodebox({scopes}: IJsonManifestCodeboxProps) {
-    const s = JSON.stringify(scopedRegistriesCode(scopes));
-
+    const s = JSON.stringify(scopedRegistriesCode(scopes), null, 2);
 
     return <CodeBox language="JavaScript" filename="<project_root>/Packages/manifest.json" clipboardCode={'"scopedRegistries": ' + s}>
         {JSON.stringify(jsonManifest(scopes), null, 2)}

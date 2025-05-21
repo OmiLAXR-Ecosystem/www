@@ -39,12 +39,16 @@ export default function () {
             {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
             {label: "unityxr", imageSrc: "/get-started/unityxr.png"},
             {label: "mrtk2", imageSrc: "/get-started/mrtk2.png"},
+            {label: "unityxr-prefab", imageSrc: "/get-started/unityxr-prefab.png"},
+            {label: "endpoints", imageSrc: "/get-started/endpoints.png"},
+            {label: "credentials.json", imageSrc: "/get-started/credentials-json.png"},
+            {label: "create-credentials.json", imageSrc: "/get-started/create-credentials-json.png"},
+            {label: "osx-allow-java", imageSrc: "/get-started/osx-allow-java.png"},
+            {label: "yetanalytics", imageSrc: "/get-started/yetanalytics.png"},
+
             {label: "discord", imageSrc: "/get-started/discord.png"},
 
             {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
-            {label: "step-3", imageSrc: "/get-started/step-3.jpg"},
-            {label: "using-xapi", imageSrc: "/Using_xAPI_v2.webm"},
-            {label: "trackable-register", imageSrc: "/get-started/Trackable_Register.png"},
         ]
     });
 
@@ -206,7 +210,7 @@ export default function () {
 
                 <P style={{fontSize:"1.5em"}}>&gt;&gt;&gt; To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>. &lt;&lt;&lt;</P>
 
-                    <P>Example scripts can be found
+                <P>Example scripts can be found
                     &nbsp;<a className="underline" target="_blank"
                              href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main/Runtime/Examples">here</a> (Attention: Currently they are a bit outdated and will be updated later).</P>
 
@@ -231,6 +235,52 @@ export default function () {
                     label: "MRTK2",
                     content: <fm.Figure caption="OmiLAXR.MRTK2" label="mrtk2" maxWidth="70%"/>
                 }]}/>
+
+                <P>After installing the XR module of your choice, you can use their prefabs for starting quick using <InlineCodeBox>OmiLAXR</InlineCodeBox>. See one example in <fm.FigureRef label={"unityxr-prefab"} />.</P>
+
+                <fm.Figure caption={"OmiLAXR.UnityXR Prefab"} label={"unityxr-prefab"} maxWidth={"50%"}/>
+            </div>
+        },
+        {
+            title: "Configure a OmiLAXR Endpoint",
+            children: <div>
+                <P>To create some statements you need to setup an endpoint. You can use multiple endpoints to providing data. One of our default endpoints is <InlineCodeBox>StatementPrinter</InlineCodeBox>. This one can be used to print statements into Unity console. The other one is a Learning Record Store. In <fm.FigureRef label={"endpoints"} /> we have disabled the LRS components and just enabled <InlineCodeBox>PrintStatement</InlineCodeBox> component. If you still want to use the Learning Record Store component you need to keep it enabled.</P>
+
+                <fm.Figure maxWidth={"75%"} caption={"OmiLAXR Default Endpoints"} label={"endpoints"} />
+
+                <P>You can either provide credentials of your Learning Record Store (LRS) by changing your <InlineCodeBox>Streaming Assets / credentials.json</InlineCodeBox> (see <fm.FigureRef label={"credentials.json"} />) file. If you haven't a <InlineCodeBox>credentials.json</InlineCodeBox> yet, you can create one via <InlineCodeBox>OmiLAXR &gt; Create credentials.json</InlineCodeBox>  (see <fm.FigureRef label={"create-credentials.json"} />). As Learning Record Store you can use several solutions. Here are some LRS we recommend:</P>
+
+                <ul style={{listStyle: "disc", paddingLeft: "20px"}}>
+                    <li><Hyperlink url="https://learninglocker.atlassian.net/wiki/spaces/DOCS/overview">Learning Record Store</Hyperlink> for production use.</li>
+                    <li><Hyperlink url="https://www.yetanalytics.com/sql-lrs">YetAnalytics LRSQL</Hyperlink> for development</li>
+                </ul>
+
+                <P>Follow the next instructions, to see how to setup an own LRS.</P>
+
+                <fm.Figure maxWidth={"50%"} caption={"Assets / Streaming Assets / credentials.json"} label={"credentials.json"} />
+                <fm.Figure maxWidth={"50%"} caption={"Create credentials.json file"} label={"create-credentials.json"} />
+
+                <h5 style={{"fontWeight": "bold", "fontSize": "1.2em"}}>How to setup local Learning Record Store</h5>
+                <P>For developing purposes we preconfigured LRSQL that you can use.</P>
+
+                <ol style={{listStyle: "decimal", paddingLeft: "20px"}}>
+                    <li><Hyperlink url="https://rwth-aachen.sciebo.de/s/SQgrxeH1TzEWQOf/download">Download preconfigured SQLRS</Hyperlink>.</li>
+                    <li>Unpack the zip file.</li>
+                    <li>Open LRSQL
+                        <ul style={{listStyle: "disc", paddingLeft: "20px"}}>
+                            <li>Windows: Open <InlineCodeBox>lrsql.exe</InlineCodeBox></li>
+                            <li>OSX: Execute in terminal <InlineCodeBox>&gt; ./bin/run_sqlite.sh</InlineCodeBox> (it can happen that you need to make it executable with chmod and allow to open the application over preferences and data privacy).</li>
+                        </ul>
+                    </li>
+                    <li>Visit <Hyperlink>http://localhost:8080/</Hyperlink> and login with the preconfigured username <InlineCodeBox>admin</InlineCodeBox> and password <InlineCodeBox>admin</InlineCodeBox>.</li>
+                    <li>Now, you can see the dashboard of the LRS (see <fm.FigureRef label={"yetanalytics"} />).</li>
+                    <li>You can pick LRS credentials from this dashboard. Our preconfigured credentials are API <InlineCodeBox>db3e9b32e6c2ceeb06c69a98ad3315c0137999172a4c3e56339bb61c94340872</InlineCodeBox> and the API Secret <InlineCodeBox>30cfcff6247a86c8023968a30956c8cea6a43e416faeb96c30fb7c9d4a10e46e</InlineCodeBox> (change it if you use it for production on server, for development it is enough). The default endpoint host is <InlineCodeBox>http://localhost:8080/xapi/</InlineCodeBox>.</li>
+                    <li>Enter these credentials into your <InlineCodeBox>credentials.json</InlineCodeBox>. You can also download a ready file <Hyperlink url="https://rwth-aachen.sciebo.de/s/eAZYCVf6lMHhVsv/download">here</Hyperlink>.</li>
+                    <li>You can see created statements in your LRS, now.</li>
+                </ol>
+
+                <fm.Figure caption={"Allow Java in Preferences"} label={"osx-allow-java"} />
+                <fm.Figure caption={"YetAnalytics LRSQL"} label={"yetanalytics"} />
             </div>
         },
         {
@@ -275,15 +325,7 @@ export default function () {
                 <div className="container mx-auto items-center relative">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Get
                         started</h1>
-                    {/*<p style={{color: 'red'}}*/}
-                    {/*   className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">*/}
-                    {/*    Looking for v1 of OmiLAXR? Click <a href="/get-started-v1" className="underline">here</a>.*/}
-                    {/*</p>*/}
-
-                    <p style={{color: 'green'}}
-                       className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                        <P>Already installed OmiLAXRv2? Continue with the <a href="/pipeline" className="underline">Pipeline</a> instruction.</P>
-                    </p>
+                    <P>Already installed OmiLAXRv2? Continue with the <a href="/pipeline" className="underline">Pipeline</a> instruction.</P>
 
                     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
                         Here, educators, students, and developers can find technical guides, best practices, case
