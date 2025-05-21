@@ -45,6 +45,13 @@ export default function () {
             required: {"xAPI Definitions Registry": "https://xapi.elearn.rwth-aachen.de/"}
         },
         {
+            name: "OmiLAXR.MRTK2",
+            sourceCode: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/xr-framework-modules/omilaxr.mrtk2",
+            package: "com.rwth.unity.omilaxr.mrtk2",
+            purpose: "Collection of Listeners, Filters and Tracking Behaviours for MRTK2 SDK.",
+            required: {"OmiLAXR@^2.0.17": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.17", "MRTK2": "https://learn.microsoft.com/en-us/windows/mixed-reality/mrtk-unity/mrtk2/packages/mrtk-packages?view=mrtkunity-2022-05"}
+        },
+        {
             name: "OmiLAXR.UnityXR",
             sourceCode: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/xr-framework-modules/omilaxr.unityxr",
             package: "com.rwth.unity.omilaxr.unityxr",
