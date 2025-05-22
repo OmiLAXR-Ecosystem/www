@@ -57,279 +57,365 @@ export default function () {
         {
             title: "Overview of the Workflow",
             children: <div>
-                <P>To streamline development with IDE support and ensure consistency, we provide a tool that converts the xAPI registry into C# code. Start by importing this tool. Refer to <fm.FigureRef label="omilaxr-workflow"/> for an overview.</P>
+                <P>To streamline development with IDE support and ensure consistency, we provide a tool that converts
+                    the xAPI registry into C# code. Start by importing this tool. Refer to <fm.FigureRef
+                        label="omilaxr-workflow"/> for an overview.</P>
+
                 <fm.Figure caption="Overview of the OmiLAXR workflow" label="omilaxr-workflow" maxWidth="50%"/>
-                <P>We maintain xAPI definitions through a structured registry, organized as <InlineCodeBox>&lt;context&gt;/&lt;defType&gt;/&lt;defName&gt;.json</InlineCodeBox> for modular and reusable definitions. Our tool translates these definitions into static C# classes, avoiding typos and inconsistencies.</P>
-                <P>These definitions can be integrated into your XR application to create custom xAPI statements, provided to a Learning Record Store (LRS). Developers also learn from tracked scenarios and update the registry with new definitions for broader community use.</P>
+
+                <P>We maintain xAPI definitions through a structured registry, organized
+                    as <InlineCodeBox>&lt;context&gt;/&lt;defType&gt;/&lt;defName&gt;.json</InlineCodeBox> to enable
+                    modular and reusable definitions. Our tool translates these definitions into static C# classes,
+                    helping to avoid typos and inconsistencies.</P>
+
+                <P>These definitions can be integrated into your XR application to create custom xAPI statements, which
+                    are then sent to a Learning Record Store (LRS). Developers can also learn from tracked scenarios and
+                    update the registry with new definitions for broader community use.</P>
             </div>
         },
         {
             title: "Preparation",
             children: <div>
-                <P>Ensure you have a Unity project where you plan to integrate this framework. OmiLAXRv2 is compatible with all Unity projects—both XR and non-XR.</P>
-                <fm.Figure caption="XR Starter Project Screenshot" label="step-0" maxWidth="80%"/>
-                <P>In this guide, you'll install three Unity packages:</P>
+                <P>Make sure you have a Unity project set up where you plan to integrate this framework. OmiLAXRv2 is compatible with all Unity projects — both XR and non-XR.</P>
+
+                <fm.Figure caption="XR Starter Project Screenshot" label="step-0" maxWidth="80%" />
+
+                <P>In this guide, you'll install the following three Unity packages:</P>
+
                 <ul>
-                    <li><Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package>: Transforms JSON definitions into C# code.</li>
-                    <li><Package>OmiLAXR</Package>: The base module for added functionality.</li>
+                    <li><Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package>: Translates JSON definitions into C# code.</li>
+                    <li><Package>OmiLAXR</Package>: The base module that provides additional functionality.</li>
                     <li><Package>OmiLAXR.xAPI</Package>: Adds xAPI handling tools and components.</li>
                 </ul>
-                <P><strong style={{color: "red" }}>For <Package>OmiLAXR.xAPI</Package> below 2.0.16: Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
+
+                <P><strong style={{ color: "red" }}>For <Package>OmiLAXR.xAPI</Package> versions below 2.0.16: The packages must be installed in the following order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
             </div>
         },
-{
+        {
             title: "Prepare Unity Package Scope",
             children: <div>
-                <strong>If you prefer installing packages by Git URL, skip this step. Otherwise, follow these instructions to manage package updates:</strong>
-                <P>Unity only recognizes Unity-hosted packages by default. To support third-party packages like <Package>OmiLAXR</Package>, update your `manifest.json` file to include the required scopes.</P>
-                <P>Edit <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following within <InlineCodeBox>scopedRegistries</InlineCodeBox> if missing:</P>
+                <strong>If you prefer installing packages via Git URL, you can skip this step. Otherwise, follow the instructions below to manage package updates:</strong>
+
+                <P>By default, Unity only recognizes packages hosted by Unity. To support third-party packages like <Package>OmiLAXR</Package>, you’ll need to update your <InlineCodeBox>manifest.json</InlineCodeBox> file to include the required scopes.</P>
+
+                <P>Open <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following entry under <InlineCodeBox>scopedRegistries</InlineCodeBox> if it isn’t already present:</P>
+
                 <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
-                <P>Once updated, restart Unity and verify the scopes via <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox> as shown in <fm.FigureRef label="step-1"/>.</P>
+
+                <P>After updating, restart Unity and verify the scopes under <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox>, as shown in <fm.FigureRef label="step-1" />.</P>
             </div>
         },
         {
             title: "Install xAPI4Unity Package",
             children: <div>
-                <P>In Unity, navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> → <InlineCodeBox>My Registries</InlineCodeBox> to locate and install the package (see <fm.FigureRef label="my-registries"/>).</P>
+                <P>In Unity, navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> → <InlineCodeBox>My
+                    Registries</InlineCodeBox> to locate and install the package (see <fm.FigureRef
+                    label="my-registries"/>).</P>
                 <Tabs tabs={[{
                     id: "unity-2023",
                     label: "Unity 2023+",
-                    content: <fm.Figure caption="My Registries in Unity (2023+)" label="my-registries-2023" maxWidth="70%"/>
+                    content: <fm.Figure caption="My Registries in Unity (2023+)" label="my-registries-2023"
+                                        maxWidth="70%"/>
                 }, {
                     id: "unity-2022",
                     label: "< Unity 2023",
                     content: <fm.Figure caption="My Registries in Unity (<2023)" label="my-registries" maxWidth="70%"/>
                 }]}/>
-                <P>Alternatively, use the <InlineCodeBox>+</InlineCodeBox> button in the Package Manager and add the package by entering <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox>.</P>
+                <P>Alternatively, use the <InlineCodeBox>+</InlineCodeBox> button in the Package Manager and add the
+                    package by entering <InlineCodeBox
+                        clipboardButton={true}>com.rwth.unity.omilaxr.xapi4unity</InlineCodeBox>.</P>
             </div>
         },
         {
             title: "Prepare xAPI Registry",
             children: <div>
-                <P>For data tracking we are using the xAPI data format. To get an idea of the
-                    eXperience API please read the official documentation
-                    (<Hyperlink>https://xapi.com/statements-101/</Hyperlink>).</P>
+                <P>For data tracking, we use the xAPI (Experience API) data format. To better understand xAPI, please refer to the official documentation: <Hyperlink>https://xapi.com/statements-101/</Hyperlink>.</P>
 
-                <P>For standardization purpose we established an own xAPI registry specialized for
-                    different research domains. One domain
-                    is <InlineCodeBox>virtualReality</InlineCodeBox> (<InlineCodeBox>extendedReality</InlineCodeBox> is
-                    in progress). We maintain our registry in our GitLab
-                    repository <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
-                    For a more user friendly maintenance we created an user
-                    interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
+                <P>To support standardization, we maintain a dedicated xAPI registry tailored to various research domains. One such domain is <InlineCodeBox>virtualReality</InlineCodeBox> (support for <InlineCodeBox>extendedReality</InlineCodeBox> is in progress).
+                    The registry is hosted in our GitLab repository: <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
+                    For a more user-friendly experience, we also provide a graphical interface at <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink>.</P>
 
-                <P> Check in <InlineCodeBox>xAPI4Unity &gt; Setup xAPI Definitions</InlineCodeBox>
-                    whether everything is configured correctly.
-                    Now, you have to check if every path is correct. The recommended settings are defined by default.
-                    Here, you have three options. You can click through them because you need confirm again before action get executed.</P>
+                <P>In Unity, navigate to <InlineCodeBox>xAPI4Unity &gt; Setup xAPI Definitions</InlineCodeBox> to verify your configuration.
+                    Ensure all paths are correct — the default settings are preconfigured and recommended.
+                    You'll be guided through three options below. Don’t worry — changes will only be applied after you confirm your selection.</P>
 
-                <fm.Figure caption={"xAPI4Unity Menu"} label={"xapi4unity-menu"} />
+                <fm.Figure caption="xAPI4Unity Menu" label="xapi4unity-menu"/>
 
                 <ul>
-                    <li><strong>(Option 1) I want to download a local copy and place it in projects 'Assets' folder</strong>:
-                        In this case the <a href="https://gitlab.com/learntech-rwth/xapi/-/tree/master?ref_type=heads" target="_blank">latest xAPI repository version of 'master' branch</a> will be downloaded and extracted directly into your
-                        Assets folder. This way the xAPI definitions will be part of your project repository (<InlineCodeBox>Assets/xapi</InlineCodeBox>). This option is used most commonly.
+                    <li><strong>(Option 1) Download a local copy into the project's 'Assets' folder</strong>:
+                        This will download and extract the latest version of the <a href="https://gitlab.com/learntech-rwth/xapi/-/tree/master?ref_type=heads" target="_blank">master branch</a>
+                        of the xAPI registry directly into your <InlineCodeBox>Assets</InlineCodeBox> folder.
+                        The xAPI definitions will then be part of your project repository under <InlineCodeBox>Assets/xapi</InlineCodeBox>.
+                        This is the most commonly used option.
                     </li>
-                    <li><strong>(Option 2) I want just to download local copy to selected path</strong>: It is also allowed to use a
-                        local copy without a separate git. This makes sense if you plan to hold your local registry
-                        changes inside your project repository. This can make sense if you plan a lot of
-                        project-specific xAPI definitions. If you click on the button, the newest files will be
-                        downloaded from our repository. All you need to do is to extract the content into your wished
-                        path (recommended <InlineCodeBox>Assets/xapi</InlineCodeBox>). Make sure you have the
-                        `definitions` folder in root of <InlineCodeBox>Assets/xapi</InlineCodeBox>.
+
+                    <li><strong>(Option 2) Download a local copy to a custom path</strong>:
+                        You may also use a local copy without relying on Git. This is useful if you want to keep xAPI definitions within your project repository
+                        and expect to maintain project-specific definitions. When you click the button, the latest files will be downloaded.
+                        You just need to extract the content into your desired path (recommended: <InlineCodeBox>Assets/xapi</InlineCodeBox>).
+                        Ensure the <InlineCodeBox>definitions</InlineCodeBox> folder is at the root of <InlineCodeBox>Assets/xapi</InlineCodeBox>.
                     </li>
-                    <li><strong>(Option 3) I want to use git and clone it to my selected path</strong>: You can add a git submodule to your project. This
-                        makes sense if you want to sync your local registry changes with a separate git repository or
-                        contribute to a global repository. Of course, you can do it totally on your own, but the tool
-                        window gives you the possibility to choose a target git repository and branch. By default it
-                        will use our git repository and. Make sure you have no error messages and your window looks
-                        similar to <fm.FigureRef label="xapi4unity"/>.
+
+                    <li><strong>(Option 3) Use Git to clone into a custom path</strong>:
+                        You can add the registry as a Git submodule. This is recommended if you want to sync local changes with a separate repository
+                        or contribute to the global registry. While manual setup is possible, the tool window simplifies this process by allowing you to choose a Git repository and branch.
+                        By default, it uses our GitLab repository. Ensure there are no errors and that your window looks similar to <fm.FigureRef label="xapi4unity" />.
                     </li>
                 </ul>
 
-                <P>
-                    To (re-)transform the JSON files to C# you have to click the button <InlineCodeBox>Update xAPI.Registry</InlineCodeBox>. After
-                    transformation you shall have the
-                    folder <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox> containing
-                    all C# files.
-                </P>
+                <P>To (re-)generate the C# code from your JSON definitions, click the <InlineCodeBox>Update xAPI.Registry</InlineCodeBox> button.
+                    After transformation, the folder <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox> will contain all the generated C# files.</P>
 
-                <fm.Figure caption="xAPI4Unity Config Window" label="xapi4unity" maxWidth="70%"/>
+                <fm.Figure caption="xAPI4Unity Config Window" label="xapi4unity" maxWidth="70%" />
             </div>
         },
         {
             title: "Install OmiLAXR Framework",
             children: <div>
 
-                <P>Use again "My Registries" and install <Package>OmiLAXR</Package> package (see <fm.FigureRef label="my-registries"/>). As it depends on OmiLAXR package, it will be installed, too.</P>
+                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR</Package> package (see <fm.FigureRef label="my-registries" />).
+                    Since <Package>OmiLAXR.xAPI</Package> depends on <Package>OmiLAXR</Package>, both packages will be installed automatically.</P>
 
-                <fm.Figure caption="Installed (xAPI4Unity, OmiLAXR and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%"/>
+                <fm.Figure caption="Installed Packages (xAPI4Unity, OmiLAXR, and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%" />
 
-                <P>Alternatively, open <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> and install the
-                    package <InlineCodeBox
-                        clipboardButton={true}>com.rwth.unity.omilaxr.xapi</InlineCodeBox>
-                    (see <fm.FigureRef label="installed-omilaxr"/>).
-                </P>
+                <P>Alternatively, open <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> and install the package
+                    <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi</InlineCodeBox>
+                    (see <fm.FigureRef label="installed-omilaxr" />).</P>
 
                 <div className="pt-3"></div>
-                <h5 style={{fontSize: "20px"}}>(Optional, if you are using Assembly Definitions): Include OmiLAXR to your project</h5>
-                <P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the next
-                    instruction.</P>
-                <P>We your project is not using any asmdef-file it should work without including
-                    OmiLAXR asmdef file.
-                    But we recommend to use a asmdef file in your project. To do this create with right click in assets
-                    window a new one <InlineCodeBox>Assembly Definition</InlineCodeBox> in root of your Unity scripts.
-                    After that you have to include OmiLAXR to your project. To achieve this follow these steps:</P>
+
+                <h5 style={{ fontSize: "20px" }}>(Optional — if you are using Assembly Definitions): Include OmiLAXR in Your Project</h5>
+
+                <P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the following instructions.</P>
+
+                <P>If your project does not use any assembly definition (.asmdef) files, OmiLAXR should work without additional steps.
+                    However, we recommend using an assembly definition file for better modularity and build performance.
+                    To set this up, create a new <InlineCodeBox>Assembly Definition</InlineCodeBox> file in the root of your Unity scripts folder (right-click in the Assets window).</P>
+
+                <P>Next, you’ll need to include <Package>OmiLAXR</Package> in your assembly definition. Follow these steps:</P>
 
                 <ol>
-                    <li>(1) Select your asmdef file.</li>
-                    <li>(2) Add a new entry in <InlineCodeBox>Assembly Definition References</InlineCodeBox> in
-                        <InlineCodeBox>Inspector</InlineCodeBox> window (see <fm.FigureRef label="asmdef-inspector"/>).
-                    </li>
-                    <li>(3) Select <Package>OmiLAXR</Package> by double click.</li>
-                    <li>(4) Repeat the same for <Package>OmiLAXR.xAPI</Package>.</li>
-                    <li>(5) Scroll down in <InlineCodeBox>Inspector</InlineCodeBox> window and click on "Apply".</li>
+                    <li>(1) Select your newly created <InlineCodeBox>.asmdef</InlineCodeBox> file.</li>
+                    <li>(2) In the <InlineCodeBox>Inspector</InlineCodeBox> window, add a new entry under <InlineCodeBox>Assembly Definition References</InlineCodeBox> (see <fm.FigureRef label="asmdef-inspector" />).</li>
+                    <li>(3) Double-click to add <Package>OmiLAXR</Package>.</li>
+                    <li>(4) Repeat the same process for <Package>OmiLAXR.xAPI</Package>.</li>
+                    <li>(5) Scroll down and click "Apply" in the <InlineCodeBox>Inspector</InlineCodeBox> window.</li>
                 </ol>
 
-                <P>Now, you have successfully installed the base packages for OmiLAXR.</P>
+                <P>You have now successfully installed the base packages required for OmiLAXR.</P>
 
-                <fm.Figure caption="Assembly Defintion File Inspector" label="asmdef-inspector" maxWidth="50%" />
+                <fm.Figure caption="Assembly Definition File Inspector" label="asmdef-inspector" maxWidth="50%" />
             </div>
         },
         {
-            title: "Use the OmiLAXR prefabs",
+            title: "Use the OmiLAXR Prefabs",
             children: <div>
 
-                <P>The modular architecture of OmiLAXR enables to implemented needed modules for all XR frameworks.
-                    Depending on needs, they differ in interaction and teleport behavior or player game object hierarchies.</P>
+                <P>The modular architecture of OmiLAXR makes it possible to implement necessary modules for all XR frameworks.
+                    Depending on your needs, the frameworks may differ in terms of interaction behavior, teleportation logic, or the hierarchy of player game objects.</P>
 
-                <P>Working with OmiLAXR means to implement components of the pipeline and add this way more functionality to the pipeline.
-                    This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
+                <P>Working with OmiLAXR means implementing components of the pipeline to extend its functionality.
+                    This can be done either in your own Unity package (see section below) or by placing the classes inside a folder within the <InlineCodeBox>Assets</InlineCodeBox> directory.</P>
 
-                <P><Package>OmiLAXR</Package> modules are following a strict structure. They provide
-                    prefabs that can be used to start directly (see <fm.FigureRef label="prefabs"/>, <fm.FigureRef label="prefabs-2"/> and <fm.FigureRef label="prefabs-in-hierarchy"/>).</P>
+                <P><Package>OmiLAXR</Package> modules follow a strict structure. They provide prefabs that you can use to get started immediately (see <fm.FigureRef label="prefabs" />, <fm.FigureRef label="prefabs-2" />, and <fm.FigureRef label="prefabs-in-hierarchy" />).</P>
 
-                <P>Example scripts can be found
-                    &nbsp;<a className="underline" target="_blank"
-                             href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main/Runtime/Examples">here</a> (Attention: Currently they are a bit outdated and will be updated later).</P>
+                <P>Example scripts can be found&nbsp;
+                    <a className="underline" target="_blank"
+                       href="https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template/-/tree/main/Runtime/Examples">
+                        here
+                    </a>.
+                    <strong>Note:</strong> These examples are currently a bit outdated and will be updated soon.
+                </P>
 
-                <fm.Figure caption={"OmiLAXR Prefab"} label={"prefabs"} maxWidth={"50%"}/>
-                <fm.Figure caption={"OmiLAXR.xAPI Prefab"} label={"prefabs-2"} maxWidth={"50%"}/>
-                <fm.Figure caption={"OmiLAXR Prefabs in Hierarchy"} label={"prefabs-in-hierarchy"} maxWidth={"50%"}/>
+                <fm.Figure caption={"OmiLAXR Prefab"} label={"prefabs"} maxWidth={"50%"} />
+                <fm.Figure caption={"OmiLAXR.xAPI Prefab"} label={"prefabs-2"} maxWidth={"50%"} />
+                <fm.Figure caption={"OmiLAXR Prefabs in Hierarchy"} label={"prefabs-in-hierarchy"} maxWidth={"50%"} />
             </div>
         },
         {
-            title: "Install your needed XR SDK Module",
+            title: "Install Your Required XR SDK Module",
             children: <div>
-                <P>To support XR interactions it is needed to install a OmiLAXR module, that supports the SDK-specific components.</P>
-                <P>We are working on several components. Please take a look into those which are already published.</P>
-                <P>If you cannot find them in your Unity registry, please take a look <Hyperlink url="/ecosystem">here</Hyperlink>.</P>
+                <P>To support XR interactions, you need to install an appropriate <Package>OmiLAXR</Package> module that integrates with the specific XR SDK components used in your project.</P>
 
-                <Tabs tabs={[{
-                    id: "unityxr",
-                    label: "UnityXR",
-                    content: <fm.Figure caption="OmiLAXR.UnityXR" label="unityxr" maxWidth="70%"/>
-                }, {
-                    id: "mrtk",
-                    label: "MRTK2",
-                    content: <fm.Figure caption="OmiLAXR.MRTK2" label="mrtk2" maxWidth="70%"/>
-                }]}/>
+                <P>We are actively developing several XR modules. Please check the available ones that have already been published.</P>
 
-                <P>After installing the XR module of your choice, you can use their prefabs for starting quick using <Package>OmiLAXR</Package>. See one example in <fm.FigureRef label={"unityxr-prefab"} />.</P>
+                <P>If you don't see them in your Unity registry, please visit <Hyperlink url="/ecosystem">this page</Hyperlink> for more information.</P>
 
-                <fm.Figure caption={"OmiLAXR.UnityXR Prefab"} label={"unityxr-prefab"} maxWidth={"50%"}/>
+                <Tabs tabs={[
+                    {
+                        id: "unityxr",
+                        label: "UnityXR",
+                        content: <fm.Figure caption="OmiLAXR.UnityXR" label="unityxr" maxWidth="70%" />
+                    },
+                    {
+                        id: "mrtk",
+                        label: "MRTK2",
+                        content: <fm.Figure caption="OmiLAXR.MRTK2" label="mrtk2" maxWidth="70%" />
+                    }
+                ]} />
+
+                <P>After installing the XR module of your choice, you can start quickly by using the provided prefabs from <Package>OmiLAXR</Package>.
+                    See an example in <fm.FigureRef label="unityxr-prefab" />.</P>
+
+                <fm.Figure caption="OmiLAXR.UnityXR Prefab" label="unityxr-prefab" maxWidth="50%" />
             </div>
         },
         {
-            title: "Configure a OmiLAXR Endpoint",
+            title: "Configure an OmiLAXR Endpoint",
             children: <div>
-                <P>To create some statements you need to setup an endpoint. You can use multiple endpoints to providing data. One of our default endpoints is <InlineCodeBox>StatementPrinter</InlineCodeBox>. This one can be used to print statements into Unity console. The other one is a Learning Record Store. In <fm.FigureRef label={"endpoints"} /> we have disabled the LRS components and just enabled <InlineCodeBox>PrintStatement</InlineCodeBox> component. If you still want to use the Learning Record Store component you need to keep it enabled.</P>
 
-                <fm.Figure maxWidth={"50%"} caption={"OmiLAXR Default Endpoints"} label={"endpoints"} />
+                <P>To create and send statements, you must set up an endpoint. OmiLAXR supports multiple endpoints for delivering data.
+                    One of the default endpoints is <InlineCodeBox>StatementPrinter</InlineCodeBox>, which logs statements to the Unity console.
+                    Another common endpoint is a Learning Record Store (LRS).</P>
 
-                <P>You can either provide credentials of your Learning Record Store (LRS) by changing your <InlineCodeBox>Streaming Assets / credentials.json</InlineCodeBox> (see <fm.FigureRef label={"credentials.json"} />) file. If you haven't a <InlineCodeBox>credentials.json</InlineCodeBox> yet, you can create one via <InlineCodeBox>OmiLAXR &gt; Create credentials.json</InlineCodeBox>  (see <fm.FigureRef label={"create-credentials.json"} />). As Learning Record Store you can use several solutions. Here are some LRS we recommend:</P>
+                <P>In <fm.FigureRef label="endpoints" />, the LRS components are disabled, and only the <InlineCodeBox>PrintStatement</InlineCodeBox> component is enabled.
+                    If you wish to use the LRS, make sure to keep its component enabled.</P>
 
-                <ul style={{listStyle: "disc", paddingLeft: "20px"}}>
-                    <li><Hyperlink url="https://learninglocker.atlassian.net/wiki/spaces/DOCS/overview">Learning Record Store</Hyperlink> for production use.</li>
-                    <li><Hyperlink url="https://www.yetanalytics.com/sql-lrs">YetAnalytics LRSQL</Hyperlink> for development</li>
+                <fm.Figure maxWidth="50%" caption="OmiLAXR Default Endpoints" label="endpoints" />
+
+                <P>To connect to your Learning Record Store, provide the credentials by editing the file at
+                    <InlineCodeBox>Assets/StreamingAssets/credentials.json</InlineCodeBox> (see <fm.FigureRef label="credentials.json" />).
+                    If this file doesn't exist, you can create one via <InlineCodeBox>OmiLAXR &gt; Create credentials.json</InlineCodeBox>
+                    (see <fm.FigureRef label="create-credentials.json" />).</P>
+
+                <P>We support several LRS solutions. Recommended options:</P>
+
+                <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                    <li><Hyperlink url="https://learninglocker.atlassian.net/wiki/spaces/DOCS/overview">Learning Locker</Hyperlink> — suitable for production use</li>
+                    <li><Hyperlink url="https://www.yetanalytics.com/sql-lrs">YetAnalytics LRSQL</Hyperlink> — ideal for development environments</li>
                 </ul>
 
-                <P>Follow the next instructions, to see how to setup an own LRS.</P>
+                <P>Follow the steps below to set up a local LRS:</P>
 
-                <fm.Figure maxWidth={"50%"} caption={"Assets / Streaming Assets / credentials.json"} label={"credentials.json"} />
-                <fm.Figure maxWidth={"50%"} caption={"Create credentials.json file"} label={"create-credentials.json"} />
+                <fm.Figure maxWidth="50%" caption="Assets / StreamingAssets / credentials.json" label="credentials.json" />
+                <fm.Figure maxWidth="50%" caption="Create credentials.json file" label="create-credentials.json" />
 
-                <h5 style={{"fontWeight": "bold", "fontSize": "1.2em"}}>How to setup local Learning Record Store</h5>
-                <P>For developing purposes we preconfigured LRSQL that you can use.</P>
+                <h5 style={{ fontWeight: "bold", fontSize: "1.2em" }}>How to Set Up a Local Learning Record Store</h5>
 
-                <ol style={{listStyle: "decimal", paddingLeft: "20px"}}>
-                    <li><Hyperlink url="https://rwth-aachen.sciebo.de/s/SQgrxeH1TzEWQOf/download">Download preconfigured SQLRS</Hyperlink>.</li>
-                    <li>Unpack the zip file.</li>
-                    <li>Open LRSQL
-                        <ul style={{listStyle: "disc", paddingLeft: "20px"}}>
-                            <li>Windows: Open <InlineCodeBox>lrsql.exe</InlineCodeBox></li>
-                            <li>OSX: Execute in terminal <InlineCodeBox>&gt; ./bin/run_sqlite.sh</InlineCodeBox> (it can happen that you need to make it executable with chmod and allow to open the application over preferences and data privacy).</li>
+                <P>For development purposes, we provide a preconfigured version of LRSQL:</P>
+
+                <ol style={{ listStyle: "decimal", paddingLeft: "20px" }}>
+                    <li>
+                        <Hyperlink url="https://rwth-aachen.sciebo.de/s/SQgrxeH1TzEWQOf/download">Download the preconfigured SQLRS package</Hyperlink>.
+                    </li>
+                    <li>Unpack the ZIP archive.</li>
+                    <li>
+                        Launch LRSQL:
+                        <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                            <li><strong>Windows:</strong> Run <InlineCodeBox>lrsql.exe</InlineCodeBox></li>
+                            <li>
+                                <strong>macOS:</strong> In Terminal, execute
+                                <InlineCodeBox>./bin/run_sqlite.sh</InlineCodeBox>.
+                                You may need to make the file executable using <InlineCodeBox>chmod</InlineCodeBox> and allow it to run via **System Preferences → Privacy & Security**.
+                            </li>
                         </ul>
                     </li>
-                    <li>Visit <Hyperlink>http://localhost:8080/</Hyperlink> and login with the preconfigured username <InlineCodeBox>admin</InlineCodeBox> and password <InlineCodeBox>admin</InlineCodeBox>.</li>
-                    <li>Now, you can see the dashboard of the LRS (see <fm.FigureRef label={"yetanalytics"} />).</li>
-                    <li>You can pick LRS credentials from this dashboard. Our preconfigured credentials are API <InlineCodeBox>db3e9b32e6c2ceeb06c69a98ad3315c0137999172a4c3e56339bb61c94340872</InlineCodeBox> and the API Secret <InlineCodeBox>30cfcff6247a86c8023968a30956c8cea6a43e416faeb96c30fb7c9d4a10e46e</InlineCodeBox> (change it if you use it for production on server, for development it is enough). The default endpoint host is <InlineCodeBox>http://localhost:8080/xapi/</InlineCodeBox>.</li>
-                    <li>Enter these credentials into your <InlineCodeBox>credentials.json</InlineCodeBox>. You can also download a ready file <Hyperlink url="https://rwth-aachen.sciebo.de/s/eAZYCVf6lMHhVsv/download">here</Hyperlink>.</li>
-                    <li>You can see created statements in your LRS, now.</li>
+                    <li>
+                        Open <Hyperlink>http://localhost:8080/</Hyperlink> in your browser and log in using:
+                        <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                            <li><strong>Username:</strong> <InlineCodeBox>admin</InlineCodeBox></li>
+                            <li><strong>Password:</strong> <InlineCodeBox>admin</InlineCodeBox></li>
+                        </ul>
+                    </li>
+                    <li>Once logged in, you'll see the LRS dashboard (see <fm.FigureRef label="yetanalytics" />).</li>
+                    <li>
+                        Use the following preconfigured credentials for development (change them if used in production):
+                        <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                            <li><strong>API Key:</strong> <InlineCodeBox>db3e9b32e6c2ceeb06c69a98ad3315c0137999172a4c3e56339bb61c94340872</InlineCodeBox></li>
+                            <li><strong>API Secret:</strong> <InlineCodeBox>30cfcff6247a86c8023968a30956c8cea6a43e416faeb96c30fb7c9d4a10e46e</InlineCodeBox></li>
+                            <li><strong>Endpoint:</strong> <InlineCodeBox>http://localhost:8080/xapi/</InlineCodeBox></li>
+                        </ul>
+                    </li>
+                    <li>You can now enter these credentials into your <InlineCodeBox>credentials.json</InlineCodeBox> file.
+                        Alternatively, download a pre-filled file
+                        <Hyperlink url="https://rwth-aachen.sciebo.de/s/eAZYCVf6lMHhVsv/download">here</Hyperlink>.
+                    </li>
+                    <li>Once configured, you will be able to see generated xAPI statements in the LRS dashboard.</li>
                 </ol>
 
-                <fm.Figure maxWidth={"50%"} caption={"Allow Java in Preferences"} label={"osx-allow-java"} />
-                <fm.Figure maxWidth={"50%"} caption={"YetAnalytics LRSQL"} label={"yetanalytics"} />
+                <fm.Figure maxWidth="50%" caption="Allow Java in System Preferences (macOS)" label="osx-allow-java" />
+                <fm.Figure maxWidth="50%" caption="YetAnalytics LRSQL Dashboard" label="yetanalytics" />
+
             </div>
         },
         {
             title: "Work with xAPI Definitions",
             children: <div>
-                <P>To work with xAPI definitions you can either use your IDE and edit the JSON files in <InlineCodeBox>Assets/xapi</InlineCodeBox> or use again our <Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package> package.
-                    It provides a tool window to manage xAPI definitions (see <fm.FigureRef label={"definitions-editor"} />).
-                    You can find it in <InlineCodeBox>xAPI4Unity &gt; Edit xAPI definitions</InlineCodeBox>. Finally, you can edit, create, rename or delete definitions there.</P>
-                <fm.Figure maxWidth={"50%"} caption={"Edit xAPI definitions window"} label={"definitions-editor"} />
+                <P>To manage xAPI definitions, you can either edit the JSON files directly using your IDE
+                    in <InlineCodeBox>Assets/xapi</InlineCodeBox>, or you can use the <Package scope="com.rwth.unity.omilaxr.xapi4unity">xAPI4Unity</Package> package.</P>
+
+                <P>This package provides a dedicated tool window to manage xAPI definitions (see <fm.FigureRef label="definitions-editor" />).
+                    You can access it via <InlineCodeBox>xAPI4Unity &gt; Edit xAPI Definitions</InlineCodeBox>.</P>
+
+                <P>From this window, you can easily create, edit, rename, or delete xAPI definitions.</P>
+
+                <fm.Figure maxWidth="50%" caption="Edit xAPI Definitions Window" label="definitions-editor" />
             </div>
         },
         {
             title: "Work with OmiLAXR Modules",
             children: <div>
-                <P>You can start to implement own modules.</P>
-                <P style={{fontSize:"1.5em"}}>&gt;&gt;&gt; To see the modular architecture basics and some code examples click <a href="/pipeline">here</a>. &lt;&lt;&lt;</P>
+                <P>You can now begin developing your own OmiLAXR modules.</P>
+                <P style={{ fontSize: "1.5em" }}>
+                    &gt;&gt;&gt; To learn more about the modular architecture and see example code, click <a href="/pipeline">here</a>. &lt;&lt;&lt;
+                </P>
             </div>
         },
         {
-            title: "Join our Discord server",
+            title: "Join Our Discord Server",
             children: <div>
-                <P>Our Discord server has update notes and a community, where everyone is working with OmiLAXR.</P>
-                <P>Join and work within a community! Click <Hyperlink url={'https://discord.gg/AnUXutpHZz'}>here</Hyperlink>.</P>
+                <P>Stay connected through our official Discord server, where we share update notes and collaborate as a community of OmiLAXR users and developers.</P>
 
-                <fm.Figure maxWidth={"50%"} caption={"OmiLAXR Discord server"} label={"discord"} />
+                <P>Join the conversation and grow with the community!
+                    Click <Hyperlink url="https://discord.gg/AnUXutpHZz">here</Hyperlink> to join.</P>
+
+                <fm.Figure maxWidth="50%" caption="OmiLAXR Discord Server" label="discord" />
             </div>
         },
         {
-            title: "Contribute and share with the community",
+            title: "Contribute and Share with the Community",
             children: <div>
-                <P>In OmiLAXRv2 we are working with so called "modules". The <a href="/pipeline">Pipeline</a> consists of components. Modules are a collection of components to extend or create OmiLAXR pipelines.</P>
-                <P>This way you can split your LA work into an own repository.</P>
-                <P>To do LA work, you can either place all components in an own folder inside your project or you can work with an own module following this template.</P>
-                <P>If you want to place the module inside your XR project repository, it is enough to download the project by ZIP from <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</P>
+                <P>In OmiLAXRv2, we use a modular architecture based on so-called “modules.” The <a href="/pipeline">Pipeline</a> consists of individual components, and a module is a collection of such components used to extend or create OmiLAXR pipelines.</P>
+
+                <P>This allows you to organize your Learning Analytics (LA) work in a separate repository.</P>
+
+                <P>To develop your own LA module, you can either place all components inside a dedicated folder within your project or create a standalone module based on our module template.</P>
+
+                <P>If you prefer to place the module inside your existing XR project, simply download the template as a ZIP file from:
+                    <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>.</P>
 
                 <ul>
-                    <li>(a) Fork the following repository <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink> and fork your clone.</li>
-                    <li>(b) In Unity menu navigate to <InlineCodeBox>Window &gt; Package
-                        Manager</InlineCodeBox>, then on <InlineCodeBox>+</InlineCodeBox> in the top left corner. Then click on
+                    <li>
+                        <strong>(a)</strong> Fork the following repository:
+                        <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/omilaxr.module-template</Hyperlink>,
+                        then clone your fork locally.
+                    </li>
+                    <li>
+                        <strong>(b)</strong> In Unity, go to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox>.
+                        Click the <InlineCodeBox>+</InlineCodeBox> button in the top-left corner and select
                         <InlineCodeBox>Add from disk...</InlineCodeBox> (see <fm.FigureRef label="add-from-disk" />).
 
-                        <fm.Figure maxWidth="700px" className="align-middle" caption="Add package from disk" label="add-from-disk"/>
+                        <fm.Figure maxWidth="700px" className="align-middle" caption="Add package from disk" label="add-from-disk" />
                     </li>
-                    <li>(c) Navigate to the cloned project(s) and select its <InlineCodeBox>package.json</InlineCodeBox>.</li>
-                    <li>(d) Now you have imported the package into your project and you can start to work.</li>
-                    <li>(e) Adjust all "YOUR_MODULE_NAME" entries in the module package (e.g. in README.md, package.json, asmdef-File, asmdef-File name, Namespaces of scripts). This can be done step by step.</li>
+                    <li>
+                        <strong>(c)</strong> Navigate to the cloned project folder and select the <InlineCodeBox>package.json</InlineCodeBox> file.
+                    </li>
+                    <li>
+                        <strong>(d)</strong> The module will now be imported into your project, and you can begin working with it.
+                    </li>
+                    <li>
+                        <strong>(e)</strong> Update all placeholder entries labeled <InlineCodeBox>YOUR_MODULE_NAME</InlineCodeBox>
+                        in files such as <InlineCodeBox>README.md</InlineCodeBox>, <InlineCodeBox>package.json</InlineCodeBox>,
+                        your <InlineCodeBox>.asmdef</InlineCodeBox> file, and any script namespaces.
+                        This can be done step by step.
+                    </li>
                 </ul>
 
-                <P>In case you want to contribute to OmiLAXR by extending or changing OmiLAXR modules, use can use the same workflow. For contribution we recommend to create a fork of our projects and push the changes back.</P>
-                <P>But here you need to clone one of these <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink> repositories to your computer.</P>
+                <P>If you want to contribute directly to OmiLAXR by extending or modifying existing modules,
+                    you can use the same workflow. In this case, we recommend forking the relevant project and submitting your changes via merge requests.</P>
+
+                <P>To contribute, first clone one of the repositories from:
+                    <Hyperlink>https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2</Hyperlink></P>
             </div>
         }
     ];
@@ -338,21 +424,20 @@ export default function () {
         <ThemeProvider>
             <div className="h-full w-screen place-items-center bg-white py-20">
                 <div className="container mx-auto items-center relative">
-                    <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Get
-                        started</h1>
-                    <P>Already installed OmiLAXRv2? Continue with the <a href="/pipeline" className="underline">Pipeline</a> instruction.</P>
+                    <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+                        Get Started
+                    </h1>
+
+                    <P>Already installed OmiLAXRv2? Continue with the <a href="/pipeline" className="underline">Pipeline</a> instructions.</P>
 
                     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                        Here, educators, students, and developers can find technical guides, best practices, case
-                        studies, and examples. Whether you're
-                        new to XR or an experienced developer, you'll find
-                        useful information to help you integrate XR into learning.
+                        This site provides educators, students, and developers with technical guides, best practices, case studies, and real-world examples.
+                        Whether you're new to XR or an experienced developer, you'll find valuable resources to help you integrate XR into educational settings.
                     </p>
 
                     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                        We hope you find our resources helpful. Thank you for exploring XR in education with us.
+                        We hope you find our materials useful. Thank you for exploring XR in education with us.
                     </p>
-
                     {contentOf(items)}
                 </div>
             </div>
