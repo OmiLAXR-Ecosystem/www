@@ -173,7 +173,7 @@ export default function () {
             title: "Install OmiLAXR Framework",
             children: <div>
 
-                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR</Package> package (see <fm.FigureRef label="my-registries" />).
+                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR.xAPI</Package> package (see <fm.FigureRef label="my-registries" />).
                     Since <Package>OmiLAXR.xAPI</Package> depends on <Package>OmiLAXR</Package>, both packages will be installed automatically.</P>
 
                 <fm.Figure caption="Installed Packages (xAPI4Unity, OmiLAXR, and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%" />
