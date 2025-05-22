@@ -66,7 +66,8 @@ export function generateUrlAnchor(title: string): string {
 
 export function contentOf(items: InstructionCardProps[]) {
     return <div className="get-started-cards">
-        <ol className="table-of-contents" style={{fontSize: "1.5em", paddingLeft: "1em"}}>
+        <h2 style={{fontSize: "1.5em"}}>Table of Contents</h2>
+        <ol className="table-of-contents" style={{fontSize: "1.2em", paddingLeft: "1em"}}>
             {
                 items.map(({title}, index) => (
                     <li key={index}>
@@ -78,7 +79,7 @@ export function contentOf(items: InstructionCardProps[]) {
 
         {
             items.map(({title, children, image}, index) => (
-                <section style={{paddingTop: '80px'}} id={generateUrlAnchor(title)} key={index}>
+                <section id={generateUrlAnchor(title)} key={index}>
                     <InstructionCard title={`Step ${index}: ${title}`}
                                      image={image}
                                      swapCells={index % 2 != 0}>

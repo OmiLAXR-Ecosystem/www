@@ -37,13 +37,13 @@ export function ClipboardButton({code, ...props}: IClipboardButtonProps) {
 
 export function InlineCodeBox({children, href, target, clipboardButton}: InlineCodeBoxProps) {
     const code =
-            <span className={'code-box-inline'} style={{
-                fontFamily: 'Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace',
-                background: 'rgb(248, 248, 255)',
-                color: 'black',
-                padding: '5px',
-                borderColor: '#eeeeee'
-            }}>{children}</span>;
+        <span className={'code-box-inline'} style={{
+            fontFamily: 'Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace',
+            background: 'rgb(248, 248, 255)',
+            color: 'black',
+            padding: '5px',
+            borderColor: '#eeeeee'
+        }}>{children}</span>;
 
     const clipboardCode = <>{clipboardButton && <ClipboardButton style={{position: 'relative', top: '8px'}} code={children}/>}</>;
 
