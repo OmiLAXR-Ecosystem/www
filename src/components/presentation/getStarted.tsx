@@ -6,6 +6,7 @@ import {FigureManager} from "react-figure-ref";
 import Hyperlink from "../Hyperlink";
 import {JsonManifestCodebox} from "../jsonManifest";
 import Tabs from "../Tabs";
+import Package from "../Package";
 
 const scopes = [
     "com.rwth.unity.omilaxr.xapi4unity",
@@ -36,7 +37,6 @@ export default function () {
             {label: "prefabs", imageSrc: "/get-started/prefabs.png"},
             {label: "prefabs-2", imageSrc: "/get-started/prefabs-2.png"},
             {label: "prefabs-in-hierarchy", imageSrc: "/get-started/prefabs-in-hierarchy.png"},
-            {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
             {label: "unityxr", imageSrc: "/get-started/unityxr.png"},
             {label: "mrtk2", imageSrc: "/get-started/mrtk2.png"},
             {label: "unityxr-prefab", imageSrc: "/get-started/unityxr-prefab.png"},
@@ -47,6 +47,7 @@ export default function () {
             {label: "yetanalytics", imageSrc: "/get-started/yetanalytics.png"},
             {label: "definitions-editor", imageSrc: "/get-started/definitions-editor.png"},
             {label: "discord", imageSrc: "/get-started/discord.png"},
+            {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
 
             {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
         ]
@@ -69,18 +70,18 @@ export default function () {
                 <fm.Figure caption="XR Starter Project Screenshot" label="step-0" maxWidth="80%"/>
                 <P>In this guide, you'll install three Unity packages:</P>
                 <ul>
-                    <li><InlineCodeBox>xAPI4Unity</InlineCodeBox>: Transforms JSON definitions into C# code.</li>
-                    <li><InlineCodeBox>OmiLAXR</InlineCodeBox>: The base module for added functionality.</li>
-                    <li><InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>: Adds xAPI handling tools and components.</li>
+                    <li><Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package>: Transforms JSON definitions into C# code.</li>
+                    <li><Package>OmiLAXR</Package>: The base module for added functionality.</li>
+                    <li><Package>OmiLAXR.xAPI</Package>: Adds xAPI handling tools and components.</li>
                 </ul>
-                <P><strong style={{color: "red" }}>For OmiLAXR.xAPI below 2.0.16: Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
+                <P><strong style={{color: "red" }}>For <Package>OmiLAXR.xAPI</Package> below 2.0.16: Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
             </div>
         },
 {
             title: "Prepare Unity Package Scope",
             children: <div>
                 <strong>If you prefer installing packages by Git URL, skip this step. Otherwise, follow these instructions to manage package updates:</strong>
-                <P>Unity only recognizes Unity-hosted packages by default. To support third-party packages like <InlineCodeBox>OmiLAXR</InlineCodeBox>, update your `manifest.json` file to include the required scopes.</P>
+                <P>Unity only recognizes Unity-hosted packages by default. To support third-party packages like <Package>OmiLAXR</Package>, update your `manifest.json` file to include the required scopes.</P>
                 <P>Edit <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following within <InlineCodeBox>scopedRegistries</InlineCodeBox> if missing:</P>
                 <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
                 <P>Once updated, restart Unity and verify the scopes via <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox> as shown in <fm.FigureRef label="step-1"/>.</P>
@@ -160,7 +161,7 @@ export default function () {
             title: "Install OmiLAXR Framework",
             children: <div>
 
-                <P>Use again "My Registries" and install <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> package (see <fm.FigureRef label="my-registries"/>). As it depends on OmiLAXR package, it will be installed, too.</P>
+                <P>Use again "My Registries" and install <Package>OmiLAXR</Package> package (see <fm.FigureRef label="my-registries"/>). As it depends on OmiLAXR package, it will be installed, too.</P>
 
                 <fm.Figure caption="Installed (xAPI4Unity, OmiLAXR and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%"/>
 
@@ -185,8 +186,8 @@ export default function () {
                     <li>(2) Add a new entry in <InlineCodeBox>Assembly Definition References</InlineCodeBox> in
                         <InlineCodeBox>Inspector</InlineCodeBox> window (see <fm.FigureRef label="asmdef-inspector"/>).
                     </li>
-                    <li>(3) Select <InlineCodeBox>OmiLAXR</InlineCodeBox> by double click.</li>
-                    <li>(4) Repeat the same for <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox>.</li>
+                    <li>(3) Select <Package>OmiLAXR</Package> by double click.</li>
+                    <li>(4) Repeat the same for <Package>OmiLAXR.xAPI</Package>.</li>
                     <li>(5) Scroll down in <InlineCodeBox>Inspector</InlineCodeBox> window and click on "Apply".</li>
                 </ol>
 
@@ -205,7 +206,7 @@ export default function () {
                 <P>Working with OmiLAXR means to implement components of the pipeline and add this way more functionality to the pipeline.
                     This can be done either by working in an own Unity package (see in the bottom) holding these classes or holding them in a folder inside of "Assets".</P>
 
-                <P><InlineCodeBox>OmiLAXR</InlineCodeBox> modules are following a strict structure. They provide
+                <P><Package>OmiLAXR</Package> modules are following a strict structure. They provide
                     prefabs that can be used to start directly (see <fm.FigureRef label="prefabs"/>, <fm.FigureRef label="prefabs-2"/> and <fm.FigureRef label="prefabs-in-hierarchy"/>).</P>
 
                 <P>Example scripts can be found
@@ -234,7 +235,7 @@ export default function () {
                     content: <fm.Figure caption="OmiLAXR.MRTK2" label="mrtk2" maxWidth="70%"/>
                 }]}/>
 
-                <P>After installing the XR module of your choice, you can use their prefabs for starting quick using <InlineCodeBox>OmiLAXR</InlineCodeBox>. See one example in <fm.FigureRef label={"unityxr-prefab"} />.</P>
+                <P>After installing the XR module of your choice, you can use their prefabs for starting quick using <Package>OmiLAXR</Package>. See one example in <fm.FigureRef label={"unityxr-prefab"} />.</P>
 
                 <fm.Figure caption={"OmiLAXR.UnityXR Prefab"} label={"unityxr-prefab"} maxWidth={"50%"}/>
             </div>
@@ -284,7 +285,7 @@ export default function () {
         {
             title: "Work with xAPI Definitions",
             children: <div>
-                <P>To work with xAPI definitions you can either use your IDE and edit the JSON files in <InlineCodeBox>Assets/xapi</InlineCodeBox> or use again our <InlineCodeBox>xAPI4Unity</InlineCodeBox> package.
+                <P>To work with xAPI definitions you can either use your IDE and edit the JSON files in <InlineCodeBox>Assets/xapi</InlineCodeBox> or use again our <Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package> package.
                     It provides a tool window to manage xAPI definitions (see <fm.FigureRef label={"definitions-editor"} />).
                     You can find it in <InlineCodeBox>xAPI4Unity &gt; Edit xAPI definitions</InlineCodeBox>. Finally, you can edit, create, rename or delete definitions there.</P>
                 <fm.Figure maxWidth={"50%"} caption={"Edit xAPI definitions window"} label={"definitions-editor"} />

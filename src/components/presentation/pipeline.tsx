@@ -4,6 +4,8 @@ import {contentOf, type InstructionCardProps} from "./instructionCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "react-figure-ref";
 import {OmiLAXRPipeline} from "../Pipeline";
+import Package from "../Package";
+import Tabs from "../Tabs";
 
 function P({children}: any) {
     return <p className="pt-3 pb-3">{children}</p>
@@ -42,46 +44,79 @@ export default function () {
                 <P>Both categories interact through asynchronous events, enabling
                     the use of multiple pipelines and, if necessary, multiple data providers.</P>
 
-                <P>The key idea is to maintain separate pipelines for different actors. By default, OmiLAXR provides a
+                <P>The key idea is to maintain separate pipelines for different actors. By
+                    default, <Package>OmiLAXR</Package> provides a
                     <InlineCodeBox>Learner Pipeline</InlineCodeBox> and a <InlineCodeBox>System Pipeline</InlineCodeBox>.
-                    The <InlineCodeBox>Learner Pipeline</InlineCodeBox> processes actions and objects specifically related to
-                    learner interactions (e.g. teleported event), while the <InlineCodeBox>System Pipeline</InlineCodeBox> functions in a similar
-                    manner for system-related interactions (e.g. game start). This makes it possible to extend existing pipelines by new
+                    The <InlineCodeBox>Learner Pipeline</InlineCodeBox> processes actions and objects specifically
+                    related to
+                    learner interactions (e.g. teleported event), while the <InlineCodeBox>System
+                        Pipeline</InlineCodeBox> functions in a similar
+                    manner for system-related interactions (e.g. game start). This makes it possible to extend existing
+                    pipelines by new
                     components or build new pipelines with a set of components (depending on use case).</P>
 
-
                 <P>The "Data Provider" stage operates independently of any data standard. In our examples, we are using
-                    xAPI. To send data to the learning record store, the <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> module
+                    xAPI. To send data to the learning record store, the <Package>OmiLAXR.xAPI</Package> module
                     provides a set of Data Provider components for working with xAPI. Therefore, in the following
                     instructions, we will also be working with xAPI.</P>
 
                 <P>The components are strictly organized in the game object hierarchy.
-                    The <InlineCodeBox>OmiLAXR</InlineCodeBox>
-                    and <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> modules are providing Unity prefabs with
-                    ready-to-use component sets (see <fm.FigureRef label="hierarchy"/>).</P>
+                    The <Package>OmiLAXR</Package> is providing the core system and ready-to-use components for the blue
+                    part
+                    and <Package>OmiLAXR.xAPI</Package> is providing ready-to-use components for the green part. Both
+                    provide also ready-to-use prefabs with
+                    component sets (see <fm.FigureRef label="hierarchy"/>).</P>
 
                 <fm.Figure caption="OmiLAXR Pipeline organized in Unity" label="hierarchy"
                            maxWidth="250px"/>
 
                 <P>As example, in <fm.FigureRef label="learner_pipeline"/> you can see the Learner Pipeline. The
-                    actor is defined by an own component and you can see a <InlineCodeBox>Learner Pipeline</InlineCodeBox>
+                    actor is defined by an own component and you can see a <InlineCodeBox>Learner
+                        Pipeline</InlineCodeBox>
                     component.</P>
 
                 <fm.Figure caption="Learner Pipeline as example in Unity" label="learner_pipeline"
                            maxWidth="500px"/>
 
-                <P>In our example, we are using an explicit <InlineCodeBox>Learner Pipeline</InlineCodeBox>. Alternatively,
-                    to create an own pipeline, it is enough to use the <InlineCodeBox>Pipeline</InlineCodeBox> component.
-                    However, even an own component for a custom pipeline is not needed, we strongly recommend to create one.
+                <P>In our example, we are using an explicit <InlineCodeBox>Learner Pipeline</InlineCodeBox>.
+                    Alternatively,
+                    to create an own pipeline, it is enough to use
+                    the <InlineCodeBox>Pipeline</InlineCodeBox> component.
+                    However, even an own component for a custom pipeline is not needed, we strongly recommend to create
+                    one.
                     See for example, how an own pipeline component could look like.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 0) Pipelines / Learner Pipeline\")]\n" +
-                        "public class LearnerPipeline : Pipeline\n" +
-                        "{\n" +
-                        "   // do nothing \n" +
-                        "}"}
-                </CodeBox>
+                <Tabs tabs={[{
+                    id: "learner",
+                    label: "Learner Pipeline",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 0) Pipelines / Learner Pipeline\")]\n" +
+                            "public class LearnerPipeline : Pipeline\n" +
+                            "{\n" +
+                            "   // do nothing \n" +
+                            "}"}
+                    </CodeBox>
+                }, {
+                    id: "system",
+                    label: "System Pipeline",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 0) Pipelines / System Pipeline\")]\n" +
+                            "public class SystemPipeline : Pipeline\n" +
+                            "{\n" +
+                            "   // do nothing \n" +
+                            "}"}
+                    </CodeBox>
+                }, {
+                    id: "custom",
+                    label: "Your custom pipeline",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 0) Pipelines / Custom Pipeline\")]\n" +
+                            "public class CustomPipeline : Pipeline\n" +
+                            "{\n" +
+                            "   // do nothing \n" +
+                            "}"}
+                    </CodeBox>
+                }]}/>
 
 
             </div>
@@ -92,45 +127,94 @@ export default function () {
 
                 <fm.Figure caption="Listener Step" label="step-listeners" maxWidth="100%"/>
 
-                <P>In first step, you are able to work with specific scene objects you can use Listeners to pass them to the
+                <P>In first step, you are able to work with specific scene objects you can use Listeners to pass them to
+                    the
                     pipeline.</P>
                 <P>You may define one Listener for many objects or define specific Listeners for different cases.</P>
 
-                <P>In the following example code the Listener is looking for explicit GameObjects having the component <InlineCodeBox>Collider</InlineCodeBox>.
-                    These objects are passed to the mandatory function <InlineCodeBox>Found(objects: Object[])</InlineCodeBox>.
-                    Attention: as the parameter of <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is an array of
-                    type <InlineCodeBox>Object</InlineCodeBox> it is also allowed to pass components instead of game objects.</P>
+                <P>In the following example code the Listener is looking for explicit GameObjects having the
+                    component <InlineCodeBox>SelectableObjectsListener</InlineCodeBox>.
+                    These objects are passed to the mandatory function <InlineCodeBox>Found(objects:
+                        Selectables[])</InlineCodeBox>.
+                    Attention: as the parameter of <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is an array
+                    of
+                    type <InlineCodeBox>Object</InlineCodeBox> it is also allowed to pass components instead of game
+                    objects.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / Collider Listener (YOUR_MODULE_NAME)\")]\n" +
-                        "public sealed class ColliderListener : Listener\n" +
-                        "{\n" +
-                        "    public override void StartListening()\n" +
-                        "    {\n" +
-                        "        var exampleComponents = FindObjectsOfType<Collider>();\n" +
-                        "        Found(exampleComponents);\n" +
-                        "    }\n" +
-                        "}"}
-                </CodeBox>
+                <Tabs tabs={[{
+                    id: "selectable",
+                    label: "<Selectable> Listener Example",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / <Selectable> Listener\")]\n" +
+                            "[Description(\"Provides all <Selectable> components to pipeline.\")]\n" +
+                            "public sealed class SelectableObjectsListener : Listener\n" +
+                            "{\n" +
+                            "    public override void StartListening()\n" +
+                            "    {\n" +
+                            "        var selectables = FindObjectsOfType<Selectable>();\n" +
+                            "        Found(selectables);\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }, {
+                    id: "xrbaseinteractable",
+                    label: "<XRBaseInteractable> Listener Example",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / <XRBaseInteractable> Objects Listener (UnityXR)\")]\n" +
+                            "[Description(\"Provides all <XRBaseInteractable> components to pipeline.\")]\n" +
+                            "public sealed class XRBaseInteractableListener : Listener\n" +
+                            "{\n" +
+                            "    public override void StartListening()\n" +
+                            "    {\n" +
+                            "        var interactables = FindObjectsOfType<XRBaseInteractable>();\n" +
+                            "        Found(interactables);\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }]}/>
 
                 <P>The pipeline is triggered whenever <InlineCodeBox>Found(objects: Object[])</InlineCodeBox> is called.
                     This makes it possible to also wait asynchronously for specific in future appearing objects.</P>
 
-                <P>The order of components is not relevant. All listeners are attached to one game objects (see <fm.FigureRef label="learner_listeners" />).</P>
+                <P>The order of components is not relevant. All listeners are attached to one game objects
+                    (see <fm.FigureRef label="learner_listeners"/>).</P>
 
                 <H>Safe time by using AutoListener</H>
-                <P>If you just need to find specific game components like in the example above, than we have a more easier way to implement the same. Here is an equivalent example of the <InlineCodeBox>ColliderListener</InlineCodeBox> implementation. Technically, <InlineCodeBox>AutoListener</InlineCodeBox> is doing the same as you can see above. The only thing you have to do is to provide the wished type.</P>
+                <P>If you just need to find specific game components like in the example above, than we have a more
+                    easier way to implement the same. Here is an equivalent example of
+                    the <InlineCodeBox>SelectableObjectsListener</InlineCodeBox> implementation.
+                    Technically, <InlineCodeBox>AutoListener</InlineCodeBox> is doing the same as you can see above. The
+                    only thing you have to do is to provide the wished type.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / Collider Listener (YOUR_MODULE_NAME)\")]\n" +
-                        "public sealed class ColliderListener : AutoListener<Collider>\n" +
-                        "{\n" +
-                        "   // do nothing \n" +
-                        "}"
-                    }
-                </CodeBox>
+                <Tabs tabs={[{
+                    id: "selectable",
+                    label: "<Selectable> Listener Example",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / <Selectable> Listener\")]\n" +
+                            "[Description(\"Provides all <Selectable> components to pipeline.\")]\n" +
+                            "public sealed class SelectableObjectsListener : AutoListener<Selectable>\n" +
+                            "{\n" +
+                            "   // do nothing \n" +
+                            "}"
+                        }
+                    </CodeBox>
+                }, {
+                    id: "xrbaseinteractable",
+                    label: "<XRBaseInteractable> Listener Example",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 1) Listeners / <XRBaseInteractable> Objects Listener (UnityXR)\")]\n" +
+                            "[Description(\"Provides all <XRBaseInteractable> components to pipeline.\")]\n" +
+                            "public sealed class XRBaseInteractableListener : AutoListener<XRBaseInteractable>\n" +
+                            "{\n" +
+                            "   // do nothing \n" +
+                            "}"
+                        }
+                    </CodeBox>
+                }]}/>
 
-                <fm.Figure caption="Example of listeners of Learner Pipeline" label="learner_listeners" maxWidth={"500px"} />
+
+                <fm.Figure caption="Example of listeners of Learner Pipeline" label="learner_listeners"
+                           maxWidth={"500px"}/>
 
             </div>
         },
@@ -145,21 +229,41 @@ export default function () {
                 <P>Filters can selectively isolate certain objects from the full set of passed objects.
                     This is useful in scenarios where you need to blacklist specific objects or manage particular ones
                     (such as <InlineCodeBox>InputManager</InlineCodeBox>). Since the filters are applied in a sequence,
-                    their order is important. Objects that have already been filtered out will not be passed to subsequent filters.</P>
+                    their order is important. Objects that have already been filtered out will not be passed to
+                    subsequent filters.</P>
 
                 <P>The following example demonstrates filtering specific objects by name using a blacklist.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 2) Filters / Blacklist Filter\")]\n" +
-                        "public class BlacklistFilter : Filter\n" +
-                        "{\n" +
-                        "    public List<string> blacklist;\n" +
-                        "    public override Object[] Pass(Object[] objects)\n" +
-                        "    {\n" +
-                        "        return objects.Where(go => !blacklist.Contains(go.GetTrackingName())).ToArray();\n" +
-                        "    }\n" +
-                        "}"}
-                </CodeBox>
+                <Tabs tabs={[{
+                    id: "blacklist",
+                    label: "Blacklist Filter Example",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 2) Filters / Blacklist Filter\")]\n" +
+                            "[Description(\"Filters found objects by a blacklist of tracking names. The names are get with go.GetTrackingName().\")]\n" +
+                            "public class BlacklistFilter : Filter\n" +
+                            "{\n" +
+                            "    public List<string> blacklist;\n" +
+                            "    public override Object[] Pass(Object[] objects)\n" +
+                            "    {\n" +
+                            "        return objects.Where(go => !blacklist.Contains(go.GetTrackingName())).ToArray();\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }, {
+                    id: "excludefromtracking",
+                    label: "<Exclude From Tracking> Filter Example",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 2) Filters / <Exclude From Tracking> Filter\")]\n" +
+                            "[Description(\"Filters found objects that have the component <Exclude From Tracking>.\")]\n" +
+                            "public class ExcludeFromTrackingFilter : Filter\n" +
+                            "{\n" +
+                            "    public override Object[] Pass(Object[] objects)\n" +
+                            "    {\n" +
+                            "        return objects.Exclude<ExcludeFromTracking>();\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }]}/>
 
 
             </div>
@@ -175,47 +279,290 @@ export default function () {
                     For example, if a list of buttons is provided, <InlineCodeBox>Tracking Behaviours</InlineCodeBox>
                     can attach listeners to the click events.</P>
 
-                <P>Further the explicit event class <InlineCodeBox>TrackingBehaviourEvent</InlineCodeBox> ensures a clean
-                    binding and unbinding of listener events whenever the pipeline is started, paused or restarted.</P>
+                <P>Further the explicit event class <InlineCodeBox>TrackingBehaviourEvent</InlineCodeBox> ensures
+                    a <strong>clean
+                        binding and unbinding</strong> of listener events whenever the pipeline is started, paused or
+                    restarted. If you want to use other event types, you will need to unbind the events on your own by using <InlineCodeBox>Dispose(Object[] objects)</InlineCodeBox> ().</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / UI Tracking Behaviour\")]\n" +
-                        "public class UiTrackingBehaviour : TrackingBehaviour\n" +
-                        "{\n" +
-                        "    [Gesture(\"UI\"), Action(\"Click\")]\n" +
-                        "    public TrackingBehaviourEvent<Button> OnClickedButton = new TrackingBehaviourEvent<Button>();\n" +
-                        "    ..." +
-                        "    \n" +
-                        "    protected override void AfterFilteredObjects(Object[] objects)\n" +
-                        "    {\n" +
-                        "        var selectables = Select<Selectable>(objects);\n" +
-                        "        \n" +
-                        "        foreach (var selectable in selectables)\n" +
-                        "        {\n" +
-                        "            var type = selectable.GetType();\n" +
-                        "\n" +
-                        "            if (type == typeof(Button))\n" +
-                        "            {\n" +
-                        "                var button = (Button)selectable;\n" +
-                        "                OnClickedButton.Bind(button.onClick, () =>\n" +
-                        "                {\n" +
-                        "                    OnClickedButton?.Invoke(this, button);\n" +
-                        "                });\n" +
-                        "            }\n" +
-                        "            ..." +
-                        "        }\n" +
-                        "    }\n" +
-                        "}"}
-                </CodeBox>
+                <h5 style={{fontSize: "20px", marginTop: "1em"}}>Base classes</h5>
+                <P>There are three ways to implement <InlineCodeBox>Tracking Behaviours</InlineCodeBox>:</P>
+                <ul style={{listStyleType: "disc", marginLeft: "20px"}}>
+                    <li><InlineCodeBox>TrackingBehaviour&lt;T&gt;</InlineCodeBox>: recommended in most cases. You need
+                        to implement <InlineCodeBox>AfterFilteredObjects(T[] objects)</InlineCodeBox>.
+                    </li>
+                    <li><InlineCodeBox>TrackingBehaviour</InlineCodeBox>: equals
+                        to <InlineCodeBox>TrackingBehaviour&lt;Object&gt;</InlineCodeBox>, but you need to
+                        implement <InlineCodeBox>AfterFilteredObjects(Object[] objects)</InlineCodeBox>. Is recommended
+                        if you need to handle different types of objects in one class.
+                    </li>
+                    <li><InlineCodeBox>ObjectlessTrackingBehaviour</InlineCodeBox>: if just want to use other methods
+                        like <InlineCodeBox>Start()</InlineCodeBox> and <InlineCodeBox>Update()</InlineCodeBox> or the
+                        events below and don't want to use any piped object, you can choose this base class. It simply
+                        depends on <InlineCodeBox>TrackingBehaviour&lt;Object&gt;</InlineCodeBox> and left
+                        the <InlineCodeBox>AfterFilteredObjects</InlineCodeBox> method empty.
+                    </li>
+                </ul>
+
+                <P>In the following you can see some <InlineCodeBox>Tracking Behaviours</InlineCodeBox> examples.</P>
+
+                <Tabs tabs={[{
+                    id: "tb1",
+                    label: "UiTrackingBehaviour (TrackingBehaviour<T> Example)",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / UI Tracking Behaviour\")]\n" +
+                            "public class UiTrackingBehaviour : TrackingBehaviour<Selectable>\n" +
+                            "{\n" +
+                            "    [Gesture(\"UI\"), Action(\"Click\")]\n" +
+                            "    public TrackingBehaviourEvent<Button> OnClickedButton = new TrackingBehaviourEvent<Button>();\n" +
+                            "    ..." +
+                            "    \n" +
+                            "    protected override void AfterFilteredObjects(Selectable[] selectables)\n" +
+                            "    {\n" +
+                            "        foreach (var selectable in selectables)\n" +
+                            "        {\n" +
+                            "            var type = selectable.GetType();\n" +
+                            "\n" +
+                            "            if (type == typeof(Button))\n" +
+                            "            {\n" +
+                            "                var button = (Button)selectable;\n" +
+                            "                OnClickedButton.Bind(button.onClick, () =>\n" +
+                            "                {\n" +
+                            "                    OnClickedButton?.Invoke(this, button);\n" +
+                            "                });\n" +
+                            "            }\n" +
+                            "            ..." +
+                            "        }\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }, {
+                    id: "XrInteractable",
+                    label: "XRBaseInteractable Tracking Behaviour (InteractableTrackingBehaviour Example)",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / XRBaseInteractable Tracking Behaviour (UnityXR)\"), \n" +
+                            "Description(\"A <InteractableTrackingBehaviour> for tracking XR controllers by using <XRBaseInteractable> components.\")]\n" +
+                            "public class XRBaseInteractableTrackingBehaviour : InteractableTrackingBehaviour\n" +
+                            "{\n" +
+                            "    private UnityAction<HoverEnterEventArgs> _hoverEnterAction;\n" +
+                            "    private UnityAction<HoverExitEventArgs> _hoverExitAction;\n" +
+                            "\n" +
+                            "    private void SelectEnter(SelectEnterEventArgs e)\n" +
+                            "    {\n" +
+                            "        OnGrabbed.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    private void SelectExit(SelectExitEventArgs e)\n" +
+                            "    {\n" +
+                            "        OnInteracted.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    protected override void AfterFilteredObjects(Object[] objects)\n" +
+                            "    {\n" +
+                            "        var interactables = Select<XRBaseInteractable>(objects);\n" +
+                            "        foreach (var interactable in interactables)\n" +
+                            "        {\n" +
+                            "            interactable.hoverEntered.AddListener(_hoverEnterAction = e =>\n" +
+                            "            {\n" +
+                            "                OnTouched.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "            });\n" +
+                            "            interactable.hoverExited.AddListener(_hoverExitAction = e =>\n" +
+                            "            {\n" +
+                            "               OnReleased.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "            });\n" +
+                            "            interactable.selectEntered.AddListener(SelectEnter);\n" +
+                            "            interactable.selectExited.AddListener(SelectExit);\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    protected override void Dispose(Object[] objects)\n" +
+                            "    {\n" +
+                            "        base.Dispose(objects);\n" +
+                            "        var interactables = Select<XRBaseInteractable>(objects);\n" +
+                            "        foreach (var interactable in interactables)\n" +
+                            "        {\n" +
+                            "            interactable.hoverEntered.RemoveListener(_hoverEnterAction);\n" +
+                            "            interactable.hoverExited.RemoveListener(_hoverExitAction);\n" +
+                            "            interactable.selectEntered.RemoveListener(SelectEnter);\n" +
+                            "            interactable.selectExited.RemoveListener(SelectExit);\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }]}/>
 
 
-                <P>Secondly, they can respond to specific inputs or user gestures. This can be solved by using (for example)
-                    the <InlineCodeBox>Update</InlineCodeBox> function of Unity or whatever is needed. One example for this usecase
+                <h5 style={{fontSize: "20px", marginTop: "1em"}}>Events</h5>
+                <P>The <InlineCodeBox>Tracking Behaviours</InlineCodeBox> do also support some events you can react on:</P>
+                <ul style={{listStyleType: "disc", marginLeft: "20px"}}>
+                    <li><InlineCodeBox>OnStartedPipeline</InlineCodeBox>: is triggered when the pipeline started.</li>
+                    <li><InlineCodeBox>OnStoppedPipeline</InlineCodeBox>: is triggered when the pipeline is stopped.
+                    </li>
+                    <li><InlineCodeBox>AfterFoundObjects</InlineCodeBox>: is triggered ignoring the filters before.</li>
+                    <li><InlineCodeBox>AfterFilteredObjects</InlineCodeBox>: mandatory method you have to implement
+                        (except you are using a <InlineCodeBox>ObjectlessTrackingBehaviour</InlineCodeBox>).
+                    </li>
+                </ul>
+
+                <Tabs tabs={[{
+                    id: "sessiontracker",
+                    label: "SessionTrackingBehaviour (Events Example)",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / Session Tracking Behaviour\")]\n" +
+                            "[Description(\"Tracks the start and end of a session.\")]\n" +
+                            "public class SessionTrackingBehaviour : ObjectlessTrackingBehaviour\n" +
+                            "{\n" +
+                            "    public readonly TrackingBehaviourEvent<DateTime> OnSessionStarted = new TrackingBehaviourEvent<DateTime>();\n" +
+                            "    public readonly TrackingBehaviourEvent<DateTime> OnSessionStopped = new TrackingBehaviourEvent<DateTime>();\n" +
+                            "    protected override void OnStartedPipeline(Pipeline pipeline)\n" +
+                            "    {\n" +
+                            "        OnSessionStarted.Invoke(this, DateTime.Now);\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    protected override void OnStoppedPipeline(Pipeline pipeline)\n" +
+                            "    {\n" +
+                            "        OnSessionStopped.Invoke(this, DateTime.Now);\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }]}/>
+
+                <P>They can respond to specific inputs or user gestures. This can be solved by using (for
+                    example)
+                    the <InlineCodeBox>Update</InlineCodeBox> function of Unity or whatever is needed. One example for
+                    this usecase
                     can be seen in component <InlineCodeBox>MouseTrackingBehaviour</InlineCodeBox> in source code.</P>
                 <P>Their core concept is to react to any kind of action (such as button clicks or interactions) and
                     emit public events for further processing. These events function as an interface for composers.</P>
-                {/*<P>A more abstract example could be if we reuse our <InlineCodeBox>ExampleComponent</InlineCodeBox> again.*/}
-                {/*We added a random event to the component and just react on its triggering.</P>*/}
+
+                <h5 style={{fontSize: "20px"}}>(Special Use Cases only) Standardized Tracking Behaviour</h5>
+                <P>We are working on to standardize some <InlineCodeBox>Tracking Behaviours</InlineCodeBox>. For
+                    example, in case
+                    of <InlineCodeBox>Interactables</InlineCodeBox> or <InlineCodeBox>EyeTracking</InlineCodeBox> we
+                    have the same events in all XR frameworks that need to be triggered. The only difference are the
+                    Unity components we need to handle and define when the events happen at all. This way we can
+                    pre-define xAPI statements for those events.</P>
+                <P>Here are our currently standardized Tracking Behaviours. All you need is to extend these classes and
+                    trigger the events. As there are
+                    standardized <InlineCodeBox>Composers</InlineCodeBox> in <Package>OmiLAXR.xAPI</Package>, you don't
+                    have to implement some on your own.</P>
+                <Tabs tabs={[{
+                    id: "InteractableTrackingBehaviour",
+                    label: "InteractableTrackingBehaviour Base Class",
+                    content: <CodeBox language="csharp">{
+                        "public abstract class InteractableTrackingBehaviour : TrackingBehaviour\n" +
+                        "{\n" +
+                        "    [Gesture(\"XRController\"), Action(\"Interacted\")]\n" +
+                        "    public TrackingBehaviourEvent<InteractableEventArgs> OnInteracted = new TrackingBehaviourEvent<InteractableEventArgs>();\n" +
+                        "    \n" +
+                        "    [Gesture(\"XRController\"), Action(\"Touched\")]\n" +
+                        "    public TrackingBehaviourEvent<InteractableEventArgs> OnTouched = new TrackingBehaviourEvent<InteractableEventArgs>();\n" +
+                        "    \n" +
+                        "    [Gesture(\"XRController\"), Action(\"Released\")]\n" +
+                        "    public TrackingBehaviourEvent<InteractableEventArgs> OnReleased = new TrackingBehaviourEvent<InteractableEventArgs>();\n" +
+                        "\n" +
+                        "    [Gesture(\"XRController\"), Action(\"Grabbed\")]\n" +
+                        "    public TrackingBehaviourEvent<InteractableEventArgs> OnGrabbed = new TrackingBehaviourEvent<InteractableEventArgs>();\n" +
+                        "}"
+                    }</CodeBox>
+                },{
+                    id: "eyetracking",
+                    label: "EyeTracking Tracking Behaviour Base Class (v2.1.0 WIP)",
+                    content: <CodeBox language="csharp">{
+                        "public abstract class EyeTrackingBehaviour : ObjectlessTrackingBehaviour\n" +
+                        "{\n" +
+                        "    /// <summary>\n" +
+                        "    /// Notable change in pupil size occurs. Track cognitive load or emotional response.\n" +
+                        "    /// </summary>\n" +
+                        "    public abstract PupilDilationData? GetPupilDilationData();\n" +
+                        "    \n" +
+                        "    public abstract double? GetViewingAngle();\n" +
+                        "    \n" +
+                        "    /// <summary>\n" +
+                        "    /// The eye moves on to focus on a particular point (fixation). Log attention on specific Areas of Interest (AOIs), durations, and transitions.\n" +
+                        "    /// </summary>\n" +
+                        "    [Gesture(\"Eyes\"), Action(\"Fixate\")]\n" +
+                        "    public readonly TrackingBehaviourEvent<FixationData> OnFixated = new TrackingBehaviourEvent<FixationData>();\n" +
+                        "    /// <summary>\n" +
+                        "    /// Rapid movement occurs between two fixations. Track gaze shifts and identify scanning patterns.\n" +
+                        "    /// </summary>\n" +
+                        "    [Gesture(\"Eyes\"), Action(\"Saccade\")]\n" +
+                        "    public readonly TrackingBehaviourEvent<SaccadeData> OnSaccaded = new TrackingBehaviourEvent<SaccadeData>();\n" +
+                        "    /// <summary>\n" +
+                        "    /// Small involuntary movement happens during fixation. Study attention or response to stimuli within a fixation.\n" +
+                        "    /// </summary>\n" +
+                        "    [Gesture(\"Eyes\"), Action(\"Micro Saccade\")]\n" +
+                        "    public readonly TrackingBehaviourEvent<MicroSaccadeData> OnMicroSaccaded = new TrackingBehaviourEvent<MicroSaccadeData>();\n" +
+                        "    /// <summary>\n" +
+                        "    /// Gaze data is temporarily lost due to a blink. Monitor engagement, fatigue, or workload.\n" +
+                        "    /// </summary>\n" +
+                        "    [Gesture(\"Eyes\"), Action(\"Blink\")]\n" +
+                        "    public readonly TrackingBehaviourEvent<BlinkData> OnBlinked = new TrackingBehaviourEvent<BlinkData>();\n" +
+                        "    /// <summary>\n" +
+                        "    /// Notable change in pupil size occurs. Track cognitive load or emotional response.\n" +
+                        "    /// </summary>\n" +
+                        "    [Gesture(\"Eyes\"), Action(\"Pupil Dilation\")]\n" +
+                        "    public readonly TrackingBehaviourEvent<PupilDilationData> OnPupilDilation = new TrackingBehaviourEvent<PupilDilationData>();\n" +
+                        "}\n"
+                    }</CodeBox>
+                }]}/>
+
+                <h5 style={{fontSize: "20px", marginTop: "1em"}}>(Example) Using the standardized Tracking Behaviour</h5>
+
+                <Tabs tabs={[ {
+                    id: "XrInteractable",
+                    label: "XRBaseInteractable Tracking Behaviour (InteractableTrackingBehaviour Example)",
+                    content: <CodeBox language="csharp">
+                        {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / XRBaseInteractable Tracking Behaviour (UnityXR)\"), \n" +
+                            "Description(\"A <InteractableTrackingBehaviour> for tracking XR controllers by using <XRBaseInteractable> components.\")]\n" +
+                            "public class XRBaseInteractableTrackingBehaviour : InteractableTrackingBehaviour\n" +
+                            "{\n" +
+                            "    private UnityAction<HoverEnterEventArgs> _hoverEnterAction;\n" +
+                            "    private UnityAction<HoverExitEventArgs> _hoverExitAction;\n" +
+                            "\n" +
+                            "    private void SelectEnter(SelectEnterEventArgs e)\n" +
+                            "    {\n" +
+                            "        OnGrabbed.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    private void SelectExit(SelectExitEventArgs e)\n" +
+                            "    {\n" +
+                            "        OnInteracted.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    protected override void AfterFilteredObjects(Object[] objects)\n" +
+                            "    {\n" +
+                            "        var interactables = Select<XRBaseInteractable>(objects);\n" +
+                            "        foreach (var interactable in interactables)\n" +
+                            "        {\n" +
+                            "            interactable.hoverEntered.AddListener(_hoverEnterAction = e =>\n" +
+                            "            {\n" +
+                            "                OnTouched.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "            });\n" +
+                            "            interactable.hoverExited.AddListener(_hoverExitAction = e =>\n" +
+                            "            {\n" +
+                            "               OnReleased.Invoke(this, new InteractableEventArgs(e.interactableObject.transform.gameObject));\n" +
+                            "            });\n" +
+                            "            interactable.selectEntered.AddListener(SelectEnter);\n" +
+                            "            interactable.selectExited.AddListener(SelectExit);\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    protected override void Dispose(Object[] objects)\n" +
+                            "    {\n" +
+                            "        base.Dispose(objects);\n" +
+                            "        var interactables = Select<XRBaseInteractable>(objects);\n" +
+                            "        foreach (var interactable in interactables)\n" +
+                            "        {\n" +
+                            "            interactable.hoverEntered.RemoveListener(_hoverEnterAction);\n" +
+                            "            interactable.hoverExited.RemoveListener(_hoverExitAction);\n" +
+                            "            interactable.selectEntered.RemoveListener(SelectEnter);\n" +
+                            "            interactable.selectExited.RemoveListener(SelectExit);\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}"}
+                    </CodeBox>
+                }]}/>
+
             </div>
         },
         {
@@ -231,18 +578,24 @@ export default function () {
                 <P>In our example, our composer is waiting when the <InlineCodeBox>OnClickedButton</InlineCodeBox> event
                     is triggered by <InlineCodeBox>UiTrackingBehaviour</InlineCodeBox>.</P>
 
-                <P>An xAPI statement can be composed by following the xAPI syntax of <InlineCodeBox>actor.Does(verb).Activity(activity)</InlineCodeBox>.
-                    Further information (like context, result and activity extensions) can be provided by using <InlineCodeBox>.WithContext(resultExtension)</InlineCodeBox>
+                <P>An xAPI statement can be composed by following the xAPI syntax
+                    of <InlineCodeBox>actor.Does(verb).Activity(activity)</InlineCodeBox>.
+                    Further information (like context, result and activity extensions) can be provided by
+                    using <InlineCodeBox>.WithContext(resultExtension)</InlineCodeBox>
                     <InlineCodeBox>.WithContext(contextExtension)</InlineCodeBox> and <InlineCodeBox>.WithExtension(activityExtension)</InlineCodeBox> notation.</P>
-                <P>The actor is assigned automatically depending on which actor pipeline triggers this specific <InlineCodeBox>Tracking Behaviour</InlineCodeBox>.</P>
+                <P>The actor is assigned automatically depending on which actor pipeline triggers this
+                    specific <InlineCodeBox>Tracking Behaviour</InlineCodeBox>.</P>
 
                 <P>The xAPI registry can be addressed by using <InlineCodeBox>xapi</InlineCodeBox> field.</P>
 
-                <P>However, the old syntax is also enabled by using <InlineCodeBox>xAPIv1.CreateStatement(statement)</InlineCodeBox>
+                <P>However, the old syntax is also enabled by
+                    using <InlineCodeBox>xAPIv1.CreateStatement(statement)</InlineCodeBox>
                     (instead of actor) and <InlineCodeBox>xAPI_Definitions</InlineCodeBox> (instead of xapi) class.</P>
 
-                <P>Further, we enabled to provide a responsible person to ensure some kind of data quality. This is covered
-                    by a mandatory method <InlineCodeBox>GetAuthor()</InlineCodeBox>. This information is provided automatically
+                <P>Further, we enabled to provide a responsible person to ensure some kind of data quality. This is
+                    covered
+                    by a mandatory method <InlineCodeBox>GetAuthor()</InlineCodeBox>. This information is provided
+                    automatically
                     to a xAPI statement.</P>
 
                 <CodeBox language="csharp">
@@ -272,16 +625,20 @@ export default function () {
                         "}"}
                 </CodeBox>
 
-                <P>If another data standard is wished instead of xAPI, than a new data composer class need to be implemented
+                <P>If another data standard is wished instead of xAPI, than a new data composer class need to be
+                    implemented
                     analog to <InlineCodeBox>XApiComposer</InlineCodeBox>.</P>
 
                 <h5 style={{fontSize: "20px"}}>Higher or Semantic Composers</h5>
 
-                <P>Our pipeline allows to create higher level <InlineCodeBox>Composers</InlineCodeBox> right before processing
-                    to hooks. They are useful, for example, if you wish to compose further statements depending on some existing other
+                <P>Our pipeline allows to create higher level <InlineCodeBox>Composers</InlineCodeBox> right before
+                    processing
+                    to hooks. They are useful, for example, if you wish to compose further statements depending on some
+                    existing other
                     statements. They are triggered whenever a set of conditions is matched.</P>
 
-                <P>In our example, we create a new statement whenever mouse clicked happened one time and move event 5 times.
+                <P>In our example, we create a new statement whenever mouse clicked happened one time and move event 5
+                    times.
                     For checking the statements there some <InlineCodeBox>Match</InlineCodeBox> functions.</P>
 
                 <CodeBox language="csharp">
@@ -321,10 +678,12 @@ export default function () {
 
                 <fm.Figure caption="Hooks Step" label="step-hooks" maxWidth="100%"/>
 
-                <P><InlineCodeBox>Hooks</InlineCodeBox> are a mechanism which allows you to manipulate existing statements
+                <P><InlineCodeBox>Hooks</InlineCodeBox> are a mechanism which allows you to manipulate existing
+                    statements
                     composed by all <InlineCodeBox>Composers</InlineCodeBox>.</P>
 
-                <P>One sensible use case for Hooks is whenever you wish to extend all statements by context information.</P>
+                <P>One sensible use case for Hooks is whenever you wish to extend all statements by context
+                    information.</P>
 
                 <CodeBox language="csharp">
                     {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Scenario Context Hook (xAPI)\")]\n" +
@@ -346,7 +705,8 @@ export default function () {
                 </CodeBox>
 
 
-                <P>Further, we match for specific statements. For example, when ever a "clicked" verb statement is detected we change the verb
+                <P>Further, we match for specific statements. For example, when ever a "clicked" verb statement is
+                    detected we change the verb
                     to "interacted".</P>
 
                 <CodeBox language="csharp">
@@ -376,11 +736,13 @@ export default function () {
                 <fm.Figure caption="Endpoints Step" label="step-endpoints" maxWidth="100%"/>
 
                 <P><InlineCodeBox>Endpoints</InlineCodeBox> are responsible to translate the data to a needed format
-                    (e.g. JSON) and provide it to a wished endpoint. This can be, for example, a simple MongoDB, a REST API
+                    (e.g. JSON) and provide it to a wished endpoint. This can be, for example, a simple MongoDB, a REST
+                    API
                     or Learning Record Store. As we are working with xAPI in our example we are transforming the xAPI
-                    statement to a TinCan standardized object (using <a href="https://github.com/RusticiSoftware/TinCan.NET">TinCan.NET</a>)
+                    statement to a TinCan standardized object (using <a
+                        href="https://github.com/RusticiSoftware/TinCan.NET">TinCan.NET</a>)
                     and send it to a Learning Record Store. The TinCan.NET library is already delivered by installing
-                    the <InlineCodeBox>OmiLAXR.xAPI</InlineCodeBox> module.</P>
+                    the <Package>OmiLAXR.xAPI</Package> module.</P>
 
                 <P>As long you don't need a new endpoint type, you can reuse existing components.</P>
 
@@ -428,21 +790,29 @@ export default function () {
                     </p>
 
                     {/*<OmiLAXRPipeline/>*/}
-                    <img src="./OmiLAXR_Pipeline.drawio.svg" style={{background: "white"}} alt="OmiLAXR Pipeline" />
+                    <img src="./OmiLAXR_Pipeline.drawio.svg" style={{background: "white"}} alt="OmiLAXR Pipeline"/>
 
                     <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         The pipeline is lead by four questions:
                     </p>
-                    <ol className="mb-6 mt-6 text-lg font-normal lg:text-xl">
-                        <li>1. <strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
-                        <li>2. <strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
-                        <li>3. <strong>How</strong> should data be encoded? (Composers and Hooks)</li>
-                        <li>4. <strong>Where</strong> should the data be stored? (Endpoints)</li>
+                    <ol style={{listStyle: "decimal", paddingLeft: "20px"}} className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+                        <li><strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
+                        <li><strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
+                        <li><strong>How</strong> should data be encoded? (Composers and Hooks)</li>
+                        <li><strong>Where</strong> should the data be stored? (Endpoints)</li>
                     </ol>
 
                     <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
-                        In the following you will get detailed information about the pipelines components.
+                        In the following you will get detailed information about the pipelines components. Each code has some code
+                        attributes. They help to organize the code and we recommend to also use them.
                     </p>
+
+                    <ol style={{listStyle: "decimal", paddingLeft: "20px"}} className="mb-6 mt-6">
+                        <li><InlineCodeBox>[AddComponentMenu("Path / In / Inspector")]</InlineCodeBox>: Organizes the components in Unity Inspector according a path.</li>
+                        <li><InlineCodeBox>[Description("Description of a component.")]</InlineCodeBox>: Adds description text to the component in Unity Inspector.</li>
+                        <li><InlineCodeBox>[ReadOnly]</InlineCodeBox>: makes a field read only in Unity Inspector.</li>
+                        <li><InlineCodeBox>[Gesture("Name of gesture")]</InlineCodeBox> and <InlineCodeBox>[Action("Name of gesture")]</InlineCodeBox>: meta values that other modules like our <InlineCodeBox>OmiLAXR.ReCoPa (WIP)</InlineCodeBox> can actually enable or disable these events.</li>
+                    </ol>
 
                     {contentOf(items)}
                 </div>
