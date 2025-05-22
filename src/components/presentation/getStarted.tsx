@@ -87,7 +87,6 @@ export default function () {
                     <li><Package>OmiLAXR.xAPI</Package>: Adds xAPI handling tools and components.</li>
                 </ul>
 
-                <P><strong style={{ fontSize: "0.7em", color: "red" }}>For <Package>OmiLAXR.xAPI</Package> versions below 2.0.16: The packages must be installed in the following order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
             </div>
         },
         {
@@ -175,7 +174,7 @@ export default function () {
             title: "Install OmiLAXR Framework",
             children: <div>
 
-                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR.xAPI</Package> package (see <fm.FigureRef label="my-registries" />).
+                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR.xAPI</Package> package (see <fm.FigureRef label="my-registries-2023" /> or <fm.FigureRef label="my-registries" />).
                     Since <Package>OmiLAXR.xAPI</Package> depends on <Package>OmiLAXR</Package>, both packages will be installed automatically.</P>
 
                 <fm.Figure caption="Installed Packages (xAPI4Unity, OmiLAXR, and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%" />
@@ -276,6 +275,8 @@ export default function () {
 
                 <fm.Figure maxWidth="50%" caption="OmiLAXR Default Endpoints" label="endpoints" />
 
+                <h5 style={{ fontWeight: "bold", fontSize: "1.2em" }}>Do you want to store your data persistent?</h5>
+
                 <P>To connect to your Learning Record Store, provide the credentials by editing the file at
                     <InlineCodeBox>Assets/StreamingAssets/credentials.json</InlineCodeBox> (see <fm.FigureRef label="credentials.json" />).
                     If this file doesn't exist, you can create one via <InlineCodeBox>OmiLAXR &gt; Create credentials.json</InlineCodeBox>
@@ -293,7 +294,6 @@ export default function () {
                 <fm.Figure maxWidth="50%" caption="Assets / StreamingAssets / credentials.json" label="credentials.json" />
                 <fm.Figure maxWidth="50%" caption="Create credentials.json file" label="create-credentials.json" />
 
-                <h5 style={{ fontWeight: "bold", fontSize: "1.2em" }}>How to Set Up a Local Learning Record Store</h5>
 
                 <P>For development purposes, we provide a preconfigured version of LRSQL:</P>
 
