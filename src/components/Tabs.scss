@@ -3,20 +3,35 @@
   gap: 10px;
   cursor: pointer;
   border-bottom: 2px solid #ddd;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+  width: 100%;
 }
+
 .tab {
   padding: 10px 15px;
   border: none;
   background: none;
   font-size: 16px;
   border-bottom: 2px solid transparent;
+  flex: 0 0 auto; // prevents tab from shrinking
+  max-width: 100%;
+  box-sizing: border-box;
 }
+
 .tab.active {
   border-bottom: 2px solid #0070f3;
   font-weight: bold;
 }
+
 .tab-content {
   padding: 15px;
   border: 1px solid #ddd;
   margin-top: 10px;
+  max-width: 100%;
+  overflow-x: auto;         // ✅ Enable horizontal scrolling
+  box-sizing: border-box;
+  white-space: normal;      // ✅ Allow children to control their wrapping
 }

@@ -310,6 +310,7 @@ export default function () {
                     label: "UiTrackingBehaviour (TrackingBehaviour<T> Example)",
                     content: <CodeBox language="csharp">
                         {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / UI Tracking Behaviour\")]\n" +
+                            "[Description(\"Tracks interaction with <Button>, <Slider>, <Dropdown>, <TMP_Dropdown>, <Toggle>, <InputField>, <TMP_InputField> and <Scrollbar> components.\")]\n" +
                             "public class UiTrackingBehaviour : TrackingBehaviour<Selectable>\n" +
                             "{\n" +
                             "    [Gesture(\"UI\"), Action(\"Click\")]\n" +
@@ -330,6 +331,12 @@ export default function () {
                             "                    OnClickedButton?.Invoke(this, button);\n" +
                             "                });\n" +
                             "            }\n" +
+                            "            else if (type == typeof(Slider))\n" +
+                            "            {\n" +
+                            "                var slider = (Slider)selectable;\n" +
+                            "                OnChangedSlider.Bind(slider.onValueChanged,\n" +
+                            "                    value => { OnChangedSlider.Invoke(this, slider, value); });\n" +
+                            "            }" +
                             "            ..." +
                             "        }\n" +
                             "    }\n" +
@@ -391,7 +398,7 @@ export default function () {
                 }]}/>
 
 
-                <h5 style={{fontSize: "20px", marginTop: "1em"}}>Events</h5>
+                <h5 style={{fontSize: "20px", marginTop: "1em"}}>Pipeline Events</h5>
                 <P>The <InlineCodeBox>Tracking Behaviours</InlineCodeBox> do also support some events you can react on:</P>
                 <ul style={{listStyleType: "disc", marginLeft: "20px"}}>
                     <li><InlineCodeBox>OnStartedPipeline</InlineCodeBox>: is triggered when the pipeline started.</li>
@@ -405,7 +412,7 @@ export default function () {
 
                 <Tabs tabs={[{
                     id: "sessiontracker",
-                    label: "SessionTrackingBehaviour (Events Example)",
+                    label: "SessionTrackingBehaviour (Pipeline Events Example)",
                     content: <CodeBox language="csharp">
                         {"[AddComponentMenu(\"OmiLAXR / 3) Tracking Behaviours / Session Tracking Behaviour\")]\n" +
                             "[Description(\"Tracks the start and end of a session.\")]\n" +
@@ -573,7 +580,7 @@ export default function () {
 
                 <P><InlineCodeBox>Composers</InlineCodeBox> are the part where the events of
                     <InlineCodeBox>Tracking Behaviours</InlineCodeBox> are translated to data rows (in our example to
-                    xAPI statements).</P>
+                    xAPI statements). For working with xAPI data it is needed to extend from <InlineCodeBox>xApiComposer&lt;T&gt;</InlineCodeBox>, where <InlineCodeBox>&lt;T&gt;</InlineCodeBox> is a specific <InlineCodeBox>Tracking Behaviour</InlineCodeBox>.</P>
 
                 <P>In our example, our composer is waiting when the <InlineCodeBox>OnClickedButton</InlineCodeBox> event
                     is triggered by <InlineCodeBox>UiTrackingBehaviour</InlineCodeBox>.</P>
@@ -598,38 +605,111 @@ export default function () {
                     automatically
                     to a xAPI statement.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 4) Composers / UI Statement Composer (xAPI)\")]\n" +
-                        "public sealed class UiComposer : XApiComposer<UiTrackingBehaviour>\n" +
-                        "{\n" +
-                        "    protected override Author GetAuthor()\n" +
-                        "        => new Author(\"Sergej Görzen\", \"goerzen@cs.rwth-aachen.de\");\n" +
-                        "    protected override void Compose(UiTrackingBehaviour tb)\n" +
-                        "    {\n" +
-                        "        tb.OnClickedButton.AddHandler((_, button) =>\n" +
-                        "        {\n" +
-                        "            var buttonName = button.gameObject.GetTrackingName();\n" +
-                        "            var text = button.GetTextOrDefault();\n" +
-                        "            \n" +
-                        "            var statement = actor.Does(xapi.generic.verbs.clicked)\n" +
-                        "                .WithExtension(xapi.virtualReality.extensions.activity\n" +
-                        "                    .uiElementValue(text)\n" +
-                        "                    .uiElementType(\"button\")\n" +
-                        "                    .vrObjectName(buttonName))\n" +
-                        "                .Activity(xapi.virtualReality.activities.uiElement);\n" +
-                        "            \n" +
-                        "            SendStatement(statement);\n" +
-                        "        });\n" +
-                        "        ...\n" +
-                        "    }\n" +
-                        "}"}
-                </CodeBox>
+                <Tabs tabs={[
+                    {
+                        id: "Ui",
+                        label: "UI Statement Composer (xAPI)",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 4) Composers / UI Statement Composer (xAPI)\")]\n" +
+                                "[Description(\"Creates statements:\\n- actor clicked uiElement with uiElementType('button'), vrObjectName(String), uiElementValue(text)\" +\n" +
+                                "                 \"\\n- actor changed uiElement with uiElementType('slider'), vrObjectName(String), uiElementValue(String), uiElementMinValue(Float), uiElementMaxValue(Float)\" +\n" +
+                                "... )]" +
+                                "public sealed class UiComposer : XApiComposer<UiTrackingBehaviour>\n" +
+                                "{\n" +
+                                "    protected override Author GetAuthor()\n" +
+                                "        => new Author(\"Sergej Görzen\", \"goerzen@cs.rwth-aachen.de\");\n" +
+                                "    protected override void Compose(UiTrackingBehaviour tb)\n" +
+                                "    {\n" +
+                                "        tb.OnClickedButton.AddHandler((_, button) =>\n" +
+                                "        {\n" +
+                                "            var buttonName = button.gameObject.GetTrackingName();\n" +
+                                "            var text = button.GetTextOrDefault();\n" +
+                                "            \n" +
+                                "            var statement = actor.Does(xapi.generic.verbs.clicked)\n" +
+                                "                .WithExtension(xapi.virtualReality.extensions.activity\n" +
+                                "                    .uiElementValue(text)\n" +
+                                "                    .uiElementType(\"button\")\n" +
+                                "                    .vrObjectName(buttonName))\n" +
+                                "                .Activity(xapi.virtualReality.activities.uiElement);\n" +
+                                "            \n" +
+                                "            SendStatement(statement);\n" +
+                                "        });\n" +
+                                "        tb.OnChangedSlider.AddHandler((_, slider, newValue) =>\n" +
+                                "        {\n" +
+                                "            var maxValue = slider.maxValue;\n" +
+                                "            var minValue = slider.minValue;\n" +
+                                "            var sliderName = slider.GetTrackingName();\n" +
+                                "            var stmt = actor.Does(xapi.generic.verbs.changed)\n" +
+                                "                .WithExtension(xapi.virtualReality.extensions.activity\n" +
+                                "                    .uiElementType(\"slider\")\n" +
+                                "                    .vrObjectName(sliderName)\n" +
+                                "                    .uiElementValue(newValue)\n" +
+                                "                    .uiElementMinValue(minValue)\n" +
+                                "                    .uiElementMaxValue(maxValue))\n" +
+                                "                .Activity(xapi.virtualReality.activities.uiElement);\n" +
+                                "            SendStatement(stmt);\n" +
+                                "        });" +
+                                "        ...\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    },
+                    {
+                        id: "interactable",
+                        label: "Interactable Composer (Standardized Example)",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 4) Composers / Interactable Composer\"),\n" +
+                                "Description(\"Creates statements:\\n- actor interacted/grabbed/touched/released vrObject with vrObjectName(String)\")]\n" +
+                                "public class InteractableComposer : xApiComposer<InteractableTrackingBehaviour>\n" +
+                                "{\n" +
+                                "    public override Author GetAuthor()\n" +
+                                "        => new Author(\"Sergej Görzen\", \"goerzen@cs.rwth-aachen.de\");\n" +
+                                "\n" +
+                                "    protected override void Compose(InteractableTrackingBehaviour tb)\n" +
+                                "    {\n" +
+                                "        tb.OnInteracted.AddHandler((_, e) =>\n" +
+                                "        {\n" +
+                                "            var go = e.Target;\n" +
+                                "            var stmt = actor.Does(xapi.virtualReality.verbs.interacted)\n" +
+                                "                .Activity(xapi.virtualReality.activities.vrObject)\n" +
+                                "                .WithExtension(xapi.virtualReality.extensions.activity.vrObjectName(go.GetTrackingName()));\n" +
+                                "            SendStatement(stmt);\n" +
+                                "        });\n" +
+                                "        tb.OnGrabbed.AddHandler((sender, e) =>\n" +
+                                "        {\n" +
+                                "            var go = e.Target;\n" +
+                                "            var stmt = actor.Does(xapi.virtualReality.verbs.grabbed)\n" +
+                                "                .Activity(xapi.virtualReality.activities.vrObject)\n" +
+                                "                .WithExtension(xapi.virtualReality.extensions.activity.vrObjectName(go.GetTrackingName()));\n" +
+                                "            SendStatement(stmt);\n" +
+                                "        });\n" +
+                                "        tb.OnTouched.AddHandler((sender, e) =>\n" +
+                                "        {\n" +
+                                "            var go = e.Target;\n" +
+                                "            var stmt = actor.Does(xapi.virtualReality.verbs.touched)\n" +
+                                "                .Activity(xapi.virtualReality.activities.vrObject)\n" +
+                                "                .WithExtension(xapi.virtualReality.extensions.activity.vrObjectName(go.GetTrackingName()));\n" +
+                                "            SendStatement(stmt);\n" +
+                                "        });\n" +
+                                "        tb.OnReleased.AddHandler((sender, e) =>\n" +
+                                "        {\n" +
+                                "            var go = e.Target;\n" +
+                                "            var stmt = actor.Does(xapi.virtualReality.verbs.released)\n" +
+                                "                .Activity(xapi.virtualReality.activities.vrObject)\n" +
+                                "                .WithExtension(xapi.virtualReality.extensions.activity.vrObjectName(go.GetTrackingName()));\n" +
+                                "            SendStatement(stmt);\n" +
+                                "        });\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    }
+                ]} />
 
                 <P>If another data standard is wished instead of xAPI, than a new data composer class need to be
                     implemented
                     analog to <InlineCodeBox>XApiComposer</InlineCodeBox>.</P>
 
-                <h5 style={{fontSize: "20px"}}>Higher or Semantic Composers</h5>
+                <h5 style={{fontSize: "20px"}}>(Optional) Higher or Semantic Composers</h5>
 
                 <P>Our pipeline allows to create higher level <InlineCodeBox>Composers</InlineCodeBox> right before
                     processing
@@ -685,47 +765,78 @@ export default function () {
                 <P>One sensible use case for Hooks is whenever you wish to extend all statements by context
                     information.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Scenario Context Hook (xAPI)\")]\n" +
-                        "public class ScenarioContextHook : xApiHook\n" +
-                        "{\n" +
-                        "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
-                        "    {\n" +
-                        "        ...\n" +
-                        "        if (FpsMonitor.Instance && FpsMonitor.Instance.enabled)\n" +
-                        "        {\n" +
-                        "            // Todo: add when fps is in Registry\n" +
-                        "            statement.WithContext(xapi.systemControl.extensions.context.fps(FpsMonitor.Instance.fps));\n" +
-                        "        }\n" +
-                        "        \n" +
-                        "        ...\n" +
-                        "        return statement;\n" +
-                        "    }\n" +
-                        "}"}
-                </CodeBox>
-
-
                 <P>Further, we match for specific statements. For example, when ever a "clicked" verb statement is
                     detected we change the verb
                     to "interacted".</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Example Hook (YOUR_MODULE_NAME)\")]\n" +
-                        "public sealed class ExampleHook : xApiStatementHook\n" +
-                        "{\n" +
-                        "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
-                        "    {\n" +
-                        "        // change all clicked verbs by interacted\n" +
-                        "        if (statement.MatchKeys(\"clicked\", \"uiElement\"))\n" +
-                        "        {\n" +
-                        "            DebugLog.xAPI.Print($\"Matches keys 'clicked' and 'uiElement': {statement}\");\n" +
-                        "            statement.Verb(xapi.virtualReality.verbs.interacted)\n" +
-                        "                .ChangedBy(\"Sergej G.\", \"goerzen@informatik.rwth-aachen.de\");\n" +
-                        "            DebugLog.xAPI.Print($\"Exchanged 'clicked' by 'interacted': {statement}\");\n" +
-                        "        }" +
-                        "\n..." +
-                        "}"}
-                </CodeBox>
+                <Tabs tabs={[
+                    {
+                        id: "scenario",
+                        label: "Scenario Context Hook",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Scenario Context Hook (xAPI)\")]\n" +
+                                "[Description(\"Adds language by <ScenarioLanguage>, platform by <PlatformInformation>, fps by <FpsMonitor>, registration by <Registration> and active scene, game and game version to the context of all statements.\")]\n" +
+                                "public class ScenarioContextHook : xApiHook\n" +
+                                "{\n" +
+                                "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
+                                "    {\n" +
+                                "        ...\n" +
+                                "        if (FpsMonitor.Instance && FpsMonitor.Instance.enabled)\n" +
+                                "        {\n" +
+                                "            // Todo: add when fps is in Registry\n" +
+                                "            statement.WithContext(xapi.systemControl.extensions.context.fps(FpsMonitor.Instance.fps));\n" +
+                                "        }\n" +
+                                "        \n" +
+                                "        ...\n" +
+                                "        return statement;\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    },
+                    {
+                        id: "ppmHook",
+                        label: "PPM Hook",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Peripheral Physiological Measures (PPM) Hook (xAPI)\")]\n" +
+                                "[Description(\"Adds peripheral physiological measures values to each statement.\")]\n" +
+                                "public class PpmHook : xApiHook\n" +
+                                "{\n" +
+                                "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
+                                "    {\n" +
+                                "        var heartRateProvider = GetProvider<HeartRateProvider>(statement);\n" +
+                                "        \n" +
+                                "        if (heartRateProvider && heartRateProvider.enabled)\n" +
+                                "        {\n" +
+                                "            statement.WithResult(xapi.ppm.extensions.result.heartRate(heartRateProvider.GetHeartRate()));\n" +
+                                "        }\n" +
+                                "\n" +
+                                "        return statement;\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    },
+                    {
+                        id: "manipualtion",
+                        label: "Manipulation Hook Example",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 5) Hooks / Example Hook (YOUR_MODULE_NAME)\")]\n" +
+                                "public sealed class ExampleHook : xApiStatementHook\n" +
+                                "{\n" +
+                                "    protected override xApiStatement AfterCompose(xApiStatement statement)\n" +
+                                "    {\n" +
+                                "        // change all clicked verbs by interacted\n" +
+                                "        if (statement.MatchKeys(\"clicked\", \"uiElement\"))\n" +
+                                "        {\n" +
+                                "            DebugLog.xAPI.Print($\"Matches keys 'clicked' and 'uiElement': {statement}\");\n" +
+                                "            statement.Verb(xapi.virtualReality.verbs.interacted)\n" +
+                                "                .ChangedBy(\"Sergej G.\", \"goerzen@informatik.rwth-aachen.de\");\n" +
+                                "            DebugLog.xAPI.Print($\"Exchanged 'clicked' by 'interacted': {statement}\");\n" +
+                                "        }" +
+                                "\n..." +
+                                "}"}
+                        </CodeBox>
+                    }
+                ]} />
 
             </div>
         },
@@ -746,28 +857,76 @@ export default function () {
 
                 <P>As long you don't need a new endpoint type, you can reuse existing components.</P>
 
-                <CodeBox language="csharp">
-                    {"[AddComponentMenu(\"OmiLAXR / 6) Endpoints / Learning Record Store (LRS for xAPI)\")]\n" +
-                        "public class LearningRecordStore : Endpoint\n" +
-                        "{\n" +
-                        "    ...\n" +
-                        "\n" +
-                        "    protected override TransferCode HandleSending(IStatement statement)\n" +
-                        "    {\n" +
-                        "       \n" +
-                        "        var stmt = statement as xApiStatement;\n" +
-                        "        // Transfer single statement to LRS\n" +
-                        "        var resp = _remoteLRS.SaveStatement(stmt.ToTinCanStatement(statementIdUri));\n" +
-                        "\n" +
-                        "        if (resp.success) \n" +
-                        "            return TransferCode.Success;\n" +
-                        "        \n" +
-                        "        // Print error message to know more about on debug\n" +
-                        "        DebugLog.xAPI.Error($\"Error Message: {resp.errMsg}, Http Error: {resp.httpException}\");\n" +
-                        "        return TransferCode.Error;\n" +
-                        "    }\n" +
-                        "}"}
-                </CodeBox>
+                <Tabs tabs={[
+                    {
+                        id: "lrs",
+                        label: "LRS Endpoint Example",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 6) Endpoints / Learning Record Store (LRS for xAPI)\")]\n" +
+                                "[Description(\"Sends all received statements a Learning Record Store asynchronously.\")]\n" +
+                                "public class LearningRecordStore : Endpoint\n" +
+                                "{\n" +
+                                "    ...\n" +
+                                "\n" +
+                                "    protected override TransferCode HandleSending(IStatement statement)\n" +
+                                "    {\n" +
+                                "       \n" +
+                                "        var stmt = statement as xApiStatement;\n" +
+                                "        // Transfer single statement to LRS\n" +
+                                "        var resp = _remoteLRS.SaveStatement(stmt.ToTinCanStatement(statementIdUri));\n" +
+                                "\n" +
+                                "        if (resp.success) \n" +
+                                "            return TransferCode.Success;\n" +
+                                "        \n" +
+                                "        // Print error message to know more about on debug\n" +
+                                "        DebugLog.xAPI.Error($\"Error Message: {resp.errMsg}, Http Error: {resp.httpException}\");\n" +
+                                "        return TransferCode.Error;\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    },
+                    {
+                        id: "local",
+                        label: "Local Endpoint Example",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 6) Endpoints / Local Endpoint\")]\n" +
+                                "[Description(\"Stores statements on local path.\")]\n" +
+                                "public class LocalEndpoint : Endpoint\n" +
+                                "{\n" +
+                                "    ...\n" +
+                                "    protected override TransferCode HandleSending(IStatement statement)\n" +
+                                "    {\n" +
+                                "        try\n" +
+                                "        {\n" +
+                                "            _streamWriter.WriteLine(statement.ToDataStandardString());\n" +
+                                "        }\n" +
+                                "        catch (IOException ex)\n" +
+                                "        {\n" +
+                                "            Debug.LogException(ex);\n" +
+                                "            return TransferCode.Error;\n" +
+                                "        }\n" +
+                                "        return TransferCode.Success;\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    },
+                    {
+                        id: "log",
+                        label: "Statement Printer Example",
+                        content: <CodeBox language="csharp">
+                            {"[AddComponentMenu(\"OmiLAXR / 6) Endpoints / Statement Printer\")]\n" +
+                                "[Description(\"Prints all received statements to Unity Editor console. May be used for testing purposes.\")]\n" +
+                                "public class StatementPrinter : Endpoint\n" +
+                                "{\n" +
+                                "    protected override TransferCode HandleSending(IStatement statement)\n" +
+                                "    {\n" +
+                                "        DebugLog.OmiLAXR.Print(\"Sent statement: \" + statement);\n" +
+                                "        return TransferCode.Success;\n" +
+                                "    }\n" +
+                                "}"}
+                        </CodeBox>
+                    }
+                ]} />
 
             </div>
         }
@@ -777,42 +936,50 @@ export default function () {
         <ThemeProvider>
             <div className="h-full w-screen place-items-center py-20">
                 <div className="container mx-auto items-center relative">
-                    <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">OmiLAXR
-                        Pipeline</h1>
-                    <p style={{color: 'red'}}
-                       className="mb-6 text-lg font-normal lg:text-xl">
-                        Looking for setup? Click <a href="/get-started" className="underline">here</a>.
-                    </p>
+                    <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+    OmiLAXR Pipeline
+</h1>
+<p style={{ color: 'red' }} className="mb-6 text-lg font-normal lg:text-xl">
+    Looking for setup? Click <a href="/get-started" className="underline">here</a>.
+</p>
 
-                    <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
-                        The OmiLAXR Pipeline gives you the possibility to create modular tracking mechanisms in form of
-                        a pipeline.
-                    </p>
+<p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+    The OmiLAXR Pipeline allows you to create modular tracking mechanisms in the form of a pipeline.
+</p>
 
-                    {/*<OmiLAXRPipeline/>*/}
-                    <img src="./OmiLAXR_Pipeline.drawio.svg" style={{background: "white"}} alt="OmiLAXR Pipeline"/>
+{/*<OmiLAXRPipeline/>*/}
+<img src="./OmiLAXR_Pipeline.drawio.svg" style={{ background: "white" }} alt="OmiLAXR Pipeline" />
 
-                    <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
-                        The pipeline is lead by four questions:
-                    </p>
-                    <ol style={{listStyle: "decimal", paddingLeft: "20px"}} className="mb-6 mt-6 text-lg font-normal lg:text-xl">
-                        <li><strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
-                        <li><strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
-                        <li><strong>How</strong> should data be encoded? (Composers and Hooks)</li>
-                        <li><strong>Where</strong> should the data be stored? (Endpoints)</li>
-                    </ol>
+<p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+    The pipeline is guided by four key questions:
+</p>
 
-                    <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
-                        In the following you will get detailed information about the pipelines components. Each code has some code
-                        attributes. They help to organize the code and we recommend to also use them.
-                    </p>
+<ol style={{ listStyle: "decimal", paddingLeft: "20px" }} className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+    <li><strong>What</strong> targets should be tracked? (Listeners and Filters)</li>
+    <li><strong>When</strong> should tracking be triggered? (Tracking Behaviours)</li>
+    <li><strong>How</strong> should data be encoded? (Composers and Hooks)</li>
+    <li><strong>Where</strong> should the data be stored? (Endpoints)</li>
+</ol>
 
-                    <ol style={{listStyle: "decimal", paddingLeft: "20px"}} className="mb-6 mt-6">
-                        <li><InlineCodeBox>[AddComponentMenu("Path / In / Inspector")]</InlineCodeBox>: Organizes the components in Unity Inspector according a path.</li>
-                        <li><InlineCodeBox>[Description("Description of a component.")]</InlineCodeBox>: Adds description text to the component in Unity Inspector.</li>
-                        <li><InlineCodeBox>[ReadOnly]</InlineCodeBox>: makes a field read only in Unity Inspector.</li>
-                        <li><InlineCodeBox>[Gesture("Name of gesture")]</InlineCodeBox> and <InlineCodeBox>[Action("Name of gesture")]</InlineCodeBox>: meta values that other modules like our <InlineCodeBox>OmiLAXR.ReCoPa (WIP)</InlineCodeBox> can actually enable or disable these events.</li>
-                    </ol>
+<p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
+    Below, you will find detailed information about the pipeline components. Each code segment has
+    attributes that help organize it, and we recommend using them.
+</p>
+
+<ol style={{ listStyle: "decimal", paddingLeft: "20px" }} className="mb-6 mt-6">
+    <li><InlineCodeBox>[AddComponentMenu("Path / In / Inspector")]</InlineCodeBox>: Organizes components
+        in the Unity Inspector according to a specified path.
+    </li>
+    <li><InlineCodeBox>[Description("Description of a component.")]</InlineCodeBox>: Adds a textual
+        description to the component in the Unity Inspector.
+    </li>
+    <li><InlineCodeBox>[ReadOnly]</InlineCodeBox>: Makes a field read-only in the Unity Inspector.</li>
+    <li>
+        <InlineCodeBox>[Gesture("Name of Gesture")]</InlineCodeBox> and <InlineCodeBox>[Action("Name of Gesture")]</InlineCodeBox>:
+        Meta values that allow other modules, such as <InlineCodeBox>OmiLAXR.ReCoPa (WIP)</InlineCodeBox>,
+        to enable or disable events.
+    </li>
+</ol>
 
                     {contentOf(items)}
                 </div>
