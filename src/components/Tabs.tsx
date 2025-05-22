@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import "./Tabs.scss";
 
-const tabs = [
-    { id: "tab1", label: "Tab 1", content: "This is the content of Tab 1." },
-    { id: "tab2", label: "Tab 2", content: "Content of Tab 2 appears here." },
-    { id: "tab3", label: "Tab 3", content: "Tab 3 says hello!" }
-];
-
 export interface Tab<T> {
     id: T,
     label: string,
