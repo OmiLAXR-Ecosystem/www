@@ -28,6 +28,7 @@ export default function () {
         figures: [
             {label: "omilaxr-workflow", imageSrc: "/OmiLAXR_Workflow_generic_small.jpg"},
             {label: "step-0", imageSrc: "/get-started/step-0.png"},
+            {label: "scoped-registry", imageSrc: "/get-started/scoped-registry.png"},
             {label: "my-registries-2023", imageSrc: "/get-started/my-registries-2023.png"},
             {label: "my-registries", imageSrc: "/get-started/my-registries.png"},
             {label: "xapi4unity-menu", imageSrc: "/get-started/xAPI4Unity_Menu.png"},
@@ -48,8 +49,6 @@ export default function () {
             {label: "definitions-editor", imageSrc: "/get-started/definitions-editor.png"},
             {label: "discord", imageSrc: "/get-started/discord.png"},
             {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.png"},
-
-            {label: "step-1", imageSrc: "/get-started/scoped-registry.png"},
         ]
     });
 
@@ -88,7 +87,7 @@ export default function () {
                     <li><Package>OmiLAXR.xAPI</Package>: Adds xAPI handling tools and components.</li>
                 </ul>
 
-                <P><strong style={{ color: "red" }}>For <Package>OmiLAXR.xAPI</Package> versions below 2.0.16: The packages must be installed in the following order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
+                <P><strong style={{ fontSize: "0.7em", color: "red" }}>For <Package>OmiLAXR.xAPI</Package> versions below 2.0.16: The packages must be installed in the following order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>
             </div>
         },
         {
@@ -102,7 +101,9 @@ export default function () {
 
                 <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
 
-                <P>After updating, restart Unity and verify the scopes under <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox>, as shown in <fm.FigureRef label="step-1" />.</P>
+                <P>After updating, restart Unity and verify the scopes under <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox>, as shown in <fm.FigureRef label="scoped-registry" />.</P>
+
+                <fm.Figure caption={"Scoped Registry Preview"} label={"scoped-registry"} />
             </div>
         },
         {
@@ -110,6 +111,7 @@ export default function () {
             children: <div>
                 <P>In Unity, navigate to <InlineCodeBox>Window &gt; Package Manager</InlineCodeBox> → <InlineCodeBox>My
                     Registries</InlineCodeBox> to locate and install the package (see <fm.FigureRef
+                    label="my-registries-2023"/> or <fm.FigureRef
                     label="my-registries"/>).</P>
                 <Tabs tabs={[{
                     id: "unity-2023",
@@ -173,7 +175,7 @@ export default function () {
             title: "Install OmiLAXR Framework",
             children: <div>
 
-                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR</Package> package (see <fm.FigureRef label="my-registries" />).
+                <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR.xAPI</Package> package (see <fm.FigureRef label="my-registries" />).
                     Since <Package>OmiLAXR.xAPI</Package> depends on <Package>OmiLAXR</Package>, both packages will be installed automatically.</P>
 
                 <fm.Figure caption="Installed Packages (xAPI4Unity, OmiLAXR, and OmiLAXR.xAPI)" label="installed-omilaxr" maxWidth="70%" />
@@ -182,29 +184,29 @@ export default function () {
                     <InlineCodeBox clipboardButton={true}>com.rwth.unity.omilaxr.xapi</InlineCodeBox>
                     (see <fm.FigureRef label="installed-omilaxr" />).</P>
 
-                <div className="pt-3"></div>
+                {/*<div className="pt-3"></div>*/}
 
-                <h5 style={{ fontSize: "20px" }}>(Optional — if you are using Assembly Definitions): Include OmiLAXR in Your Project</h5>
+                {/*<h5 style={{ fontSize: "20px" }}>(Optional — if you are using Assembly Definitions): Include OmiLAXR in Your Project</h5>*/}
 
-                <P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the following instructions.</P>
+                {/*<P>If you plan to use the Module Template (<a href="#section-6">Step 6</a>), you can skip the following instructions.</P>*/}
 
-                <P>If your project does not use any assembly definition (.asmdef) files, OmiLAXR should work without additional steps.
-                    However, we recommend using an assembly definition file for better modularity and build performance.
-                    To set this up, create a new <InlineCodeBox>Assembly Definition</InlineCodeBox> file in the root of your Unity scripts folder (right-click in the Assets window).</P>
+                {/*<P>If your project does not use any assembly definition (.asmdef) files, OmiLAXR should work without additional steps.*/}
+                {/*    However, we recommend using an assembly definition file for better modularity and build performance.*/}
+                {/*    To set this up, create a new <InlineCodeBox>Assembly Definition</InlineCodeBox> file in the root of your Unity scripts folder (right-click in the Assets window).</P>*/}
 
-                <P>Next, you’ll need to include <Package>OmiLAXR</Package> in your assembly definition. Follow these steps:</P>
+                {/*<P>Next, you’ll need to include <Package>OmiLAXR</Package> in your assembly definition. Follow these steps:</P>*/}
 
-                <ol>
-                    <li>(1) Select your newly created <InlineCodeBox>.asmdef</InlineCodeBox> file.</li>
-                    <li>(2) In the <InlineCodeBox>Inspector</InlineCodeBox> window, add a new entry under <InlineCodeBox>Assembly Definition References</InlineCodeBox> (see <fm.FigureRef label="asmdef-inspector" />).</li>
-                    <li>(3) Double-click to add <Package>OmiLAXR</Package>.</li>
-                    <li>(4) Repeat the same process for <Package>OmiLAXR.xAPI</Package>.</li>
-                    <li>(5) Scroll down and click "Apply" in the <InlineCodeBox>Inspector</InlineCodeBox> window.</li>
-                </ol>
+                {/*<ol>*/}
+                {/*    <li>(1) Select your newly created <InlineCodeBox>.asmdef</InlineCodeBox> file.</li>*/}
+                {/*    <li>(2) In the <InlineCodeBox>Inspector</InlineCodeBox> window, add a new entry under <InlineCodeBox>Assembly Definition References</InlineCodeBox> (see <fm.FigureRef label="asmdef-inspector" />).</li>*/}
+                {/*    <li>(3) Double-click to add <Package>OmiLAXR</Package>.</li>*/}
+                {/*    <li>(4) Repeat the same process for <Package>OmiLAXR.xAPI</Package>.</li>*/}
+                {/*    <li>(5) Scroll down and click "Apply" in the <InlineCodeBox>Inspector</InlineCodeBox> window.</li>*/}
+                {/*</ol>*/}
 
-                <P>You have now successfully installed the base packages required for OmiLAXR.</P>
+                {/*<P>You have now successfully installed the base packages required for OmiLAXR.</P>*/}
 
-                <fm.Figure caption="Assembly Definition File Inspector" label="asmdef-inspector" maxWidth="50%" />
+                {/*<fm.Figure caption="Assembly Definition File Inspector" label="asmdef-inspector" maxWidth="50%" />*/}
             </div>
         },
         {
@@ -244,7 +246,7 @@ export default function () {
                 <Tabs tabs={[
                     {
                         id: "unityxr",
-                        label: "UnityXR",
+                        label: "UnityXR / OpenXR",
                         content: <fm.Figure caption="OmiLAXR.UnityXR" label="unityxr" maxWidth="70%" />
                     },
                     {
@@ -254,8 +256,9 @@ export default function () {
                     }
                 ]} />
 
-                <P>After installing the XR module of your choice, you can start quickly by using the provided prefabs from <Package>OmiLAXR</Package>.
-                    See an example in <fm.FigureRef label="unityxr-prefab" />.</P>
+                <P>After installing the XR module of your choice, you can start quickly by using the provided prefabs from the XR module (e.g. <Package>OmiLAXR.UnityXR</Package>).</P>
+                <P style={{color: "red"}}>Attention: If you already included the prefab of <Package>OmiLAXR</Package>, you may not need it anymore if you use the new Prefab Variant.</P>
+                <P>See an example in <fm.FigureRef label="unityxr-prefab" />.</P>
 
                 <fm.Figure caption="OmiLAXR.UnityXR Prefab" label="unityxr-prefab" maxWidth="50%" />
             </div>
