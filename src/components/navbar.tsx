@@ -24,7 +24,7 @@ const navListMenuItems: INavListMenuItem[] = [
     icon: <HomeIcon className="h-[18px] w-[18px]"/>
   },
   {
-    title: "Join our community",
+    title: "Need help? Join our community",
     href: "https://discord.gg/AnUXutpHZz",
     target: "_blank",
     icon: <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>

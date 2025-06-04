@@ -61,12 +61,10 @@ export default function () {
     ];
 
     const scopes = [
-        "com.rwth.unity.omilaxr.xapi4unity",
-        "com.rwth.unity.omilaxr",
-        "com.rwth.unity.omilaxr.xapi"
+        "com.rwth.unity.omilaxr"
     ];
 
-    const newScopes = rows.map(row => row.package);
+    // const newScopes = rows.map(row => row.package);
 
     return (
         <ThemeProvider>
@@ -85,7 +83,7 @@ export default function () {
                         Afterwards think about installing the packages through <InlineCodeBox>Package Manager</InlineCodeBox>.
                     </p>
 
-                    <JsonManifestCodebox scopes={[...scopes, ...newScopes]}></JsonManifestCodebox>
+                    <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
 
                     <Table columns={columns} data={rows.sort((a, b) => a.name.localeCompare(b.name)).map(r => ({
                         Name: <a target="_blank" href={r.sourceCode}>{r.name}</a>,
