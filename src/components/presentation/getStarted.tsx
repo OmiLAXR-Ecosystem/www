@@ -9,9 +9,7 @@ import Tabs from "../Tabs";
 import Package from "../Package";
 
 const scopes = [
-    "com.rwth.unity.omilaxr.xapi4unity",
     "com.rwth.unity.omilaxr",
-    "com.rwth.unity.omilaxr.xapi"
 ];
 
 function P({children, ...props}: any) {
@@ -86,7 +84,7 @@ export default function () {
                     <li><Package>OmiLAXR</Package>: The base module that provides additional functionality.</li>
                     <li><Package>OmiLAXR.xAPI</Package>: Adds xAPI handling tools and components.</li>
                 </ul>
-
+                {/*<P><strong style={{color: "red" }}>For OmiLAXR.xAPI below 2.0.16: Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>*/}
             </div>
         },
         {
