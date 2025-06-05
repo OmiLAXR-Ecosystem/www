@@ -25,7 +25,8 @@ const navListMenuItems: INavListMenuItem[] = [
   },
   {
     title: "Need help? Join our community",
-    href: "https://discord.gg/AnUXutpHZz",
+    //href: "https://discord.gg/AnUXutpHZz",
+    href: "https://discord.gg/u4gtXTBEx3",
     target: "_blank",
     icon: <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>
   },
