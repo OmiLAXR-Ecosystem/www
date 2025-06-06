@@ -18,3 +18,21 @@ a {
 h6 {
   font-weight: bold;
 }
+
+ol.default-style {
+  list-style: decimal;
+  padding-left: 20px;
+}
+
+ul.default-style {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+ul, ol {
+  &.default-style {
+    li {
+      margin: 0.2em 0;
+    }
+  }
+}
