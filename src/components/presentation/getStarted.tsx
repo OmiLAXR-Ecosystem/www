@@ -79,11 +79,11 @@ export default function () {
 
                 <P>In this guide, you'll install the following three Unity packages:</P>
 
-                <ul>
+                <ol className="default-style">
                     <li><Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package>: Translates JSON definitions into C# code.</li>
                     <li><Package>OmiLAXR</Package>: The base module that provides additional functionality.</li>
                     <li><Package>OmiLAXR.xAPI</Package>: Adds xAPI handling tools and components.</li>
-                </ul>
+                </ol>
                 {/*<P><strong style={{color: "red" }}>For OmiLAXR.xAPI below 2.0.16: Packages must be installed in the mentioned order: (1) xAPI4Unity → (2) OmiLAXR → (3) OmiLAXR.xAPI.</strong></P>*/}
             </div>
         },
@@ -94,9 +94,14 @@ export default function () {
 
                 <P>By default, Unity only recognizes packages hosted by Unity. To support third-party packages like <Package>OmiLAXR</Package>, you’ll need to update your <InlineCodeBox>manifest.json</InlineCodeBox> file to include the required scopes.</P>
 
-                <P>Open <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following entry under <InlineCodeBox>scopedRegistries</InlineCodeBox> if it isn’t already present:</P>
+                <P>To do this you have two options:</P>
+                <ol className="default-style">
+                    <li>(fastest way) Open <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following entry under <InlineCodeBox>scopedRegistries</InlineCodeBox> if it isn’t already present:</li>
+                    <li><InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox>, as shown in <fm.FigureRef label="scoped-registry" />, and add the scopes by hand.</li>
+                </ol>
 
                 <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
+                <P>Since <strong>Unity 2020.1</strong> it is not needed anymore to have all packages inside the scoped registry. Having <InlineCodeBox>com.rwth.unity.omilaxr</InlineCodeBox> is enough to find all <InlineCodeBox>com.rwth.unity.omilaxr.*</InlineCodeBox> packages.</P>
 
                 <P>After updating, restart Unity and verify the scopes under <InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox>, as shown in <fm.FigureRef label="scoped-registry" />.</P>
 
@@ -282,7 +287,7 @@ export default function () {
 
                 <P>We support several LRS solutions. Recommended options:</P>
 
-                <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                <ul className="default-style">
                     <li><Hyperlink url="https://learninglocker.atlassian.net/wiki/spaces/DOCS/overview">Learning Locker</Hyperlink> — suitable for production use</li>
                     <li><Hyperlink url="https://www.yetanalytics.com/sql-lrs">YetAnalytics LRSQL</Hyperlink> — ideal for development environments</li>
                 </ul>
@@ -295,14 +300,14 @@ export default function () {
 
                 <P>For development purposes, we provide a preconfigured version of LRSQL:</P>
 
-                <ol style={{ listStyle: "decimal", paddingLeft: "20px" }}>
+                <ol className="default-style">
                     <li>
                         <Hyperlink url="https://rwth-aachen.sciebo.de/s/SQgrxeH1TzEWQOf/download">Download the preconfigured SQLRS package</Hyperlink>.
                     </li>
                     <li>Unpack the ZIP archive.</li>
                     <li>
                         Launch LRSQL:
-                        <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                        <ul className="default-style">
                             <li><strong>Windows:</strong> Run <InlineCodeBox>lrsql.exe</InlineCodeBox></li>
                             <li>
                                 <strong>macOS:</strong> In Terminal, execute
@@ -313,7 +318,7 @@ export default function () {
                     </li>
                     <li>
                         Open <Hyperlink>http://localhost:8080/</Hyperlink> in your browser and log in using:
-                        <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                        <ul className="default-style">
                             <li><strong>Username:</strong> <InlineCodeBox>admin</InlineCodeBox></li>
                             <li><strong>Password:</strong> <InlineCodeBox>admin</InlineCodeBox></li>
                         </ul>
@@ -321,7 +326,7 @@ export default function () {
                     <li>Once logged in, you'll see the LRS dashboard (see <fm.FigureRef label="yetanalytics" />).</li>
                     <li>
                         Use the following preconfigured credentials for development (change them if used in production):
-                        <ul style={{ listStyle: "disc", paddingLeft: "20px" }}>
+                        <ul className="default-style">
                             <li><strong>API Key:</strong> <InlineCodeBox>db3e9b32e6c2ceeb06c69a98ad3315c0137999172a4c3e56339bb61c94340872</InlineCodeBox></li>
                             <li><strong>API Secret:</strong> <InlineCodeBox>30cfcff6247a86c8023968a30956c8cea6a43e416faeb96c30fb7c9d4a10e46e</InlineCodeBox></li>
                             <li><strong>Endpoint:</strong> <InlineCodeBox>http://localhost:8080/xapi/</InlineCodeBox></li>
