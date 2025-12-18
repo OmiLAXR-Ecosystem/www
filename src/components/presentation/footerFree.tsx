@@ -192,7 +192,10 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-center gap-2 md:justify-between">
           <div className="text-center lg:text-left">
             <div className="text-md mt-2 py-1 font-normal text-gray-600">
-              Copyright &copy; {YEAR}{" Sergej Görzen"}
+                Template basis: Copyright &copy; 2023 Creative Tim (AstroLaunch UI).
+            </div>
+              <div className="text-md py-1 font-normal text-gray-600">
+                  Customizations & content: Copyright &copy; {YEAR}{" Sergej Görzen"}. All rights reserved.
             </div>
           </div>
           <div className="ml-auto w-full px-4 text-center md:w-4/12 md:px-0 md:text-right">
