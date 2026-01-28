@@ -39,24 +39,31 @@ export default function () {
         },
         {
             name: "xAPI4Unity",
-            sourceCode: "",
+            sourceCode: "https://github.com/SGoerzen/xAPI4Unity",
             package: "com.rwth.unity.omilaxr.xapi4unity",
             purpose: "Unity Editor plugin supporting development with xAPI. It transforms JSON xAPI defintions to strict C\# classes.",
             required: {"xAPI Definitions Registry": "https://xapi.elearn.rwth-aachen.de/"}
         },
         {
             name: "OmiLAXR.MRTK2",
-            sourceCode: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/xr-framework-modules/omilaxr.mrtk2",
+            sourceCode: "https://github.com/SGoerzen/OmiLAXR.MRTK2",
             package: "com.rwth.unity.omilaxr.mrtk2",
             purpose: "Collection of Listeners, Filters and Tracking Behaviours for MRTK2 SDK.",
             required: {"OmiLAXR@^2.0.17": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.17", "MRTK2": "https://learn.microsoft.com/en-us/windows/mixed-reality/mrtk-unity/mrtk2/packages/mrtk-packages?view=mrtkunity-2022-05"}
         },
         {
             name: "OmiLAXR.UnityXR",
-            sourceCode: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2/xr-framework-modules/omilaxr.unityxr",
+            sourceCode: "https://github.com/SGoerzen/OmiLAXR.UnityXR",
             package: "com.rwth.unity.omilaxr.unityxr",
             purpose: "Collection of Listeners, Filters and Tracking Behaviours for Unity's XR SDK.",
-            required: {"OmiLAXR@^2.0.11": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.11", "Unity XR Plugin": "https://docs.unity.com/2020.3/Documentation/Manual/Unity-XR-Overview.html"}
+            required: {"OmiLAXR@>=2.0.11": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.11", "Unity XR Plugin": "https://docs.unity.com/2020.3/Documentation/Manual/Unity-XR-Overview.html"}
+        },
+        {
+            name: "OmiLAXR.MetaXR",
+            sourceCode: "https://github.com/SGoerzen/OmiLAXR.MetaXR",
+            package: "com.rwth.unity.omilaxr.metarx",
+            purpose: "Collection of Listeners, Filters and Tracking Behaviours for Meta's XR SDK.",
+            required: {"OmiLAXR@^2.2.0": "https://www.npmjs.com/package/com.rwth.unity.omilaxr/v/2.0.11", "Meta Interaction SDK": "https://developers.meta.com/horizon/documentation/unity/unity-isdk-interaction-sdk-overview/"}
         }
     ];
 
@@ -83,7 +90,12 @@ export default function () {
                         Afterwards think about installing the packages through <InlineCodeBox>Package Manager</InlineCodeBox>.
                     </p>
 
+                    <div className="mt-6 mb-6">
+                        <img style={{margin: "auto"}} src="/ecosystem/OmiLAXR_Interface.drawio.png" alt="OmiLAXR Ecosystem" className="mb-6 rounded-lg shadow-lg" width={1000} height={600} />
+                    </div>
+
                     <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>
+
 
                     <Table columns={columns} data={rows.sort((a, b) => a.name.localeCompare(b.name)).map(r => ({
                         Name: <a target="_blank" href={r.sourceCode}>{r.name}</a>,
