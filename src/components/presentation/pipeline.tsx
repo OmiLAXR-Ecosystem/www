@@ -2,7 +2,7 @@ import ThemeProvider from "../theme-provider";
 import React from "react";
 import {contentOf, type InstructionCardProps} from "./instructionCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
-import {FigureManager} from "react-figure-ref";
+import {FigureManager} from "react-figure-ref/lib/FigureManager.js";
 import {OmiLAXRPipeline} from "../Pipeline";
 import Package from "../Package";
 import Tabs from "../Tabs";

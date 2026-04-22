@@ -12,13 +12,13 @@ import NavbarPresentation from "../components/presentation/navbar";
 ---
 
 <Layout title="OmiLAXR - Modular Learning Analytics framework for XR">
-        <NavbarPresentation client:load />
+        <NavbarPresentation client:only="react" />
         <main>
                 <HeaderPresentation client:load />
                 <PalettePresentationFree />
                 <DevFreePresentation />
                 <FeaturePresentation />
                 <ProjectsPresentation />
-                <FooterFreePresentation />
+                <FooterFreePresentation client:only="react" />
         </main>
 </Layout>

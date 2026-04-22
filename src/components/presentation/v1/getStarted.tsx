@@ -2,7 +2,7 @@ import ThemeProvider from "../../theme-provider";
 import React from "react";
 import {contentOf, type GetStartedCardProps} from "../instructionCard";
 import CodeBox, {InlineCodeBox} from "../../CodeBox";
-import {FigureManager} from "react-figure-ref";
+import {FigureManager} from "react-figure-ref/lib/FigureManager.js";
 import Hyperlink from "../../Hyperlink";
 
 const scopes = [

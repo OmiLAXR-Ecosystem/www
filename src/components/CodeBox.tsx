@@ -1,5 +1,5 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import SyntaxHighlighter from "react-syntax-highlighter/dist/cjs/default-highlight";
+import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import type {ButtonProps} from "@material-tailwind/react";
 
 interface CodeBoxProps {

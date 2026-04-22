@@ -12,10 +12,15 @@ export default defineConfig({
   publicDir: "static",
   base: "/",
   vite: {
+    resolve: {
+      dedupe: ["react", "react-dom"],
+      alias: {
+        "@material-tailwind/react/node_modules/react": "react",
+        "@material-tailwind/react/node_modules/react-dom": "react-dom",
+      },
+    },
     ssr: {
-      noExternal: [
-        "@material-tailwind/react",
-      ],
+      external: ["@material-tailwind/react"],
     },
     plugins: [],
   }

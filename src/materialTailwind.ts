@@ -1,5 +1,7 @@
-// utils/materialTailwind.js
-import * as pkg from '@material-tailwind/react';
+// Handle both CJS and ESM shapes from @material-tailwind/react across Vite/Astro SSR.
+import * as importedPkg from "@material-tailwind/react";
+
+const pkg = ((importedPkg as any).default ?? importedPkg) as any;
 export const {
     Accordion,
     AccordionHeader,

@@ -8,9 +8,9 @@ import GetStartedPresentation from "../components/presentation/v1/getStarted";
 ---
 
 <Layout title="OmiLAXR - Get Started (v1)">
-    <NavbarPresentation client:load />
+    <NavbarPresentation client:only="react" />
     <main>
-        <GetStartedPresentation />
-        <FooterFreePresentation />
+        <GetStartedPresentation client:only="react" />
+        <FooterFreePresentation client:only="react" />
     </main>
 </Layout>
