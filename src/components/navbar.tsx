@@ -81,7 +81,7 @@ function NavListMenu() {
 
 function NavList() {
   return (
-      <ul className="flex gap-2 mb-0 mt-0 flex-row lg:items-center">
+      <ul className="mb-0 mt-0 flex flex-wrap items-center justify-end gap-1 sm:gap-2 lg:items-center">
       <NavListMenu />
     </ul>
   );
@@ -116,18 +116,18 @@ export default function ComplexNavbar() {
 
   return (
     <Navbar
-      className={`sticky inset-0 z-10 mx-auto max-w-screen-2xl p-2 lg:pl-6 mt-4 transition-shadow ${
+      className={`sticky inset-0 z-10 mt-0 !w-full !max-w-none rounded-none px-3 py-2 sm:px-4 lg:px-6 transition-shadow ${
         shouldShowBorder ? "border-b border-gray-300 shadow-none" : ""
       }`}
     >
-      <div className="relative mx-auto flex items-center text-blue-gray-900">
-        <img width={120} src="/logos/OmiLAXR.svg" alt="Logo" />
-        <div className="flex ml-auto">
+      <div className="relative mx-auto flex w-full flex-wrap items-center gap-2 text-blue-gray-900 sm:flex-nowrap">
+        <img width={120} src="/logos/OmiLAXR.svg" alt="Logo" className="shrink-0" />
+        <div className="order-3 w-full sm:order-2 sm:ml-auto sm:w-auto">
           <NavList />
         </div>
-        <a href="/get-started">
+        <a href="/get-started" className="order-2 ml-auto sm:order-3 sm:ml-2">
           {/* @ts-ignore */}
-          <Button color="blue" className="ml-2">
+          <Button color="blue" className="whitespace-nowrap px-3 py-2 sm:px-4">
             Get started
           </Button>
         </a>

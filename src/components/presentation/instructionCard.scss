@@ -1,3 +1,27 @@
 .get-started-step a {
   text-decoration: underline;
 }
+
+.get-started-cards,
+.get-started-cards > section,
+.get-started-step,
+.table-of-contents {
+  width: 100%;
+  max-width: none;
+}
+
+@media (max-width: 767px) {
+  .get-started-cards .figure,
+  .get-started-cards figure {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .get-started-cards .figure img,
+  .get-started-cards figure img,
+  .get-started-cards .figure video,
+  .get-started-cards figure video {
+    width: 100% !important;
+    height: auto !important;
+  }
+}

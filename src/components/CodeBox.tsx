@@ -42,7 +42,10 @@ export function InlineCodeBox({children, href, target, clipboardButton}: InlineC
             background: 'rgb(248, 248, 255)',
             color: 'black',
             padding: '5px',
-            borderColor: '#eeeeee'
+            borderColor: '#eeeeee',
+            overflowWrap: "anywhere",
+            wordBreak: "break-word",
+            whiteSpace: "normal"
         }}>{children}</span>;
 
     const clipboardCode = <>{clipboardButton && <ClipboardButton style={{position: 'relative', top: '8px'}} code={children}/>}</>;
@@ -56,9 +59,17 @@ export function InlineCodeBox({children, href, target, clipboardButton}: InlineC
 
 export default function CodeBox({children: code, clipboardCode, language, filename}: CodeBoxProps) {
     return (
-        <div className={'code-box code-' + language.toLowerCase()} style={{position: "relative", maxWidth: '100%'}}>
+        <div
+            className={'code-box code-' + language.toLowerCase()}
+            style={{position: "relative", width: "100%", maxWidth: "100%", overflowX: "auto"}}
+        >
             {filename && <small className="code-box-filename">{filename}</small>}
-            <SyntaxHighlighter language={language} style={docco}>
+            <SyntaxHighlighter
+                language={language}
+                style={docco}
+                wrapLongLines={true}
+                customStyle={{maxWidth: "100%", overflowX: "auto"}}
+            >
                 {code}
             </SyntaxHighlighter>
             <div className="code-box-copy-holder" style={{position: "absolute", right: "5px", top: "2em"}}>

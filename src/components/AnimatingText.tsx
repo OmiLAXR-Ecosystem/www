@@ -32,7 +32,7 @@ export function AnimatingText({items, underscoreColor}: AnimatingTextProps) {
         const colors = items.map(i => i.color ?? defaultColor);
         const strokes = items.map(i => i.stroke);
 
-        setInterval(function () {
+        const intervalId = window.setInterval(function () {
             const word = items[index].word;
             setContent(word.substring(0, letterCount));
 
@@ -71,14 +71,18 @@ export function AnimatingText({items, underscoreColor}: AnimatingTextProps) {
 
             }
         }, 100);
+
+        return () => window.clearInterval(intervalId);
     }, [items]);
 
     return <div className="animating-text">
         <div className='console-container' style={{
-            fontSize: "4em",
+            fontSize: "clamp(1.75rem, 7vw, 4rem)",
             textAlign: "center",
-            height: "200px",
-            width: "600px",
+            minHeight: "4.5rem",
+            height: "auto",
+            width: "100%",
+            maxWidth: "600px",
             display: "block",
             color: underscoreColor ?? color,
             top: 0,
@@ -96,7 +100,7 @@ export function AnimatingText({items, underscoreColor}: AnimatingTextProps) {
                 display: "inline-block",
                 position: "relative",
                 top: "-0.14em",
-                left: "10px",
+                left: "0.3em",
             }} className="blinking console-underscore animating-text-console">&#95;</div>
         </div>
     </div>

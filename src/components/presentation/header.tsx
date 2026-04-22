@@ -11,22 +11,22 @@ export default function HeaderPresentation() {
 
   return (
     <ThemeProvider>
-      <header className="h-full w-screen place-items-center bg-white relative px-8 py-8 lg:mb-36">
-        <div className="container mx-auto grid items-center lg:grid-cols-2">
+      <header className="relative h-full w-full place-items-center bg-white px-4 py-6 sm:px-6 lg:mb-36 lg:px-8 lg:py-8">
+        <div className="container mx-auto grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="text-center lg:text-left">
             <Typography
                 variant="h1"
                 color="blue-gray"
-                className="mb-8 lg:mr-32 leading-tight font-black"
+                className="mb-6 text-4xl leading-tight font-black sm:text-5xl lg:mb-8 lg:mr-20 lg:text-6xl"
             >
               High quality and standardized Learning Analytics foundation for your <span
                 className="xr-style">XR Project</span>
             </Typography>
-            <Typography variant="lead" color="blue-gray" className="lg:pr-32">
+            <Typography variant="lead" color="blue-gray" className="text-base sm:text-lg lg:pr-20">
               Enable Learning Analytics in your Unity XR Application by using prepared tracking mechanisms and create
               your own IDE-supported xAPI statements.
             </Typography>
-            <div className="mt-12 flex flex-wrap justify-center gap-3 lg:justify-start">
+            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:mt-12 lg:justify-start">
               <a href="/get-started">
                 <Button color="blue" className="flex items-center">
                   Get Started
@@ -34,7 +34,7 @@ export default function HeaderPresentation() {
               </a>
             </div>
           </div>
-          <div className="h-full">
+          <div className="h-full w-full">
             <OmiLAXRLogo className="w-full md:w-auto" long={true} />
             <AnimatingText items={[
               {word: "Learning Analytics", color: "#23304c"},

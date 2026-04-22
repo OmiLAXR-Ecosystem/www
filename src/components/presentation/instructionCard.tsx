@@ -33,9 +33,9 @@ export default function InstructionCard({children, image, title, swapCells}: Ins
     </div>;
 
     return <Card
-        className="get-started-step block rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface mt-6 mb-6"
+        className="get-started-step mt-6 mb-6 w-full max-w-none rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
         shadow={false}>
-        <div className={'grid ' + (image ? 'grid-cols-2' : '')}>
+        <div className={'w-full min-w-0 grid ' + (image ? 'grid-cols-1 md:grid-cols-2' : '')}>
             {swapCells && contentCell()}
             {image && imageCell()}
             {!swapCells && contentCell()}
@@ -65,9 +65,9 @@ export function generateUrlAnchor(title: string): string {
 }
 
 export function contentOf(items: InstructionCardProps[]) {
-    return <div className="get-started-cards">
+    return <div className="get-started-cards w-full max-w-none">
         <h2 style={{fontSize: "1.5em"}}>Table of Contents</h2>
-        <ol className="table-of-contents" style={{fontSize: "1.2em", paddingLeft: "1em"}}>
+        <ol className="table-of-contents w-full" style={{fontSize: "1.2em", paddingLeft: "1em"}}>
             {
                 items.map(({title}, index) => (
                     <li key={index}>
@@ -79,7 +79,7 @@ export function contentOf(items: InstructionCardProps[]) {
 
         {
             items.map(({title, children, image}, index) => (
-                <section id={generateUrlAnchor(title)} key={index}>
+                <section id={generateUrlAnchor(title)} key={index} className="w-full">
                     <InstructionCard title={`Step ${index}: ${title}`}
                                      image={image}
                                      swapCells={index % 2 != 0}>
