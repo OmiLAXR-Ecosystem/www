@@ -6,6 +6,7 @@ import {FigureManager} from "react-figure-ref";
 import {OmiLAXRPipeline} from "../Pipeline";
 import Package from "../Package";
 import Tabs from "../Tabs";
+import "./pipeline.scss";
 
 function P({children}: any) {
     return <p className="pt-3 pb-3">{children}</p>
@@ -64,13 +65,23 @@ export default function () {
                     for the green part. Both also include prefabs with predefined component sets (see <fm.FigureRef
                         label="hierarchy"/>).</P>
 
-                <fm.Figure caption="OmiLAXR Pipeline organized in Unity" label="hierarchy" maxWidth="250px"/>
+                <fm.Figure
+                    caption="OmiLAXR Pipeline organized in Unity"
+                    label="hierarchy"
+                    width="100%"
+                    maxWidth="900px"
+                />
 
                 <P>As an example, in <fm.FigureRef label="learner_pipeline"/> you can see the Learner Pipeline. The
                     actor is defined by a custom component, and you can see a <InlineCodeBox>Learner
                         Pipeline</InlineCodeBox> component attached.</P>
 
-                <fm.Figure caption="Learner Pipeline as example in Unity" label="learner_pipeline" maxWidth="500px"/>
+                <fm.Figure
+                    caption="Learner Pipeline as example in Unity"
+                    label="learner_pipeline"
+                    width="100%"
+                    maxWidth="900px"
+                />
 
                 <P>In our example, we use an explicit <InlineCodeBox>Learner Pipeline</InlineCodeBox>. Alternatively, to
                     create a custom pipeline, it is sufficient to use
@@ -205,8 +216,12 @@ export default function () {
                 }]}/>
 
 
-                <fm.Figure caption="Example of listeners of Learner Pipeline" label="learner_listeners"
-                           maxWidth={"500px"}/>
+                <fm.Figure
+                    caption="Example of listeners of Learner Pipeline"
+                    label="learner_listeners"
+                    width="100%"
+                    maxWidth="900px"
+                />
 
             </div>
         },
@@ -264,7 +279,7 @@ export default function () {
             title: "Tracking Behaviours",
             children: <div>
 
-                <fm.Figure caption="Tracking Behaviours Step" label="step-tb" maxWidth="100%"/>
+                <fm.Figure caption="Tracking Behaviours Step" label="step-tb" width="100%" maxWidth="900px"/>
 
                 <P><InlineCodeBox>Tracking Behaviours</InlineCodeBox> serve two main purposes.
                     First, they can process previously passed objects and perform actions on them.
@@ -928,8 +943,8 @@ export default function () {
 
     return (
         <ThemeProvider>
-            <div className="h-full w-screen place-items-center py-20">
-                <div className="container mx-auto items-center relative">
+            <div className="pipeline-page h-full w-full place-items-center px-4 py-20 sm:px-6 lg:px-8">
+                <div className="pipeline-page-content mx-auto w-full items-center relative">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
                         OmiLAXR Pipeline
                     </h1>
@@ -943,7 +958,12 @@ export default function () {
                     </p>
 
                     {/* <OmiLAXRPipeline/> */}
-                    <img src="./OmiLAXR_Pipeline.drawio.svg" style={{background: "white"}} alt="OmiLAXR Pipeline"/>
+                    <img
+                        src="./OmiLAXR_Pipeline.drawio.svg"
+                        style={{background: "white"}}
+                        alt="OmiLAXR Pipeline"
+                        className="pipeline-hero-image"
+                    />
 
                     <p className="mb-6 mt-6 text-lg font-normal lg:text-xl">
                         The pipeline is guided by four key questions:

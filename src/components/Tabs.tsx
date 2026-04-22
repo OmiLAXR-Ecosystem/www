@@ -16,7 +16,7 @@ export default function Tabs<T>({ tabs, defaultActiveTab }: TabsProps<T>) {
     const [activeTab, setActiveTab] = useState(defaultActiveTab || tabs[0]?.id);
 
     return (
-        <div style={{width: "100%", maxWidth: "1100px", margin: "0 auto"}}>
+        <div style={{width: "100%", maxWidth: "var(--tabs-max-width, 1100px)", margin: "0 auto"}}>
             <div className="tabs">
                 {tabs.map((tab) => (
                     <button
