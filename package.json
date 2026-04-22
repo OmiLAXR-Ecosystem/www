@@ -5,6 +5,9 @@
   "main": "assets/js/astro-launch-ui.min.js",
   "type": "commonjs",
   "scripts": {
+    "tailwind:build": "tailwindcss -c tailwind.config.js -i assets/css/input.css -o assets/css/material-tailwind.css",
+    "predev": "npm run tailwind:build",
+    "prebuild": "npm run tailwind:build",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -29,12 +32,11 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/react": "^5.0.4",
-    "@astrojs/tailwind": "^6.0.2",
     "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
-    "astro": "^5.18.1",
+    "astro": "^6.1.9",
     "forward-ref": "^1.0.0",
     "fs-extra": "^11.3.4",
     "json-server": "^0.17.4",
