@@ -1,4 +1,3 @@
-import { Card, CardBody, Typography } from "../../materialTailwind";
 import type React from "react";
 
 interface FeatureCardProps {
@@ -9,24 +8,17 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, title, children }: FeatureCardProps) {
   return (
-    <Card color="transparent" shadow={false}>
-      <CardBody className="grid justify-center text-center">
+    <div>
+      <div className="grid justify-center text-center p-4">
         {icon}
-        <Typography
-          variant="h5"
-          color="blue-gray"
-          className="mb-2 !font-semibold"
-        >
+        <h5 className="mb-2 font-semibold text-gray-900 text-xl">
           {title}
-        </Typography>
-        <Typography
-          color="blue-gray"
-          className="px-8 font-normal text-gray-700"
-        >
+        </h5>
+        <p className="px-8 font-normal text-gray-700">
           {children}
-        </Typography>
-      </CardBody>
-    </Card>
+        </p>
+      </div>
+    </div>
   );
 }
 

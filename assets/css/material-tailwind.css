@@ -3237,10 +3237,6 @@ video {
   line-height: 1rem;
 }
 
-.\!font-bold {
-  font-weight: 700 !important;
-}
-
 .\!font-semibold {
   font-weight: 600 !important;
 }
@@ -3517,6 +3513,11 @@ video {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(97 97 97 / var(--tw-text-opacity, 1));
+}
+
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(66 66 66 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-900 {

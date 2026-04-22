@@ -1,4 +1,3 @@
-import { Typography } from "../../materialTailwind";
 import MailTo from "../MailTo";
 import Hyperlink from "../Hyperlink";
 
@@ -40,22 +39,19 @@ export default function LogoSectionOne() {
   return (
     <section className="py-8 px-8 lg:py-20">
       <div className="container mx-auto text-center">
-        <Typography
-          color="blue-gray"
-          className="text-xl font-extrabold mb-8"
-        >
+        <p className="text-xl font-extrabold mb-8 text-gray-900">
           Following projects are using OmiLAXR
-        </Typography>
-        <Typography className="text-md">Are you interested in integrating OmiLAXR into your project? Contact us via <MailTo email="goerzen@cs.rwth-aachen.de">E-Mail</MailTo> or <Hyperlink url="https://discord.com/invite/AnUXutpHZz">Discord</Hyperlink>. We are happy if we can help you to integrate it into your application.</Typography>
+        </p>
+        <p className="text-md">Are you interested in integrating OmiLAXR into your project? Contact us via <MailTo email="goerzen@cs.rwth-aachen.de">E-Mail</MailTo> or <Hyperlink url="https://discord.com/invite/AnUXutpHZz">Discord</Hyperlink>. We are happy if we can help you to integrate it into your application.</p>
         <br />
         <div className="flex flex-wrap items-center justify-center gap-8">
           {projects.map(({image, name, url, contributors }, index) => (
               <div style={{maxWidth: '450px', width: '100%'}} key={index}>
                 <a href={url} target="_blank">
                   <div>
-                    <Typography color="blue" className="text-xl font-semibold">
+                    <p className="text-xl font-semibold text-blue">
                       {name}
-                    </Typography>
+                    </p>
                     <img
                         src={image}
                         alt={name}
