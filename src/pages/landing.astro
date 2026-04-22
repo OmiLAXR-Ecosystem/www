@@ -10,11 +10,11 @@ import FooterSection from "../components/landing/footer"
 
 <Layout title="Landing Page">
 	<main>
-    <HeaderLanding client:only="react" />
-    <CategoriesSection client:only="react" />
-    <ContentSection client:only="react" />
+    <HeaderLanding client:load />
+    <CategoriesSection />
+    <ContentSection />
         <!--<BasicSection client:only="react" />
         <TestimonialSection client:only="react" />-->
-    <FooterSection client:only="react" />
+    <FooterSection />
   </main>
 </Layout>

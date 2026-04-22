@@ -8,9 +8,9 @@ import PipelinePresentation from "../components/presentation/pipeline";
 ---
 
 <Layout title="OmiLAXR - Pipeline">
-    <NavbarPresentation client:only="react" />
+    <NavbarPresentation client:load />
     <main>
-        <PipelinePresentation client:only="react" />
-        <FooterFreePresentation client:only="react" />
+        <PipelinePresentation client:load />
+        <FooterFreePresentation />
     </main>
 </Layout>
