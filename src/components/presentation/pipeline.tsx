@@ -69,7 +69,7 @@ export default function () {
                     caption="OmiLAXR Pipeline organized in Unity"
                     label="hierarchy"
                     width="100%"
-                    maxWidth="900px"
+                    maxWidth="500px"
                 />
 
                 <P>As an example, in <fm.FigureRef label="learner_pipeline"/> you can see the Learner Pipeline. The
@@ -80,7 +80,7 @@ export default function () {
                     caption="Learner Pipeline as example in Unity"
                     label="learner_pipeline"
                     width="100%"
-                    maxWidth="900px"
+                    maxWidth="500px"
                 />
 
                 <P>In our example, we use an explicit <InlineCodeBox>Learner Pipeline</InlineCodeBox>. Alternatively, to
@@ -220,7 +220,7 @@ export default function () {
                     caption="Example of listeners of Learner Pipeline"
                     label="learner_listeners"
                     width="100%"
-                    maxWidth="900px"
+                    maxWidth="500px"
                 />
 
             </div>
