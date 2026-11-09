@@ -129,7 +129,7 @@ export function GetStartedPresentation() {
                     in progress). We maintain our registry on in our GitLab
                     repository <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
                     For a more user friendly maintenance we created an user
-                    interface <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink></P>
+                    interface <Hyperlink>https://omilaxr-ecosystem.github.io/xapi/</Hyperlink></P>
 
                 <P>OmiLAXR is using this registry for tracking interactions of the XR scenarios.
                     This is why you will need a local copy of the xAPI repository. You have following options to get

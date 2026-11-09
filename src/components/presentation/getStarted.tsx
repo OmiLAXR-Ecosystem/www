@@ -136,7 +136,7 @@ export default function () {
 
                 <P>To support standardization, we maintain a dedicated xAPI registry tailored to various research domains. One such domain is <InlineCodeBox>virtualReality</InlineCodeBox> (support for <InlineCodeBox>extendedReality</InlineCodeBox> is in progress).
                     The registry is hosted in our GitLab repository: <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
-                    For a more user-friendly experience, we also provide a graphical interface at <Hyperlink>https://xapi.elearn.rwth-aachen.de/</Hyperlink>.</P>
+                    For a more user-friendly experience, we also provide a graphical interface at <Hyperlink>https://omilaxr-ecosystem.github.io/xapi/</Hyperlink>.</P>
 
                 <P>In Unity, navigate to <InlineCodeBox>xAPI4Unity &gt; Setup xAPI Definitions</InlineCodeBox> to verify your configuration.
                     Ensure all paths are correct — the default settings are preconfigured and recommended.

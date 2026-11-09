@@ -86,7 +86,7 @@ const RESEARCHGROUP = [
   },
   {
     name: "xAPI Registry",
-    link: "https://xapi.elearn.rwth-aachen.de/",
+    link: "https://omilaxr-ecosystem.github.io/xapi/",
   },
   /*{
     name: "Technology Landscape (todo)",
@@ -100,12 +100,12 @@ const RESOURCES = [
     link: "https://discord.com/invite/AnUXutpHZz",
   },
   {
-    name: "OmiLAXR Framework and Modules",
-    link: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/v2",
+    name: "OmiLAXR Framework",
+    link: "https://github.com/OmiLAXR-Ecosystem/OmiLAXR",
   },
   {
     name: "OmiLAXR Ecosystem",
-    link: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem",
+    link: "https://github.com/OmiLAXR-Ecosystem",
   }
 ];
 

@@ -41,7 +41,7 @@ export default function () {
             sourceCode: "https://github.com/OmiLAXR-Ecosystem/xAPI4Unity",
             package: "com.rwth.unity.omilaxr.xapi4unity",
             purpose: "Unity Editor plugin supporting development with xAPI. It transforms JSON xAPI defintions to strict C\# classes.",
-            required: {"xAPI Definitions Registry": "https://xapi.elearn.rwth-aachen.de/"}
+            required: {"xAPI Definitions Registry": "https://omilaxr-ecosystem.github.io/xapi/"}
         },
         {
             name: "OmiLAXR.MRTK2",
