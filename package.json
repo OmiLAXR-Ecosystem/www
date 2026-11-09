@@ -31,10 +31,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@astrojs/react": "^5.0.4",
+    "@astrojs/react": "^7.1.4",
     "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
-    "astro": "^6.1.9",
+    "astro": "^7.4.7",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "react-figure-ref": "^1.0.3",
