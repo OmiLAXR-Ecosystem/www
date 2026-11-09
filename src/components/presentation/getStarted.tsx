@@ -1,6 +1,6 @@
 import React from "react";
 import {contentOf, type InstructionCardProps} from "./instructionCard";
-import {InlineCodeBox} from "../CodeBox";
+import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "../Figure";
 import Hyperlink from "../Hyperlink";
 import {JsonManifestCodebox} from "../jsonManifest";
@@ -10,6 +10,21 @@ import Package from "../Package";
 const scopes = [
     "com.rwth.unity.omilaxr",
 ];
+
+const mcpConfig = JSON.stringify({
+    mcpServers: {
+        omilaxr: {
+            command: "dnx",
+            args: ["OmiLAXR.MCP", "--yes"],
+            env: {
+                OMILAXR_WORKSPACE: ".",
+                OMILAXR_UNITY_PROJECT: ".",
+                OMILAXR_WRITE_ROOTS: ".",
+                OMILAXR_AUTHOR: "Jane Doe <jane@example.org>"
+            }
+        }
+    }
+}, null, 2);
 
 function P({children, ...props}: any) {
     return <p className="pt-3 pb-3" {...props}>{children}</p>
