@@ -1575,6 +1575,22 @@ video {
     width: calc((100% - 1.5rem) / 2);
   }
 
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:items-center {
+    align-items: center;
+  }
+
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+
+  .sm\:self-auto {
+    align-self: auto;
+  }
+
   .sm\:p-8 {
     padding: 2rem;
   }

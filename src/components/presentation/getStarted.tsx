@@ -2,6 +2,7 @@ import React from "react";
 import {contentOf, type InstructionCardProps} from "./instructionCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
 import {FigureManager} from "../Figure";
+import {INSTALLER_URL} from "../../lib/downloads";
 import Hyperlink from "../Hyperlink";
 import {JsonManifestCodebox} from "../jsonManifest";
 import Tabs from "../Tabs";
@@ -108,7 +109,7 @@ export default function () {
                 <P>The quickest way to set up OmiLAXR takes two steps. The sections after this one describe the same steps by hand, if you prefer that.</P>
 
                 <H>1. Run the installer</H>
-                <P>Download the <a className="underline" href="/downloads/OmiLAXR-Installer.unitypackage" download>OmiLAXR installer</a> and drag it into the Unity editor.
+                <P>Download the <a className="underline" href={INSTALLER_URL} download>OmiLAXR installer</a> and drag it into the Unity editor.
                     Unity shows the two files it imports (an editor script and its assembly definition). After you confirm, the installer adds the scoped registry and the <Package>OmiLAXR</Package> package
                     to your <InlineCodeBox>Packages/manifest.json</InlineCodeBox>, keeps a backup as <InlineCodeBox>manifest.json.bak</InlineCodeBox> and then removes itself.
                     Running it again changes nothing if OmiLAXR is already set up.</P>

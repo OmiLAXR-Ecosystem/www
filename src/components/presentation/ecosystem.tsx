@@ -1,6 +1,9 @@
 import React from "react";
 import {InlineCodeBox} from "../CodeBox";
 import Table from "../Table";
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import Icon from "../Icon";
+import {INSTALLER_URL} from "../../lib/downloads";
 import {JsonManifestCodebox} from "../jsonManifest";
 
 function P({children}: any) {
@@ -83,6 +86,18 @@ export default function () {
                         The OmiLAXR Ecosystem consists of several tools and modules. Here you can find only approved modules that are accepted as part of the ecosystem.
                         If you cannot find a module fitting your needs, try to find a module you need, please look into the channel <InlineCodeBox href="https://discord.com/channels/1152173650708004876/1293916582577176647" target="_blank">#modules</InlineCodeBox> in our <a href="https://discord.gg/u4gtXTBEx3" target="_blank">Discord Server</a>.
                     </p>
+
+                    <div className="mb-6 mt-6 flex flex-col gap-4 rounded-lg border border-gray-200 p-6 sm:flex-row sm:items-center sm:justify-between">
+                        <p className="text-gray-700">
+                            <strong>Quickest setup:</strong> drag the OmiLAXR installer into the Unity editor. It adds the registry and the core package,
+                            and the OmiLAXR Wizard then installs the modules below with one click
+                            (see <a className="underline" href="/get-started#quick-start-installer-and-wizard">Quick Start</a>).
+                        </p>
+                        <a href={INSTALLER_URL} download
+                           className="flex shrink-0 items-center justify-center gap-2 self-start rounded bg-blue px-4 py-2.5 font-bold text-white sm:self-auto">
+                            <Icon icon={faDownload}/> Download installer
+                        </a>
+                    </div>
 
                     <p className="mb-6 mt-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
                         In the following code example you can see how you should register the module into your projects <InlineCodeBox>manifest.json</InlineCodeBox>. In this example all available modules are entered. But you can remove those you don't need.
