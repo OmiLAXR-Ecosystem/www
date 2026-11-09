@@ -4,3 +4,6 @@ node_modules
 .astro
 .vscode
 dist
+# OS files
+.DS_Store
+Thumbs.db

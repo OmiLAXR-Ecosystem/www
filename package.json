@@ -1,8 +1,7 @@
 {
   "name": "omilaxr-www",
   "version": "1.0.0",
-  "description": "Learning Analytics Framework for making live easier for developers.",
-  "main": "assets/js/astro-launch-ui.min.js",
+  "description": "Website of the OmiLAXR ecosystem for Learning Analytics in XR.",
   "type": "commonjs",
   "scripts": {
     "tailwind:build": "tailwindcss -c tailwind.config.js -i assets/css/input.css -o assets/css/material-tailwind.css",
@@ -52,5 +51,8 @@
   "bugs": {
     "url": "https://github.com/OmiLAXR-Ecosystem/www/issues"
   },
-  "homepage": "https://omilaxr.dev/"
+  "homepage": "https://omilaxr.dev/",
+  "engines": {
+    "node": ">=22.23.4"
+  }
 }
