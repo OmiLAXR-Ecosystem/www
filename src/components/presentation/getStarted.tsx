@@ -62,7 +62,12 @@ export default function () {
             {label: "definitions-editor", imageSrc: "/get-started/definitions-editor.webp"},
             {label: "discord", imageSrc: "/get-started/discord.webp"},
             {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.webp"},
-            {label: "wizard", imageSrc: "/get-started/wizard.webp"},
+            {label: "wizard-welcome", imageSrc: "/get-started/wizard-1-welcome.webp"},
+            {label: "wizard-required", imageSrc: "/get-started/wizard-2-required.webp"},
+            {label: "wizard-tracking", imageSrc: "/get-started/wizard-3-tracking.webp"},
+            {label: "wizard-tools", imageSrc: "/get-started/wizard-4-tools.webp"},
+            {label: "wizard-mcp", imageSrc: "/get-started/wizard-5-mcp.webp"},
+            {label: "wizard-done", imageSrc: "/get-started/wizard-6-done.webp"},
         ]
     });
 
@@ -115,21 +120,98 @@ export default function () {
                     Running it again changes nothing if OmiLAXR is already set up.</P>
 
                 <H>2. Follow the OmiLAXR Wizard</H>
-                <P>From OmiLAXR 2.3.0 on, the OmiLAXR Wizard opens once the package is installed (see <fm.FigureRef label="wizard" />). You can open it again at any time via <InlineCodeBox>OmiLAXR &gt; Open Wizard</InlineCodeBox>.
-                    Use <strong>Next</strong> and <strong>Back</strong> to go through the steps, or click a step at the top:</P>
+                <P>From OmiLAXR 2.3.0 on, the OmiLAXR Wizard opens once the package is installed (see <fm.FigureRef label="wizard-welcome" />). You can open it again at any time via <InlineCodeBox>OmiLAXR &gt; Open Wizard</InlineCodeBox>.
+                    It opens on its own only the first time; tick <strong>Show on startup</strong> at the bottom left if it should open every time you start Unity.
+                    Use <strong>Next</strong> and <strong>Back</strong> to go through the six steps, or click a step at the top. The tabs below show each step.</P>
 
-                <ol className="default-style">
-                    <li><strong>Required:</strong> checks that the scoped registry, the OmiLAXR pipeline and a data provider are in place, and fixes them with one click.
-                        Install <Package>OmiLAXR.xAPI</Package> here and add its prefab and the <InlineCodeBox>xAPI.Registry</InlineCodeBox>.</li>
-                    <li><strong>Tracking</strong> (optional): XR input modules (<Package>OmiLAXR.UnityXR</Package>, <Package>OmiLAXR.MetaXR</Package>, <Package>OmiLAXR.MRTK2</Package>),
-                        heart rate with <Package>OmiLAXR.HypeRate</Package> and the PPM hook that adds it to every xAPI statement, and pseudonyms with <Package>OmiLAXR.Pseudonymization</Package>.</li>
-                    <li><strong>Tools</strong> (optional): <Package>OmiLAXR.ReCoPa</Package> to watch the data live in the Researcher Companion Panel, and <Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package> for xAPI definitions.</li>
-                    <li><strong>AI (MCP)</strong> (optional): connects AI coding agents to OmiLAXR (see <a className="underline" href="#use-ai-coding-agents-mcp">Use AI Coding Agents (MCP)</a>).</li>
-                </ol>
+                <P>Each package card shows its state on the right:</P>
+                <ul className="default-style">
+                    <li><strong>not installed</strong>: <strong>Install</strong> adds the package through the Unity Package Manager.</li>
+                    <li><strong>installed 1.2.3</strong>: installed from the registry. <strong>Remove</strong> takes it out of the project again.</li>
+                    <li><strong>1.2.3 → 1.3.0</strong>: a newer version is available. <strong>Update</strong> installs it.</li>
+                    <li><strong>local 1.2.3</strong> (or <strong>git 1.2.3</strong>): the package comes from disk or a Git URL. The wizard leaves it as it is.</li>
+                </ul>
+                <P>Packages can only be installed once the scoped registry is added (first check of <strong>Required</strong>).</P>
 
-                <P>The last page sums up what is done and what still needs attention. The wizard installs packages through the Unity Package Manager, so you can also remove them there later.</P>
-
-                <fm.Figure caption="OmiLAXR Wizard" label="wizard" maxWidth="70%" />
+                <Tabs tabs={[
+                    {
+                        id: "wizard-welcome",
+                        label: "1 Welcome",
+                        content: <div>
+                            <P>The first page explains what the wizard sets up. Only the <strong>Required</strong> step is needed for tracking; you can skip all other steps and come back later.
+                                The header shows the installed OmiLAXR core version and your Unity version.</P>
+                            <fm.Figure caption="OmiLAXR Wizard: Welcome" label="wizard-welcome" maxWidth="60%" />
+                        </div>
+                    },
+                    {
+                        id: "wizard-required",
+                        label: "2 Required",
+                        content: <div>
+                            <P>The <strong>Status</strong> list checks your project and the open scene. A check that fails shows a hint and a button that fixes it:</P>
+                            <ul className="default-style">
+                                <li><strong>Scoped registry for OmiLAXR packages</strong>: <strong>Add registry</strong> adds it to <InlineCodeBox>Packages/manifest.json</InlineCodeBox>.</li>
+                                <li><strong>Pipeline in the open scene</strong>: <strong>Add prefab</strong> adds the OmiLAXR prefab with a learner pipeline, actor and instructor.</li>
+                                <li><strong>Data provider in the open scene</strong>: install a data provider module such as <Package>OmiLAXR.xAPI</Package> under <strong>Data format</strong> and add its prefab.</li>
+                                <li><strong>Credentials file in StreamingAssets</strong> (optional): web endpoints read their login from <InlineCodeBox>credentials.json</InlineCodeBox> (basic auth) or <InlineCodeBox>bearer.json</InlineCodeBox> (bearer token). Local file endpoints need none.</li>
+                            </ul>
+                            <P>Once <Package>OmiLAXR.xAPI</Package> is installed, three more checks appear: the xAPI data provider in the open scene, the folder <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox> (<strong>Copy sample</strong> copies the bundled one)
+                                and the scripting define <InlineCodeBox>XAPI_REGISTRY_EXISTS</InlineCodeBox>, which is set automatically once the folder exists. Without it, the xAPI composers compile out.</P>
+                            <P>Below the list are buttons to add the prefabs, create the credentials files and copy the xAPI samples by hand.</P>
+                            <fm.Figure caption="OmiLAXR Wizard: Required" label="wizard-required" maxWidth="60%" />
+                        </div>
+                    },
+                    {
+                        id: "wizard-tracking",
+                        label: "3 Tracking",
+                        content: <div>
+                            <P>Optional modules that track more:</P>
+                            <ul className="default-style">
+                                <li><strong>XR input</strong>: <Package>OmiLAXR.UnityXR</Package> (XR Interaction Toolkit), <Package>OmiLAXR.MetaXR</Package> (Meta XR SDK, including eye calibration and face data) and <Package>OmiLAXR.MRTK2</Package>. Install the one that matches the XR SDK of your project.</li>
+                                <li><strong>Heart rate and PPM</strong>: <Package>OmiLAXR.HypeRate</Package> reads the heart rate from the HypeRate app.
+                                    With <Package>OmiLAXR.xAPI</Package>, <strong>Add PPM hook</strong> adds the PPM hook to the xAPI data provider, which puts the current heart rate into every statement.</li>
+                                <li><strong>Privacy</strong>: <Package>OmiLAXR.Pseudonymization</Package> creates unique pseudonyms for learners to use instead of their real names.</li>
+                            </ul>
+                            <fm.Figure caption="OmiLAXR Wizard: Tracking" label="wizard-tracking" maxWidth="60%" />
+                        </div>
+                    },
+                    {
+                        id: "wizard-tools",
+                        label: "4 Tools",
+                        content: <div>
+                            <P><Package>OmiLAXR.ReCoPa</Package> connects your project to the Researcher Companion Panel, a desktop app in which you watch the statements live, pause tracking and calibrate.
+                                <strong> Get the ReCoPa app</strong> leads to the download.</P>
+                            <P><Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package> turns xAPI JSON definitions into the C# <InlineCodeBox>xAPI.Registry</InlineCodeBox> the xAPI composers use (see <a className="underline" href="#install-xapi4unity-package">Install xAPI4Unity Package</a>).</P>
+                            <P><strong>More packages</strong> lists all other packages in the OmiLAXR registry, such as <Package>OmiLAXR.Benchmark</Package>.</P>
+                            <fm.Figure caption="OmiLAXR Wizard: Tools" label="wizard-tools" maxWidth="60%" />
+                        </div>
+                    },
+                    {
+                        id: "wizard-mcp",
+                        label: "5 AI (MCP)",
+                        content: <div>
+                            <P>This step connects AI coding agents to OmiLAXR (see <a className="underline" href="#use-ai-coding-agents-mcp">Use AI Coding Agents (MCP)</a>).</P>
+                            <ol className="default-style">
+                                <li>Under <strong>Agents</strong>, tick the agents you use: Claude Code, Cursor or VS Code (GitHub Copilot).</li>
+                                <li>Under <strong>Start the server with</strong>, choose <InlineCodeBox>dnx OmiLAXR.MCP</InlineCodeBox> (runs the server from NuGet without installing it; needs the .NET 10 SDK)
+                                    or <InlineCodeBox>omilaxr-mcp</InlineCodeBox> (after <InlineCodeBox clipboardButton={true}>dotnet tool install -g OmiLAXR.MCP</InlineCodeBox>).</li>
+                                <li>Optionally enter an <strong>Author</strong> as <InlineCodeBox>Name &lt;email&gt;</InlineCodeBox> for the license headers and <InlineCodeBox>package.json</InlineCodeBox> of generated files. If it is empty, the server takes it from your Git config.</li>
+                                <li>Click <strong>Write MCP configuration</strong>.</li>
+                            </ol>
+                            <P>The agent may then write generated files into your project, but it never overwrites existing files.</P>
+                            <fm.Figure caption="OmiLAXR Wizard: AI (MCP)" label="wizard-mcp" maxWidth="60%" />
+                        </div>
+                    },
+                    {
+                        id: "wizard-done",
+                        label: "6 Done",
+                        content: <div>
+                            <P>The last page sums up how many required steps are done, which modules are installed and whether MCP is configured.
+                                If something still needs attention, go back to that step. Otherwise press Play in Unity to start tracking.
+                                <strong> Learn more</strong> links to the documentation, this guide, the xAPI Registry and the changelog.</P>
+                            <fm.Figure caption="OmiLAXR Wizard: Done" label="wizard-done" maxWidth="60%" />
+                        </div>
+                    },
+                ]}/>
             </div>
         },
         {
