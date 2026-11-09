@@ -44,8 +44,6 @@ export default function () {
             {label: "scoped-registry", imageSrc: "/get-started/scoped-registry.webp"},
             {label: "my-registries-2023", imageSrc: "/get-started/my-registries-2023.webp"},
             {label: "my-registries", imageSrc: "/get-started/my-registries.webp"},
-            {label: "xapi4unity-menu", imageSrc: "/get-started/xAPI4Unity_Menu.webp"},
-            {label: "xapi4unity", imageSrc: "/get-started/xapi4unity.webp"},
             {label: "installed-omilaxr", imageSrc: "/get-started/installed-omilaxr.webp"},
             {label: "asmdef-inspector", imageSrc: "/get-started/asmdef.webp"},
             {label: "prefabs", imageSrc: "/get-started/prefabs.webp"},
@@ -263,41 +261,33 @@ export default function () {
                 <P>For data tracking, we use the xAPI (Experience API) data format. To better understand xAPI, please refer to the official documentation: <Hyperlink>https://xapi.com/statements-101/</Hyperlink>.</P>
 
                 <P>To support standardization, we maintain a dedicated xAPI registry tailored to various research domains. One such domain is <InlineCodeBox>virtualReality</InlineCodeBox> (support for <InlineCodeBox>extendedReality</InlineCodeBox> is in progress).
-                    The registry is hosted in our GitLab repository: <Hyperlink>https://gitlab.com/learntech-rwth/xapi</Hyperlink>.
-                    For a more user-friendly experience, we also provide a graphical interface at <Hyperlink>https://omilaxr-ecosystem.github.io/xapi/</Hyperlink>.</P>
+                    The definitions are in our GitHub repository <Hyperlink>https://github.com/OmiLAXR-Ecosystem/xapi</Hyperlink>.
+                    To browse them, use the xAPI Registry website at <Hyperlink>https://omilaxr-ecosystem.github.io/xapi/</Hyperlink>.</P>
 
-                <P>In Unity, navigate to <InlineCodeBox>xAPI4Unity &gt; Setup xAPI Definitions</InlineCodeBox> to verify your configuration.
-                    Ensure all paths are correct — the default settings are preconfigured and recommended.
-                    You'll be guided through three options below. Don’t worry — changes will only be applied after you confirm your selection.</P>
+                <P><strong>Tip:</strong> if you only want to try OmiLAXR.xAPI, you can skip this step. In the step <strong>Required</strong> of the OmiLAXR Wizard, <strong>Copy sample</strong> copies a prebuilt <InlineCodeBox>xAPI.Registry</InlineCodeBox> into your project.</P>
 
-                <fm.Figure caption="xAPI4Unity Menu" label="xapi4unity-menu"/>
+                <P>From xAPI4Unity 2.3.0 on, the xAPI4Unity Wizard sets up the definitions and the generated C# registry.
+                    Open it via <InlineCodeBox>xAPI4Unity &gt; Open Wizard</InlineCodeBox>. It also opens when Unity starts and the definitions or the registry are missing.
+                    It has five steps:</P>
 
-                <ul>
-                    <li><strong>(Option 1) Download a local copy into the project's 'Assets' folder</strong>:
-                        This will download and extract the latest version of the <a href="https://gitlab.com/learntech-rwth/xapi/-/tree/master?ref_type=heads" target="_blank">master branch</a>
-                        of the xAPI registry directly into your <InlineCodeBox>Assets</InlineCodeBox> folder.
-                        The xAPI definitions will then be part of your project repository under <InlineCodeBox>Assets/xapi</InlineCodeBox>.
-                        This is the most commonly used option.
-                    </li>
-
-                    <li><strong>(Option 2) Download a local copy to a custom path</strong>:
-                        You may also use a local copy without relying on Git. This is useful if you want to keep xAPI definitions within your project repository
-                        and expect to maintain project-specific definitions. When you click the button, the latest files will be downloaded.
-                        You just need to extract the content into your desired path (recommended: <InlineCodeBox>Assets/xapi</InlineCodeBox>).
-                        Ensure the <InlineCodeBox>definitions</InlineCodeBox> folder is at the root of <InlineCodeBox>Assets/xapi</InlineCodeBox>.
-                    </li>
-
-                    <li><strong>(Option 3) Use Git to clone into a custom path</strong>:
-                        You can add the registry as a Git submodule. This is recommended if you want to sync local changes with a separate repository
-                        or contribute to the global registry. While manual setup is possible, the tool window simplifies this process by allowing you to choose a Git repository and branch.
-                        By default, it uses our GitLab repository. Ensure there are no errors and that your window looks similar to <fm.FigureRef label="xapi4unity" />.
-                    </li>
-                </ul>
-
-                <P>To (re-)generate the C# code from your JSON definitions, click the <InlineCodeBox>Update xAPI.Registry</InlineCodeBox> button.
-                    After transformation, the folder <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox> will contain all the generated C# files.</P>
-
-                <fm.Figure caption="xAPI4Unity Config Window" label="xapi4unity" maxWidth="70%" />
+                <ol className="default-style">
+                    <li><strong>Welcome:</strong> an overview of the steps.</li>
+                    <li><strong>Source:</strong> where the JSON definitions come from. The <strong>Local path</strong> (default <InlineCodeBox>Assets/xapi</InlineCodeBox>) must contain a <InlineCodeBox>definitions</InlineCodeBox> folder. There are three ways to get the definitions:
+                        <ul className="default-style">
+                            <li><strong>Patch into Assets</strong> (recommended): <strong>Download and patch</strong> downloads the repository and merges it into <InlineCodeBox>Assets/xapi</InlineCodeBox>.
+                                New files are added and identical files are skipped. Files that differ from yours are kept next to them, so you can review them later under <strong>Use</strong>.
+                                The definitions are then part of your project repository.</li>
+                            <li><strong>Download zip</strong>: downloads the archive with your browser. Extract it and set the local path to the extracted folder.</li>
+                            <li><strong>Git clone</strong> (<strong>Git submodule</strong> if your project uses Git): clones the repository next to the local path and checks out a new local branch.
+                                Use this if you want to contribute definitions to the shared registry. <strong>Pull latest changes</strong> updates the clone later. Needs Git.</li>
+                        </ul>
+                        Change the repository URL and branch only if you work with a fork.</li>
+                    <li><strong>Generate:</strong> <strong>Update xAPI.Registry (JSON =&gt; C#)</strong> generates the C# classes into <InlineCodeBox>Assets/xAPI.Registry</InlineCodeBox>.
+                        Generated files are overwritten every time, so do not edit them by hand. Keep <strong>Regenerate on changes</strong> on, so that the registry is regenerated whenever a definition changes.
+                        The optional types config next to the local path (<InlineCodeBox>Assets/xapi.config.json</InlineCodeBox>, <strong>Create</strong> writes a default one) sets the types of extension values and lists contexts to skip.</li>
+                    <li><strong>Use</strong> (optional): the definitions editor, the merge conflict resolver for <strong>Patch into Assets</strong>, the export of the definitions and the registry as <InlineCodeBox>.unitypackage</InlineCodeBox>, and the xAPI Registry website.</li>
+                    <li><strong>Done:</strong> a summary of the setup.</li>
+                </ol>
             </div>
         },
         {
