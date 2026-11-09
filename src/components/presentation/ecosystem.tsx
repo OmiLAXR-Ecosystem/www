@@ -81,7 +81,7 @@ export default function () {
 
                     <p className="mb-6 mt-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
                         The OmiLAXR Ecosystem consists of several tools and modules. Here you can find only approved modules that are accepted as part of the ecosystem.
-                        If you cannot find a module fitting your needs, try to find a module you need, please look into the channel <InlineCodeBox>#modules</InlineCodeBox> in our <a href="https://discord.gg/Bu8YaUnf">Discord Server</a>.
+                        If you cannot find a module fitting your needs, try to find a module you need, please look into the channel <InlineCodeBox href="https://discord.com/channels/1152173650708004876/1293916582577176647" target="_blank">#modules</InlineCodeBox> in our <a href="https://discord.gg/u4gtXTBEx3" target="_blank">Discord Server</a>.
                     </p>
 
                     <p className="mb-6 mt-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
