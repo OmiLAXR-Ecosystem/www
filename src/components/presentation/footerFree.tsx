@@ -134,7 +134,7 @@ export function Footer() {
               Sergej Görzen
             </h2>
             <p className="text-md mt-0 mb-2 block font-normal leading-relaxed text-gray-600 antialiased">
-              PhD Student, Research Assistant, Software Engineer and Consultant. Visit my <a href="https://sgoerzen.de">homepage</a> and get in contact with me on
+              Sergej Görzen, PhD, Software Engineer and Consultant. Visit my <a href="https://sgoerzen.de">homepage</a> and get in contact with me on
             </p>
             <div className="mt-6">
               {SOCIAL_MEDIA.map(({ name, icon, link }, key) => (
