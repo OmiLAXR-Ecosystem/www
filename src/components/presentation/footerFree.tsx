@@ -1,51 +1,72 @@
+import {
+  faDiscord,
+  faGithub,
+  faGitlab,
+  faLinkedin,
+  faOrcid,
+  faResearchgate,
+  faXTwitter,
+  faXing,
+} from "@fortawesome/free-brands-svg-icons";
+import Icon from "../Icon";
 
-import { Typography } from "../../materialTailwind";
 
 const YEAR = new Date().getFullYear();
 
 const SOCIAL_MEDIA = [
   {
-    icon: "fab fa-linkedin",
+    name: "LinkedIn",
+    icon: faLinkedin,
     link: "https://www.linkedin.com/in/sergej-g%C3%B6rzen-a7a77b178/",
   },
   {
-    icon: "fab fa-xing",
+    name: "Xing",
+    icon: faXing,
     link: "https://www.xing.com/profile/Sergej_Goerzen2",
   },
   {
-    icon: "fab fa-x-twitter",
+    name: "X (Twitter)",
+    icon: faXTwitter,
     link: "https://twitter.com/sergejg92",
   },
   /*{
-    icon: "fab fa-threads",
+    name: "Threads",
+    icon: faThreads,
     link: "https://www.threads.net/@sgoerzen92",
   },*/
   {
-    icon: "fab fa-researchgate",
+    name: "ResearchGate",
+    icon: faResearchgate,
     link: "https://www.researchgate.net/profile/Sergej-Goerzen",
   },
   {
-    icon: "fab fa-orcid",
+    name: "ORCID",
+    icon: faOrcid,
     link: "https://orcid.org/0000-0003-3853-2435",
   },
   /*{
-    icon: "fab fa-facebook-square",
+    name: "Facebook",
+    icon: faSquareFacebook,
     link: "https://www.facebook.com/creativetim?ref=astrolaunch-ui",
   },
   {
-    icon: "fab fa-dribbble",
+    name: "Dribbble",
+    icon: faDribbble,
     link: "https://www.dribbble.com/creativetim?ref=astrolaunch-ui",
   },*/
   {
-    icon: "fab fa-github",
+    name: "GitHub",
+    icon: faGithub,
     link: "https://github.com/SGoerzen/",
   },
   {
-    icon: "fab fa-gitlab",
+    name: "GitLab",
+    icon: faGitlab,
     link: "https://gitlab.com/sgoerzen",
   },
   {
-    icon: "fab fa-discord",
+    name: "Discord",
+    icon: faDiscord,
     link: "https://discord.com/users/sergej.goerzen",
   },
 ];
@@ -109,21 +130,18 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="flex flex-wrap">
           <div className="w-full md:w-4/12">
-            <Typography
-              variant="h4"
-              className="mb-2 !font-semibold !text-primary"
-            >
+            <h2 className="mb-2 block text-2xl font-semibold leading-snug tracking-normal text-primary antialiased">
               Sergej Görzen
-            </Typography>
-            <Typography className="text-md mt-0 mb-2 font-normal !text-gray-600">
+            </h2>
+            <p className="text-md mt-0 mb-2 block font-normal leading-relaxed text-gray-600 antialiased">
               PhD Student, Research Assistant, Software Engineer and Consultant. Visit my <a href="https://sgoerzen.de">homepage</a> and get in contact with me on
-            </Typography>
+            </p>
             <div className="mt-6">
-              {SOCIAL_MEDIA.map(({ icon, link }, key) => (
-                <a key={key} href={link} target="_blank" rel="noreferrer">
-                  <i
-                    className={`${icon} font-xl align-center mr-2 inline-block items-center justify-center rounded-full border-[1.5px] border-blue-gray-50 p-3 text-center text-primary outline-none focus:outline-none`}
-                  />
+              {SOCIAL_MEDIA.map(({ name, icon, link }, key) => (
+                <a key={key} href={link} target="_blank" rel="noreferrer" aria-label={name} title={name}>
+                  <span className="mr-2 inline-flex items-center justify-center rounded-full border-[1.5px] border-blue-gray-50 p-3 text-primary">
+                    <Icon icon={icon} className="w-[1.25em]"/>
+                  </span>
                 </a>
               ))}
             </div>

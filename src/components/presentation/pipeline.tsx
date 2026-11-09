@@ -1,8 +1,7 @@
-import ThemeProvider from "../theme-provider";
 import React from "react";
 import {contentOf, type InstructionCardProps} from "./instructionCard";
 import CodeBox, {InlineCodeBox} from "../CodeBox";
-import {FigureManager} from "react-figure-ref/lib/FigureManager.js";
+import {FigureManager} from "../Figure";
 import {OmiLAXRPipeline} from "../Pipeline";
 import Package from "../Package";
 import Tabs from "../Tabs";
@@ -942,9 +941,9 @@ export default function () {
     ];
 
     return (
-        <ThemeProvider>
+        <>
             <div className="pipeline-page h-full w-full place-items-center px-4 py-20 sm:px-6 lg:px-8">
-                <div className="pipeline-page-content mx-auto w-full items-center relative">
+                <div className="pipeline-page-content doc-page relative items-center">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
                         OmiLAXR Pipeline
                     </h1>
@@ -1003,6 +1002,6 @@ export default function () {
                     {contentOf(items)}
                 </div>
             </div>
-        </ThemeProvider>
+        </>
     );
 };

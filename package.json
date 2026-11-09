@@ -31,15 +31,16 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/react": "^7.1.4",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@heroicons/react": "^2.2.0",
-    "@material-tailwind/react": "^2.1.10",
     "astro": "^7.4.7",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "react-figure-ref": "^1.0.3",
     "react-syntax-highlighter": "^16.1.1"
   },
   "devDependencies": {
+    "@material-tailwind/react": "^2.1.10",
     "@types/react-syntax-highlighter": "^15.5.13",
     "sass": "^1.99.0",
     "tailwindcss": "^3.4.19"

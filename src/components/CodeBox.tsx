@@ -1,6 +1,19 @@
-import SyntaxHighlighter from "react-syntax-highlighter/dist/cjs/default-highlight";
-import { docco } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import type {ButtonProps} from "@material-tailwind/react";
+import * as lightPkg from "react-syntax-highlighter/dist/cjs/light";
+import * as csharpPkg from "react-syntax-highlighter/dist/cjs/languages/hljs/csharp";
+import * as javascriptPkg from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript";
+import * as jsonPkg from "react-syntax-highlighter/dist/cjs/languages/hljs/json";
+import * as doccoPkg from "react-syntax-highlighter/dist/cjs/styles/hljs/docco";
+import type React from "react";
+
+// Handle both CJS and ESM shapes of the default export across Vite/Astro SSR.
+const defaultOf = (pkg: any) => pkg.default?.default ?? pkg.default ?? pkg;
+const SyntaxHighlighter = defaultOf(lightPkg);
+const docco = defaultOf(doccoPkg);
+
+// Only register the languages used on the site; the default build bundles all of highlight.js
+SyntaxHighlighter.registerLanguage("csharp", defaultOf(csharpPkg));
+SyntaxHighlighter.registerLanguage("javascript", defaultOf(javascriptPkg));
+SyntaxHighlighter.registerLanguage("json", defaultOf(jsonPkg));
 
 interface CodeBoxProps {
     children: string,
@@ -16,17 +29,14 @@ interface InlineCodeBoxProps {
     clipboardButton?: boolean
 }
 
-interface IClipboardButtonProps extends Omit<ButtonProps, "children"> {
+interface IClipboardButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
     code: string
 }
 
+// Copying is done by src/scripts/interactions.ts (data-copy), so the button needs no hydration.
 export function ClipboardButton({code, ...props}: IClipboardButtonProps) {
-    const handleCopy = () => {
-        navigator.clipboard.writeText(code);
-        alert("Copied to clipboard!");
-    };
-
-    return <button {...props} style={{width: "32px", height: "32px", ...props.style}} onClick={handleCopy}>
+    return <button type="button" aria-label="Copy to clipboard" title="Copy to clipboard" {...props}
+                   style={{width: "32px", height: "32px", ...props.style}} data-copy={code}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
              stroke="currentColor" className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -65,7 +75,7 @@ export default function CodeBox({children: code, clipboardCode, language, filena
         >
             {filename && <small className="code-box-filename">{filename}</small>}
             <SyntaxHighlighter
-                language={language}
+                language={language.toLowerCase()}
                 style={docco}
                 wrapLongLines={true}
                 customStyle={{maxWidth: "100%", overflowX: "auto"}}

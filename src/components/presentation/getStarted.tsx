@@ -1,8 +1,7 @@
-import ThemeProvider from "../theme-provider";
 import React from "react";
 import {contentOf, type InstructionCardProps} from "./instructionCard";
 import {InlineCodeBox} from "../CodeBox";
-import {FigureManager} from "react-figure-ref/lib/FigureManager.js";
+import {FigureManager} from "../Figure";
 import Hyperlink from "../Hyperlink";
 import {JsonManifestCodebox} from "../jsonManifest";
 import Tabs from "../Tabs";
@@ -427,9 +426,9 @@ export default function () {
     ];
 
     return (
-        <ThemeProvider>
+        <>
             <div className="h-full w-full place-items-center bg-white px-4 py-20 sm:px-6 lg:px-8">
-                <div className="mx-auto w-full items-center relative">
+                <div className="doc-page relative items-center">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
                         Get Started
                     </h1>
@@ -447,6 +446,6 @@ export default function () {
                     {contentOf(items)}
                 </div>
             </div>
-        </ThemeProvider>
+        </>
     );
 };

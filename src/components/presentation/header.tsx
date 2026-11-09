@@ -15,10 +15,8 @@ export default function HeaderPresentation() {
             your own IDE-supported xAPI statements.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3 lg:mt-12 lg:justify-start">
-            <a href="/get-started">
-              <button className="flex items-center rounded bg-blue px-4 py-2.5 font-bold text-white">
-                Get Started
-              </button>
+            <a href="/get-started" className="flex items-center rounded bg-blue px-4 py-2.5 font-bold text-white">
+              Get Started
             </a>
           </div>
         </div>

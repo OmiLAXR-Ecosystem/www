@@ -1,4 +1,3 @@
-import ThemeProvider from "../theme-provider";
 import React from "react";
 import {InlineCodeBox} from "../CodeBox";
 import Table from "../Table";
@@ -74,9 +73,9 @@ export default function () {
     // const newScopes = rows.map(row => row.package);
 
     return (
-        <ThemeProvider>
-            <div className="h-full w-screen place-items-center bg-white py-20">
-                <div className="container mx-auto items-center relative">
+        <>
+            <div className="h-full w-full place-items-center bg-white px-4 py-20 sm:px-6 lg:px-8">
+                <div className="doc-page relative items-center">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">OmiLAXR
                         Ecosystem</h1>
 
@@ -101,10 +100,10 @@ export default function () {
                         Name: <a target="_blank" href={r.sourceCode}>{r.name}</a>,
                         Purpose: r.purpose,
                         Package: <InlineCodeBox href={'https://www.npmjs.com/package/' + r.package} target="_blank" clipboardButton={true}>{r.package}</InlineCodeBox>,
-                        Requirements: Object.entries(r.required).map(([k,v]) => (<><a target="_blank" href={v}>{k}</a><br/></>)),
+                        Requirements: Object.entries(r.required).map(([k,v]) => (<React.Fragment key={k}><a target="_blank" href={v}>{k}</a><br/></React.Fragment>)),
                     }))}/>
                 </div>
             </div>
-        </ThemeProvider>
+        </>
     );
 }

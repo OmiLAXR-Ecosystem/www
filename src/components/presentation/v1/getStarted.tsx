@@ -1,8 +1,7 @@
-import ThemeProvider from "../../theme-provider";
 import React from "react";
-import {contentOf, type GetStartedCardProps} from "../instructionCard";
+import {contentOf, type InstructionCardProps} from "../instructionCard";
 import CodeBox, {InlineCodeBox} from "../../CodeBox";
-import {FigureManager} from "react-figure-ref/lib/FigureManager.js";
+import {FigureManager} from "../../Figure";
 import Hyperlink from "../../Hyperlink";
 
 const scopes = [
@@ -63,7 +62,7 @@ export function GetStartedPresentation() {
         ]
     });
 
-    const items: GetStartedCardProps[] = [
+    const items: InstructionCardProps[] = [
         {
             title: "Prepare your XR project",
             children: <div>
@@ -106,7 +105,7 @@ export function GetStartedPresentation() {
 
                 <div className="columns-2xl">
 
-                    <CodeBox language="JavaScript" filename="<project_root>/Packages/manifest.json">
+                    <CodeBox language="json" filename="<project_root>/Packages/manifest.json">
                         {JSON.stringify(jsonManifest(), null, 2)}
                     </CodeBox>
 
@@ -481,9 +480,9 @@ export function GetStartedPresentation() {
     ];
 
     return (
-        <ThemeProvider>
-            <div className="h-full w-screen place-items-center bg-white py-20">
-                <div className="container mx-auto items-center relative">
+        <>
+            <div className="h-full w-full place-items-center bg-white px-4 py-20 sm:px-6 lg:px-8">
+                <div className="doc-page relative items-center">
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Get
                         started</h1>
                     <p style={{color: 'red'}}
@@ -505,7 +504,7 @@ export function GetStartedPresentation() {
                     {contentOf(items)}
                 </div>
             </div>
-        </ThemeProvider>
+        </>
     );
 }
 

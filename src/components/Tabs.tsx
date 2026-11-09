@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Tabs.scss";
 
 export interface Tab<T> {
@@ -12,17 +12,21 @@ export interface TabsProps<T> {
     defaultActiveTab?: T;
 }
 
+// Rendered as static HTML; switching tabs is done by src/scripts/interactions.ts (data-tabs).
 export default function Tabs<T>({ tabs, defaultActiveTab }: TabsProps<T>) {
-    const [activeTab, setActiveTab] = useState(defaultActiveTab || tabs[0]?.id);
+    const activeTab = defaultActiveTab ?? tabs[0]?.id;
 
     return (
-        <div style={{width: "100%", maxWidth: "var(--tabs-max-width, 1100px)", margin: "0 auto"}}>
-            <div className="tabs">
-                {tabs.map((tab) => (
+        <div data-tabs style={{width: "100%", maxWidth: "var(--tabs-max-width, 1100px)", margin: "0 auto"}}>
+            <div className="tabs" role="tablist">
+                {tabs.map((tab, index) => (
                     <button
                         key={tab.id.toString()}
+                        type="button"
+                        role="tab"
+                        data-tab={index}
+                        aria-selected={activeTab === tab.id}
                         className={`tab ${activeTab === tab.id ? "active" : ""}`}
-                        onClick={() => setActiveTab(tab.id)}
                     >
                         {tab.label}
                     </button>
@@ -30,11 +34,13 @@ export default function Tabs<T>({ tabs, defaultActiveTab }: TabsProps<T>) {
             </div>
 
             <div className="tab-contents">
-                {tabs.map((tab) => (
+                {tabs.map((tab, index) => (
                     <div
                         key={tab.id.toString()}
+                        role="tabpanel"
+                        data-tab-panel={index}
                         className="tab-content"
-                        style={{ display: activeTab === tab.id ? "block" : "none" }}
+                        hidden={activeTab !== tab.id}
                     >
                         {tab.content}
                     </div>

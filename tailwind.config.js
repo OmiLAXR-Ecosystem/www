@@ -1,8 +1,18 @@
-const withMT = require("@material-tailwind/react/utils/withMT");
+// Theme values from Material Tailwind, which the site was originally built with.
+// Its components are no longer used, so its withMT() content globs are left out.
+const colors = require("@material-tailwind/react/theme/base/colors");
+const fontFamily = require("@material-tailwind/react/theme/base/typography");
+const boxShadow = require("@material-tailwind/react/theme/base/shadows");
+const screens = require("@material-tailwind/react/theme/base/breakpoints");
 
-module.exports = withMT({
+module.exports = {
+  darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
+    colors,
+    fontFamily,
+    boxShadow,
+    screens,
     extend: {
       colors: {
         blue: {
@@ -37,4 +47,4 @@ module.exports = withMT({
     },
   },
   plugins: [],
-});
+};

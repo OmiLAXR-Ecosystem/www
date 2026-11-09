@@ -1,4 +1,3 @@
-import {Card} from "../../materialTailwind";
 import type {ReactElement} from "react";
 import React from "react";
 import "./instructionCard.scss";
@@ -32,15 +31,14 @@ export default function InstructionCard({children, image, title, swapCells}: Ins
         </div>
     </div>;
 
-    return <Card
-        className="get-started-step mt-6 mb-6 w-full max-w-none rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
-        shadow={false}>
+    return <div
+        className="get-started-step relative mt-6 mb-6 flex w-full max-w-none flex-col rounded-lg bg-white bg-clip-border text-gray-700">
         <div className={'w-full min-w-0 grid ' + (image ? 'grid-cols-1 md:grid-cols-2' : '')}>
             {swapCells && contentCell()}
             {image && imageCell()}
             {!swapCells && contentCell()}
         </div>
-    </Card>
+    </div>
 }
 
 export function generateUrlAnchor(title: string): string {

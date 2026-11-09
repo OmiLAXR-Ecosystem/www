@@ -1,23 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 
+// Rendered as static HTML; the search box is wired up by src/scripts/interactions.ts (data-table).
 const Table = ({ columns, data }) => {
-    const [search, setSearch] = useState('');
-
-    // Filter data based on search input
-    const filteredData = data.filter(row =>
-        columns.some(col =>
-            String(row[col]).toLowerCase().includes(search.toLowerCase())
-        )
-    );
-
     return (
-        <div className="w-full mx-auto">
+        <div className="w-full mx-auto" data-table>
             {/* Search Input */}
             <input
-                type="text"
+                type="search"
                 placeholder="Search..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                aria-label="Search table"
+                data-table-search
                 className="w-full p-2 mb-4 border border-gray-300 rounded-lg"
             />
 
@@ -34,23 +26,20 @@ const Table = ({ columns, data }) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {filteredData.length > 0 ? (
-                        filteredData.map((row, rowIndex) => (
-                            <tr key={rowIndex} className="hover:bg-gray-50">
-                                {columns.map((col, colIndex) => (
-                                    <td key={colIndex} className="px-4 py-2 border-b">
-                                        {row[col]}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan={columns.length} className="px-4 py-2 text-center">
-                                No results found
-                            </td>
+                    {data.map((row, rowIndex) => (
+                        <tr key={rowIndex} data-table-row className="hover:bg-gray-50">
+                            {columns.map((col, colIndex) => (
+                                <td key={colIndex} className="px-4 py-2 border-b">
+                                    {row[col]}
+                                </td>
+                            ))}
                         </tr>
-                    )}
+                    ))}
+                    <tr data-table-empty hidden={data.length > 0}>
+                        <td colSpan={columns.length} className="px-4 py-2 text-center">
+                            No results found
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
