@@ -31,10 +31,10 @@ const navListMenuItems: INavListMenuItem[] = [
     icon: <i className="fab fa-discord text-lg leading-none" aria-hidden="true"></i>
   },
   {
-    title: "GitLab",
-    href: "https://gitlab.com/learntech-rwth/omilaxr-ecosystem",
+    title: "GitHub",
+    href: "https://github.com/OmiLAXR-Ecosystem",
     target: "_blank",
-    icon: <i className="fab fa-gitlab text-xl leading-none" aria-hidden="true"></i>
+    icon: <i className="fab fa-github text-xl leading-none" aria-hidden="true"></i>
   },
   {
     title: "Ecosystem",

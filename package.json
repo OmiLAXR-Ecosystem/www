@@ -47,10 +47,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:learntech-rwth/omilaxr-ecosystem/www.git"
+    "url": "git@github.com:OmiLAXR-Ecosystem/www.git"
   },
   "bugs": {
-    "url": "https://gitlab.com/learntech-rwth/omilaxr-ecosystem/www/-/issues"
+    "url": "https://github.com/OmiLAXR-Ecosystem/www/issues"
   },
   "homepage": "https://omilaxr.dev/"
 }
