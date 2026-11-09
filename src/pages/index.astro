@@ -6,9 +6,13 @@ import ProjectsPresentation from "../components/presentation/projects"
 import DevFreePresentation from "../components/presentation/developerFree"
 import PalettePresentationFree from "../components/presentation/palette"
 import FooterFreePresentation from "../components/presentation/footerFree"
+import NewsPresentation from "../components/presentation/news"
+import { fetchDiscordNews } from "../lib/discordNews";
 
 import "../../assets/scss/main.scss";
 import NavbarPresentation from "../components/presentation/navbar";
+
+const news = await fetchDiscordNews();
 ---
 
 <Layout title="OmiLAXR - Modular Learning Analytics framework for XR"
@@ -16,6 +20,7 @@ import NavbarPresentation from "../components/presentation/navbar";
         <NavbarPresentation />
         <main>
                 <HeaderPresentation />
+                <NewsPresentation items={news} />
                 <PalettePresentationFree />
                 <DevFreePresentation />
                 <FeaturePresentation />

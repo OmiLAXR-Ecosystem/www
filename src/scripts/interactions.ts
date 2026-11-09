@@ -70,6 +70,28 @@ function filterTable(input: HTMLInputElement) {
     table.querySelector<HTMLElement>("[data-table-empty]")!.hidden = visible > 0;
 }
 
+// Arrow buttons for a horizontally scrolling list; they are only shown when the list overflows
+function initSlider(slider: HTMLElement) {
+    const wrapper = document.querySelector<HTMLElement>(`[data-slider-buttons]:has([aria-controls="${slider.id}"])`);
+    const prev = wrapper?.querySelector<HTMLButtonElement>('[data-slider-button="prev"]');
+    const next = wrapper?.querySelector<HTMLButtonElement>('[data-slider-button="next"]');
+    if (!wrapper || !prev || !next)
+        return;
+
+    const update = () => {
+        wrapper.hidden = slider.scrollWidth <= slider.clientWidth;
+        prev.disabled = slider.scrollLeft <= 0;
+        next.disabled = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1;
+    };
+    const scroll = (direction: number) => slider.scrollBy({left: direction * slider.clientWidth, behavior: "smooth"});
+
+    prev.addEventListener("click", () => scroll(-1));
+    next.addEventListener("click", () => scroll(1));
+    slider.addEventListener("scroll", update, {passive: true});
+    window.addEventListener("resize", update);
+    update();
+}
+
 // Types a word letter by letter, waits, deletes it again and continues with the next one.
 function initAnimatingText(root: HTMLElement) {
     const items: AnimatingTextEntry[] = JSON.parse(root.dataset.animatingText!);
@@ -140,6 +162,14 @@ document.addEventListener("click", e => {
     const copyButton = target.closest<HTMLElement>("[data-copy]");
     if (copyButton)
         copyToClipboard(copyButton);
+
+    const dialogOpener = target.closest<HTMLElement>("[data-dialog-open]");
+    if (dialogOpener)
+        document.querySelector<HTMLDialogElement>(`dialog#${dialogOpener.dataset.dialogOpen}`)?.showModal();
+
+    // The dialog's content fills it completely, so a click on the dialog itself hit the backdrop
+    if (target instanceof HTMLDialogElement)
+        target.close();
 });
 
 document.addEventListener("input", e => {
@@ -150,3 +180,4 @@ document.addEventListener("input", e => {
 
 initNavbar();
 document.querySelectorAll<HTMLElement>("[data-animating-text]").forEach(initAnimatingText);
+document.querySelectorAll<HTMLElement>("[data-slider]").forEach(initSlider);
