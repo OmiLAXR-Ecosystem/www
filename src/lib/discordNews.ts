@@ -103,8 +103,9 @@ function toNewsItem(m: DiscordMessage): NewsItem | null {
 export async function fetchDiscordNews(): Promise<NewsItem[]> {
   const token = env("DISCORD_BOT_TOKEN");
   const channelId = env("DISCORD_CHANNEL_ID");
-  if (!token || !channelId) {
-    console.warn("[discord-news] DISCORD_BOT_TOKEN or DISCORD_CHANNEL_ID not set, skipping news");
+  const missing = [!token && "DISCORD_BOT_TOKEN", !channelId && "DISCORD_CHANNEL_ID"].filter(Boolean);
+  if (missing.length > 0) {
+    console.warn(`[discord-news] ${missing.join(" and ")} not set, skipping news`);
     return [];
   }
 

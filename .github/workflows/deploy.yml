@@ -32,7 +32,8 @@ jobs:
       - run: npm run build
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CHANNEL_ID }}
+          # Works whether the channel ID was saved as a variable or as a secret
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CHANNEL_ID || secrets.DISCORD_CHANNEL_ID }}
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

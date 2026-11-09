@@ -42,7 +42,7 @@ Setup:
 
 1. Create an application in the [Discord Developer Portal](https://discord.com/developers/applications), add a bot and enable **Message Content Intent** (Bot → Privileged Gateway Intents).
 2. Invite the bot by opening `https://discord.com/oauth2/authorize?client_id=<APPLICATION_ID>&scope=bot&permissions=66560` (Application ID from General Information; 66560 = View Channel + Read Message History). For a private news channel, allow the bot these two permissions in the channel settings.
-3. In this GitHub repository (Settings → Secrets and variables → Actions) add the secret `DISCORD_BOT_TOKEN` and the variable `DISCORD_CHANNEL_ID` (right-click the channel → Copy Channel ID, with developer mode enabled).
+3. In this GitHub repository (Settings → Secrets and variables → Actions) add the secret `DISCORD_BOT_TOKEN` and the variable `DISCORD_CHANNEL_ID` (a secret works too) (right-click the channel → Copy Channel ID, with developer mode enabled).
 
 For local builds, put both values into a `.env` file (gitignored). Without them the news section is simply left out.
 
