@@ -61,6 +61,7 @@ export default function () {
             {label: "definitions-editor", imageSrc: "/get-started/definitions-editor.webp"},
             {label: "discord", imageSrc: "/get-started/discord.webp"},
             {label: "add-from-disk", imageSrc: "/get-started/add-from-disk.webp"},
+            {label: "wizard", imageSrc: "/get-started/wizard.webp"},
         ]
     });
 
@@ -102,13 +103,42 @@ export default function () {
             </div>
         },
         {
+            title: "Quick Start: Installer and Wizard",
+            children: <div>
+                <P>The quickest way to set up OmiLAXR takes two steps. The sections after this one describe the same steps by hand, if you prefer that.</P>
+
+                <H>1. Run the installer</H>
+                <P>Download the <a className="underline" href="/downloads/OmiLAXR-Installer.unitypackage" download>OmiLAXR installer</a> and drag it into the Unity editor.
+                    Unity shows the two files it imports (an editor script and its assembly definition). After you confirm, the installer adds the scoped registry and the <Package>OmiLAXR</Package> package
+                    to your <InlineCodeBox>Packages/manifest.json</InlineCodeBox>, keeps a backup as <InlineCodeBox>manifest.json.bak</InlineCodeBox> and then removes itself.
+                    Running it again changes nothing if OmiLAXR is already set up.</P>
+
+                <H>2. Follow the OmiLAXR Wizard</H>
+                <P>From OmiLAXR 2.3.0 on, the OmiLAXR Wizard opens once the package is installed (see <fm.FigureRef label="wizard" />). You can open it again at any time via <InlineCodeBox>OmiLAXR &gt; Open Wizard</InlineCodeBox>.
+                    Use <strong>Next</strong> and <strong>Back</strong> to go through the steps, or click a step at the top:</P>
+
+                <ol className="default-style">
+                    <li><strong>Required:</strong> checks that the scoped registry, the OmiLAXR pipeline and a data provider are in place, and fixes them with one click.
+                        Install <Package>OmiLAXR.xAPI</Package> here and add its prefab and the <InlineCodeBox>xAPI.Registry</InlineCodeBox>.</li>
+                    <li><strong>Tracking</strong> (optional): XR input modules (<Package>OmiLAXR.UnityXR</Package>, <Package>OmiLAXR.MetaXR</Package>, <Package>OmiLAXR.MRTK2</Package>),
+                        heart rate with <Package>OmiLAXR.HypeRate</Package> and the PPM hook that adds it to every xAPI statement, and pseudonyms with <Package>OmiLAXR.Pseudonymization</Package>.</li>
+                    <li><strong>Tools</strong> (optional): <Package>OmiLAXR.ReCoPa</Package> to watch the data live in the Researcher Companion Panel, and <Package scope={"com.rwth.unity.omilaxr.xapi4unity"}>xAPI4Unity</Package> for xAPI definitions.</li>
+                    <li><strong>AI (MCP)</strong> (optional): connects AI coding agents to OmiLAXR (see <a className="underline" href="#use-ai-coding-agents-mcp">Use AI Coding Agents (MCP)</a>).</li>
+                </ol>
+
+                <P>The last page sums up what is done and what still needs attention. The wizard installs packages through the Unity Package Manager, so you can also remove them there later.</P>
+
+                <fm.Figure caption="OmiLAXR Wizard" label="wizard" maxWidth="70%" />
+            </div>
+        },
+        {
             title: "Prepare Unity Package Scope",
             children: <div>
-                <strong>If you prefer installing packages via Git URL, you can skip this step. Otherwise, follow the instructions below to manage package updates:</strong>
+                <strong>You can skip this step if you used the installer above or install the packages via Git URL. Otherwise, follow the instructions below to manage package updates:</strong>
 
                 <P>By default, Unity only recognizes packages hosted by Unity. To support third-party packages like <Package>OmiLAXR</Package>, you’ll need to update your <InlineCodeBox>manifest.json</InlineCodeBox> file to include the required scopes.</P>
 
-                <P>To do this you have two options:</P>
+                <P>To do this by hand, you have two options:</P>
                 <ol className="default-style">
                     <li>(fastest way) Open <InlineCodeBox>&lt;project_root&gt;/Packages/manifest.json</InlineCodeBox> and add the following entry under <InlineCodeBox>scopedRegistries</InlineCodeBox> if it isn’t already present:</li>
                     <li><InlineCodeBox>Edit &gt; Project Settings...</InlineCodeBox>, as shown in <fm.FigureRef label="scoped-registry" />, and add the scopes by hand.</li>
@@ -190,6 +220,7 @@ export default function () {
         {
             title: "Install OmiLAXR Framework",
             children: <div>
+                <P><strong>Tip:</strong> the step <strong>Required</strong> of the OmiLAXR Wizard installs <Package>OmiLAXR.xAPI</Package> with one click.</P>
 
                 <P>Use the <strong>My Registries</strong> section again to install the <Package>OmiLAXR.xAPI</Package> package (see <fm.FigureRef label="my-registries-2023" /> or <fm.FigureRef label="my-registries" />).
                     Since <Package>OmiLAXR.xAPI</Package> depends on <Package>OmiLAXR</Package>, both packages will be installed automatically.</P>
@@ -228,6 +259,7 @@ export default function () {
         {
             title: "Use the OmiLAXR Prefabs",
             children: <div>
+                <P><strong>Tip:</strong> the step <strong>Required</strong> of the OmiLAXR Wizard adds both prefabs to the open scene.</P>
 
                 <P>The modular architecture of OmiLAXR makes it possible to implement necessary modules for all XR frameworks.
                     Depending on your needs, the frameworks may differ in terms of interaction behavior, teleportation logic, or the hierarchy of player game objects.</P>
@@ -253,6 +285,7 @@ export default function () {
         {
             title: "Install Your Required XR SDK Module",
             children: <div>
+                <P><strong>Tip:</strong> the step <strong>Tracking</strong> of the OmiLAXR Wizard lists the XR modules and installs them with one click.</P>
                 <P>To support XR interactions, you need to install an appropriate <Package>OmiLAXR</Package> module that integrates with the specific XR SDK components used in your project.</P>
 
                 <P>We are actively developing several XR modules. Please check the available ones that have already been published.</P>
@@ -379,6 +412,24 @@ export default function () {
                 <P style={{ fontSize: "1.5em" }}>
                     &gt;&gt;&gt; To learn more about the modular architecture and see example code, click <a href="/pipeline">here</a>. &lt;&lt;&lt;
                 </P>
+            </div>
+        },
+        {
+            title: "Use AI Coding Agents (MCP)",
+            children: <div>
+                <P>The OmiLAXR MCP server gives AI coding agents such as Claude Code, Cursor or GitHub Copilot in VS Code knowledge about OmiLAXR.
+                    With it, an agent can search and propose xAPI definitions, follow the recipes for listeners, tracking behaviours, composers and endpoints,
+                    and generate components that match the package conventions. It needs the <Hyperlink url="https://dotnet.microsoft.com/download">.NET 10 SDK</Hyperlink>.</P>
+
+                <P>The step <strong>AI (MCP)</strong> of the OmiLAXR Wizard writes the server into the configuration files of the agents you select:
+                    <InlineCodeBox>.mcp.json</InlineCodeBox> (Claude Code), <InlineCodeBox>.cursor/mcp.json</InlineCodeBox> (Cursor) and <InlineCodeBox>.vscode/mcp.json</InlineCodeBox> (VS Code).
+                    Other servers in these files are kept. Restart the agent or reload its MCP servers afterwards.</P>
+
+                <P>To do it by hand, add this entry to <InlineCodeBox>.mcp.json</InlineCodeBox> in your Unity project root:</P>
+
+                <CodeBox language="json" filename="<project_root>/.mcp.json" clipboardCode={mcpConfig}>{mcpConfig}</CodeBox>
+
+                <P>All options are described in the <Hyperlink url="https://github.com/OmiLAXR-Ecosystem/OmiLAXR.MCP">OmiLAXR.MCP repository</Hyperlink>.</P>
             </div>
         },
         {
