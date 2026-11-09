@@ -5,7 +5,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faBook, faCube } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faBookOpen, faCube } from "@fortawesome/free-solid-svg-icons";
 import Icon from "./Icon";
 
 interface INavListMenuItem {
@@ -44,6 +44,11 @@ const navListMenuItems: INavListMenuItem[] = [
     title: "Basics",
     href: "/pipeline",
     icon: <Icon icon={faBook} className="text-xl"/>
+  },
+  {
+    title: "Documentation",
+    href: "https://docs.omilaxr.dev",
+    icon: <Icon icon={faBookOpen} className="text-xl"/>
   },
 ];
 

@@ -96,6 +96,10 @@ const RESEARCHGROUP = [
 
 const RESOURCES = [
   {
+    name: "Documentation",
+    link: "https://docs.omilaxr.dev",
+  },
+  {
     name: "Discord",
     link: "https://discord.com/invite/AnUXutpHZz",
   },

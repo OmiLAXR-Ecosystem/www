@@ -73,6 +73,8 @@ export default function () {
         {
             title: "Overview of the Workflow",
             children: <div>
+                <P>This guide sets up OmiLAXR step by step. The <Hyperlink url="https://docs.omilaxr.dev">documentation</Hyperlink> describes all components, modules and their changelogs in detail.</P>
+
                 <P>To streamline development with IDE support and ensure consistency, we provide a tool that converts
                     the xAPI registry into C# code. Start by importing this tool. Refer to <fm.FigureRef
                         label="omilaxr-workflow"/> for an overview.</P>
