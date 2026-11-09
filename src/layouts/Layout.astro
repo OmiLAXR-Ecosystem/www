@@ -40,6 +40,14 @@ const ogImage = new URL("/og-image.png", Astro.site);
   </body>
 </html>
 <style is:global>
+  /* Cross-document view transitions: the old page stays until the new one is rendered, and the
+     navbar (view-transition-name: site-nav) stays in place instead of being drawn again. */
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+
   code {
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
