@@ -19,15 +19,15 @@ export default function () {
     const fm = new FigureManager({
         figures: [
             {label: "components", imageSrc: "/pipeline/OmiLAXR_Pipeline_Blackbox.drawio.svg"},
-            {label: "hierarchy", imageSrc: "/pipeline/hierarchy.png"},
-            {label: "learner_pipeline", imageSrc: "/pipeline/learner_pipeline.png"},
-            {label: "step-listeners", imageSrc: "/pipeline/Listeners.png"},
-            {label: "learner_listeners", imageSrc: "/pipeline/learner_listeners.png"},
-            {label: "step-filters", imageSrc: "/pipeline/Filters.png"},
-            {label: "step-tb", imageSrc: "/pipeline/TrackingBehaviours.png"},
-            {label: "step-composers", imageSrc: "/pipeline/Composers.png"},
-            {label: "step-hooks", imageSrc: "/pipeline/Hooks.png"},
-            {label: "step-endpoints", imageSrc: "/pipeline/Endpoints.png"},
+            {label: "hierarchy", imageSrc: "/pipeline/hierarchy.webp"},
+            {label: "learner_pipeline", imageSrc: "/pipeline/learner_pipeline.webp"},
+            {label: "step-listeners", imageSrc: "/pipeline/Listeners.webp"},
+            {label: "learner_listeners", imageSrc: "/pipeline/learner_listeners.webp"},
+            {label: "step-filters", imageSrc: "/pipeline/Filters.webp"},
+            {label: "step-tb", imageSrc: "/pipeline/TrackingBehaviours.webp"},
+            {label: "step-composers", imageSrc: "/pipeline/Composers.webp"},
+            {label: "step-hooks", imageSrc: "/pipeline/Hooks.webp"},
+            {label: "step-endpoints", imageSrc: "/pipeline/Endpoints.webp"},
         ]
     });
 
@@ -958,7 +958,9 @@ export default function () {
 
                     {/* <OmiLAXRPipeline/> */}
                     <img
-                        src="./OmiLAXR_Pipeline.drawio.svg"
+                        src="/pipeline/OmiLAXR_Pipeline.drawio.webp"
+                        width={2400}
+                        height={498}
                         style={{background: "white"}}
                         alt="OmiLAXR Pipeline"
                         className="pipeline-hero-image"

@@ -5,6 +5,7 @@ interface OmiLAXRLogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export function OmiLAXRLogo({long, ...props}: OmiLAXRLogoProps) {
-    const src = long ? "/logos/OmiLAXR_long.png" : "/logos/OmiLAXR.svg";
-    return <img src={src} className="w-full md:w-auto" alt="OmiLAXR Logo" {...props} />;
+    const src = long ? "/logos/OmiLAXR_long.webp" : "/logos/OmiLAXR.svg";
+    const [width, height] = long ? [1300, 719] : [5407, 2724];
+    return <img src={src} width={width} height={height} className="w-full md:w-auto" alt="OmiLAXR Logo" {...props} />;
 }

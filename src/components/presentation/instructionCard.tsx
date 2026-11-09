@@ -1,5 +1,6 @@
 import type {ReactElement} from "react";
 import React from "react";
+import {imageSize} from "../../lib/imageSize";
 import "./instructionCard.scss";
 
 export interface InstructionCardProps {
@@ -15,7 +16,10 @@ export default function InstructionCard({children, image, title, swapCells}: Ins
 
     const imageCell = () => <div className="step-image">
         <img
+            loading="lazy"
+            decoding="async"
             src={image}
+            {...imageSize(image)}
             alt={title + ' preview'}
             className="w-full object-top"
         />

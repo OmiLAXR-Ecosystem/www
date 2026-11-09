@@ -13,7 +13,8 @@ export function DevPresentation() {
             Using our ecosystem you can get high-quality xAPI statements and ensure consistency. As your xAPI definitions are transformed to C# code, you get full IDE support.
           </p>
         </div>
-        <video src="Using_xAPI_v2.webm" autoPlay={true} controls={true} className="mx-auto hidden md:flex" />
+        <video src="/Using_xAPI_v2.webm" poster="/Using_xAPI_v2_poster.webp" controls preload="none" playsInline
+               width={1516} height={534} className="mx-auto mt-8 h-auto w-full lg:mt-0" />
       </div>
     </div>
   );

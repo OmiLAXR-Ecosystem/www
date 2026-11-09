@@ -90,7 +90,7 @@ export default function () {
                     </p>
 
                     <div className="mt-6 mb-6">
-                        <img style={{margin: "auto"}} src="/ecosystem/OmiLAXR_Interface.drawio.png" alt="OmiLAXR Ecosystem" className="mb-6 rounded-lg shadow-lg" width={1000} height={600} />
+                        <img style={{margin: "auto"}} src="/ecosystem/OmiLAXR_Interface.drawio.webp" alt="OmiLAXR Ecosystem" className="mb-6 rounded-lg shadow-lg" width={1000} height={336} loading="lazy" decoding="async" />
                     </div>
 
                     <JsonManifestCodebox scopes={scopes}></JsonManifestCodebox>

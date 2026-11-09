@@ -25,7 +25,7 @@ function FeatureCard({ icon, title, children }: FeatureCardProps) {
 const features = [
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon1.png" alt="Researchers" />
+      <img className="w-32 mx-auto mb-4" width={128} height={128} loading="lazy" decoding="async" src="/icon1.webp" alt="Researchers" />
     ),
     title: "For Researchers",
     description:
@@ -33,7 +33,7 @@ const features = [
   },
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon2.png" alt="Developers" />
+      <img className="w-32 mx-auto mb-4" width={128} height={128} loading="lazy" decoding="async" src="/icon2.webp" alt="Developers" />
     ),
     title: "For Developers",
     description:
@@ -41,7 +41,7 @@ const features = [
   },
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon3.png" alt="XR" />
+      <img className="w-32 mx-auto mb-4" width={128} height={128} loading="lazy" decoding="async" src="/icon3.webp" alt="XR" />
     ),
     title: "For Virtual, Mixed & Augmented Reality",
     description:

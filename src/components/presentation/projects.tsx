@@ -1,3 +1,4 @@
+import {imageSize} from "../../lib/imageSize";
 import MailTo from "../MailTo";
 import Hyperlink from "../Hyperlink";
 
@@ -26,10 +27,10 @@ interface Project {
 }
 
 const projects: Project[] = [
-  { name: "RePiX VR", contributors: ["lt"], url: "https://gitlab.com/learntech-rwth/repix-vr/repix-vr-app", image: "projects/repix.png" },
-  { name: "Teach-R", contributors: ["uop", "lt"], url: "https://gitup.uni-potsdam.de/mm_vr/vr-klassenzimmer/-/wikis/home", image: "projects/teach-r.png" },
-  { name: "Inside the Router", contributors: ["tud"], url: "https://ddigames.inf.tu-dresden.de/sites/vr/router/", image: "projects/inside-the-router.png" },
-  { name: "SchülerlARbor Chemie", contributors: ["chers", "lt"], url: "https://ddigames.inf.tu-dresden.de/sites/vr/router/", image: "projects/chemielarbor.png" },
+  { name: "RePiX VR", contributors: ["lt"], url: "https://gitlab.com/learntech-rwth/repix-vr/repix-vr-app", image: "/projects/repix.webp" },
+  { name: "Teach-R", contributors: ["uop", "lt"], url: "https://gitup.uni-potsdam.de/mm_vr/vr-klassenzimmer/-/wikis/home", image: "/projects/teach-r.webp" },
+  { name: "Inside the Router", contributors: ["tud"], url: "https://ddigames.inf.tu-dresden.de/sites/vr/router/", image: "/projects/inside-the-router.webp" },
+  { name: "SchülerlARbor Chemie", contributors: ["chers", "lt"], url: "https://ddigames.inf.tu-dresden.de/sites/vr/router/", image: "/projects/chemielarbor.webp" },
   //{ name: "Inside the CPU (TU Dresden)", url: "#",  },
   //{ name: "Interaction Windows", url: "", },
   //{ name: "Gedächtnispalast", url: "", },
@@ -55,6 +56,9 @@ export default function LogoSectionOne() {
                     <img
                         src={image}
                         alt={name}
+                        {...imageSize(image)}
+                        loading="lazy"
+                        decoding="async"
                     />
                   </div>
                 </a>

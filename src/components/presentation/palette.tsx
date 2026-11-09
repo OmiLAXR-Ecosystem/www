@@ -14,7 +14,7 @@ export function PalettePresentation() {
           </p>
         </div>
         <div>
-          <img src="pipeline/OmiLAXR_Pipeline.drawio.png" alt="OmiLAXR Pipeline" style={{width: '100%'}}/>
+          <img src="/pipeline/OmiLAXR_Pipeline.drawio.webp" alt="OmiLAXR Pipeline" width={2400} height={498} loading="lazy" decoding="async" style={{width: '100%'}}/>
         </div>
       </div>
     </div>
