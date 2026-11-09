@@ -14,7 +14,7 @@ export interface InstructionCardProps {
 
 export default function InstructionCard({children, image, title, swapCells}: InstructionCardProps) {
 
-    const imageCell = () => <div className="step-image">
+    const imageCell = () => <div className="step-image min-w-0">
         <img
             loading="lazy"
             decoding="async"
@@ -25,7 +25,7 @@ export default function InstructionCard({children, image, title, swapCells}: Ins
         />
     </div>;
 
-    const contentCell = () => <div className="step-content">
+    const contentCell = () => <div className="step-content min-w-0">
         <h4 style={{fontSize: "24px"}}
             className="border-b-2 border-neutral-100 px-6 py-3 text-xl font-medium leading-tight dark:border-white/10">
             {title}

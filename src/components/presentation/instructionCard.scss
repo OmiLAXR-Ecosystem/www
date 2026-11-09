@@ -1,5 +1,7 @@
 .get-started-step a {
   text-decoration: underline;
+  // Long URLs used as link text must wrap on small screens
+  overflow-wrap: anywhere;
 }
 
 .get-started-cards,

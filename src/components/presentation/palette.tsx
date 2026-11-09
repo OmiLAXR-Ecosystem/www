@@ -1,6 +1,6 @@
 export function PalettePresentation() {
   return (
-    <div className="h-full w-screen place-items-center bg-white px-8 py-8">
+    <div className="h-full w-full place-items-center bg-white px-4 py-8 sm:px-6 lg:px-8">
       <div className="container mx-auto grid items-center relative">
         <div className="text-center lg:text-left">
           <p className="flex items-center justify-center lg:justify-start font-bold text-lg mb-5 text-blue">

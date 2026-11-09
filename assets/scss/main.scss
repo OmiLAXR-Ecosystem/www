@@ -36,3 +36,22 @@ ul, ol {
     }
   }
 }
+
+// Guide pages: one centered content width, and body text kept at a readable line length
+// while figures, code and cards use the full width.
+.doc-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  p,
+  li {
+    max-width: 80ch;
+  }
+
+  table p,
+  table li {
+    max-width: none;
+  }
+}

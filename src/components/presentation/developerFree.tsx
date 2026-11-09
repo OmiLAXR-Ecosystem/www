@@ -1,6 +1,6 @@
 export function DevPresentation() {
   return (
-    <div className="h-full w-screen place-items-center bg-white py-20">
+    <div className="h-full w-full place-items-center bg-white px-4 py-20 sm:px-6 lg:px-8">
       <div className="container mx-auto grid items-center relative lg:grid-cols-2">
         <div className="mb-3">
           <p className="flex items-center font-bold text-lg mb-5 text-blue">

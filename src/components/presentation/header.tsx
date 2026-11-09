@@ -6,7 +6,7 @@ export default function HeaderPresentation() {
     <header className="relative h-full w-full place-items-center bg-white px-4 py-6 sm:px-6 lg:mb-36 lg:px-8 lg:py-8">
       <div className="container mx-auto grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <div className="text-center lg:text-left">
-          <h1 className="mb-6 text-4xl leading-tight font-black text-gray-900 sm:text-5xl lg:mb-8 lg:mr-20 lg:text-6xl">
+          <h1 className="mb-6 text-4xl leading-tight font-black text-gray-900 sm:text-5xl lg:mb-8 lg:mr-10 xl:mr-20 xl:text-6xl">
             High quality and standardized Learning Analytics foundation for your <span
               className="xr-style">XR Project</span>
           </h1>
