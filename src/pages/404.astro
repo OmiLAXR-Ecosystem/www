@@ -1,11 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Content404 from "../components/404/content"
+import NavbarPresentation from "../components/presentation/navbar"
+import FooterFreePresentation from "../components/presentation/footerFree"
 
+import "../../assets/scss/main.scss";
 ---
 
-<Layout title="404 Error Page">
-	<main>
-    <Content404 client:only="react" />
-  </main>
+<Layout title="OmiLAXR - Page not found" metaDescription="This page does not exist." noIndex>
+    <NavbarPresentation />
+    <main class="container mx-auto px-4 py-24 text-center">
+        <h1 class="mb-4 text-4xl font-extrabold text-gray-900">Page not found</h1>
+        <p class="mb-8 text-gray-700">The page you are looking for does not exist or has been moved.</p>
+        <a href="/" class="inline-block rounded bg-blue px-4 py-2.5 font-bold text-white">Back to the homepage</a>
+    </main>
+    <FooterFreePresentation />
 </Layout>

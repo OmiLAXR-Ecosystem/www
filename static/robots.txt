@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://omilaxr.dev/sitemap-index.xml
