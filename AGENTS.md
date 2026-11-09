@@ -2,12 +2,12 @@
 
 This file provides guidance to coding agents when working with code in this repository.
 
-Website of the OmiLAXR ecosystem (https://omilaxr.dev), built with Astro + React + Material Tailwind. It started from the Creative Tim "Astro Launch UI" template; `README.md` is still the template's README and partly wrong (e.g. the build output is not `dist/`).
+Website of the OmiLAXR ecosystem (<https://omilaxr.dev>), built with Astro + React + Tailwind. It started from the Creative Tim "Astro Launch UI" template; the template's pages and components have been removed.
 
 ## Commands
 
-| | |
-|---|---|
+| Command | What it does |
+| --- | --- |
 | `make install` | `npm ci` |
 | `make dev` | Dev server with hot reload |
 | `make build` | Production build into `public/` |
@@ -15,29 +15,36 @@ Website of the OmiLAXR ecosystem (https://omilaxr.dev), built with Astro + React
 | `make tailwind` | Regenerate `assets/css/material-tailwind.css` |
 | `make clean` | Remove `public/` and `.astro/` |
 
-There are no tests and no linter. `make build` is the check that everything compiles.
+Astro 7 needs Node >= 22.23.4; `.nvmrc` pins Node 24 (`nvm use`), and CI reads the same file.
+
+There are no tests and no linter. `make build` is the check that everything compiles and renders.
 
 ## Directories (non-standard Astro setup)
 
 `astro.config.mjs` swaps the usual folders:
-- `static/` is Astro's `publicDir`: images, videos and other files served as-is (referenced as `/foo.png`).
+
+- `static/` is Astro's `publicDir`: images, videos and other files served as-is. Always reference them with an absolute path (`/get-started/foo.webp`); relative paths break on sub-pages.
 - `public/` is the build output (`outDir`). It is gitignored and wiped on build; never put source files there.
+
+New images go into `static/` as WebP, sized to about twice their displayed width.
 
 ## Styling
 
 - Tailwind is precompiled by the CLI, not by Astro: `assets/css/input.css` → `assets/css/material-tailwind.css` (runs automatically before `dev`/`build`, and the generated file is committed). Only `src/**` is scanned for class names.
-- `tailwind.config.js` overrides the `blue`, `yellow`, `red`, `green`, `sky`, `slate` and `dark` colors with the OmiLAXR palette.
-- Import Material Tailwind components from `src/materialTailwind.ts`, not from `@material-tailwind/react` directly. The shim handles the package's CJS/ESM shape under Vite SSR; together with the `dedupe`/`alias` settings in `astro.config.mjs` it keeps a single React 19 instance.
-- Icons come from the Font Awesome kit loaded in `src/layouts/Layout.astro` (`<i className="fab fa-github">`).
+- `tailwind.config.js` takes colors, fonts, shadows and breakpoints from the Material Tailwind theme (the package is only a dev dependency for that; no Material Tailwind components are used at runtime) and overrides `blue`, `yellow`, `red`, `green`, `sky`, `slate` and `dark` with the OmiLAXR palette. Breakpoints are therefore `sm` 540, `md` 720, `lg` 960, `xl` 1140 px.
+- Icons are Font Awesome Free icons from `@fortawesome/free-brands-svg-icons` and `@fortawesome/free-solid-svg-icons`, rendered as inline SVG at build time by `src/components/Icon.tsx` (`<Icon icon={faGithub} className="text-xl"/>`; the icon is 1em high, so `text-*` sets its size). Don't load the Font Awesome kit or web font again: it loaded after the page and made the navbar jump on every page load. Heroicons are used for the home and menu icons.
 
 ## Page structure
 
-- `src/pages/*.astro` are thin shells: `Layout` + `presentation/navbar` + one content component + `presentation/footerFree`. Almost every React component is mounted with `client:only="react"`, so content is rendered in the browser, not at build time.
-- The real OmiLAXR content lives in `src/components/presentation/` (`getStarted`, `ecosystem`, `pipeline`, `publications`, `projects`, …) and the shared components in `src/components/` (navbar, `CodeBox`, `Tabs`, `Package`, …).
-- `src/components/landing/`, `src/components/about/`, `landing.astro`, `about.astro` and several presentation files (`pricing`, `figma`, `pagesFree`, `freeToPro`, …) are leftovers from the template.
+- `src/pages/*.astro` are thin shells: `Layout` (requires `title` and `metaDescription`; sets canonical URL and Open Graph tags) + `presentation/navbar` + one content component + `presentation/footerFree`.
+- React components are only rendered to HTML at build time; no page uses a `client:*` directive, so no React runtime is shipped to the browser. The interactive parts (navbar menu and scroll border, `Tabs`, `Table` search, `CodeBox` copy buttons, the header's `AnimatingText`) render their state into the HTML (`hidden`, `aria-selected`, `data-*`) and are wired up by `src/scripts/interactions.ts`, which `Layout.astro` loads on every page. Add new interactivity there the same way rather than hydrating a component: one island pulls in react-dom (~180 KB) plus the whole component tree. Never use `client:only`, which leaves the HTML empty for search engines and link previews.
+- The content lives in `src/components/presentation/` (`getStarted`, `ecosystem`, `pipeline`, `projects`, …) and the shared components in `src/components/` (navbar, `CodeBox`, `Tabs`, `Package`, `Figure`, …).
+- Guide pages wrap their content in `.doc-page` (`assets/scss/main.scss`): centered, at most 1200px wide, with paragraphs and list items capped at 80ch. The navbar and the homepage use the 1320px container width.
 - `get-started-v1.astro` / `presentation/v1/` keep the old OmiLAXR v1 guide.
-- Numbered figures on guide pages use `FigureManager` from `react-figure-ref`: register `{label, imageSrc}` once, then use `<fm.Figure label=… caption=…/>` and `<fm.FigureRef label=…/>`.
+- Numbered figures on guide pages use `FigureManager` from `src/components/Figure.tsx`: register `{label, imageSrc}` once, then use `<fm.Figure label=… caption=…/>` and `<fm.FigureRef label=…/>`.
+- `CodeBox` uses the light build of `react-syntax-highlighter` with only `csharp`, `javascript` and `json` registered. Register a language there before using it.
 - The ecosystem package list (names, descriptions, source links to the `OmiLAXR-Ecosystem` GitHub org) is hard-coded in `src/components/presentation/ecosystem.tsx`.
+- Redirects for removed URLs are in `redirects` in `astro.config.mjs`; the sitemap is generated by `@astrojs/sitemap`.
 
 ## Repository and deployment
 

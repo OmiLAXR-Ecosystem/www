@@ -1,99 +1,39 @@
-# Welcome to [Astro Launch UI](https://www.creative-tim.com/astro/launch-ui/)
+# OmiLAXR website
 
-![version](https://img.shields.io/badge/version-1.0.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/astro-launch-ui.svg?maxAge=2592000)](https://github.com/creativetimofficial/astro-launch-ui/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/astro-launch-ui.svg?maxAge=2592000)](https://github.com/creativetimofficial/astro-launch-ui/issues?q=is%3Aissue+is%3Aclosed)
+Source of <https://omilaxr.dev>, the website of the OmiLAXR ecosystem: an open and modular framework for Learning Analytics in Unity XR projects.
 
-![basics](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/astro/astrolaunch-ui-free.jpg)
+Built with [Astro](https://astro.build), React and Tailwind CSS. The design is based on the Astro Launch UI template by Creative Tim.
 
-## Description
+## Development
 
-Introducing **Astro LaunchUI**, the ultimate starter template for your startup web project. Built on Astro's next-gen island architecture, Astro LaunchUI offers a sleek and modern design with a wide range of components and features to help you create a stunning online store.
+Requires Node.js 24 (see `.nvmrc`).
 
-**Main Features**
-Build your startup website quickly and efficiently with:
-- 70+ fully coded elements
-- 3 fully coded example pages
-- 30+ blocks
-- Responsive design
-
-**Example Pages**
-We created a set of pre-built pages to help you get inspired or show something to your clients. See them below:
-- [Landing Page](https://demos.creative-tim.com/astro-launch-ui/landing/): Designed to introduce the website's purpose and encourage the user to take an action.
-- [Product Page](https://demos.creative-tim.com/astro-launch-ui/product/): It's designed to give the user all the information they need to make a purchase decision
-- [Shopping Page](https://demos.creative-tim.com/astro-launch-ui/shopping-cart/): Includes a summary of the items in the cart and a form for billing and shipping information.
-- more+
-
-Astro LaunchUI has everything you need to create the startup website of your dreams.
-
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── CHANGELOG.MD
-├── README.md
-├── assets
-│   ├── css
-│   │   ├── input.css
-│   │   └── material-tailwind.css
-│   ├── js
-│   │   └── astro-launch-ui.min.js
-│   └── scss
-│       └── loading-dot.css
-├── astro.config.mjs
-├── create-free-demo.js
-├── hooks/
-├── package.json
-├── public/
-├── src
-│   ├── components/
-│   ├── env.d.ts
-│   ├── example.tsx
-│   ├── header.tsx
-│   ├── layouts
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   ├── 404.astro
-│   │   ├── about.astro
-│   │   ├── index.astro
-│   │   ├── landing.astro
-│   │   ├── login.astro
-├── tailwind.config.js
-└── tsconfig.json
+```bash
+nvm use
+make install   # install dependencies
+make dev       # dev server with hot reload
+make build     # production build into public/
+make preview   # build and serve the production output
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+`make` without a target lists all commands.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Structure
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Path | Content |
+| --- | --- |
+| `src/pages/` | One `.astro` file per page |
+| `src/components/presentation/` | Page content (get started, ecosystem, pipeline, …) |
+| `src/components/` | Shared components (navbar, code boxes, tabs, figures) |
+| `static/` | Images and videos, served as-is |
+| `public/` | Build output (not committed) |
 
-## 🧞 Commands
+Details for contributors and coding agents are in [AGENTS.md](AGENTS.md).
 
-All commands are run from the root of the project, from a terminal:
+## Deployment
 
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
+Every push to `main` is built and deployed to GitHub Pages by [.github/workflows/deploy.yml](.github/workflows/deploy.yml).
 
-#### Social Media
+## License
 
-Twitter: <https://twitter.com/CreativeTim>
-
-Facebook: <https://www.facebook.com/CreativeTim>
-
-Dribbble: <https://dribbble.com/creativetim>
-
-TikTok: <https://tiktok.com/@creative.tim>
-
-Instagram: <https://instagram.com/creativetimofficial>
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://www.creative-tim.com/learning-lab/astro/overview/astro-launch-ui) or jump into our [Discord server](https://discord.com/invite/TGZqBvZB).
+[MIT](LICENSE)
